@@ -17,14 +17,15 @@ namespace Ads.Dominio
         [StringLength(100)]
         public string title { get; set; }
 
-        [Column(TypeName = "text")]
         [Required]
+        [Column(TypeName = "text")]
         public string detail { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal? price { get; set; }
 
-        public int CustomerId { get; set; }
+        [Required]
+        public int customer_id { get; set; }
 
         public virtual ICollection<resource> resource { get; set; }
     }

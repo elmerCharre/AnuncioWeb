@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ads.Models;
+using Ads.Repository;
+using Ads.Dominio;
+using Ads.Services.Entities;
+using Ninject;
 
 namespace Ads.Controllers
 {
@@ -77,6 +81,9 @@ namespace Ads.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //IKernel kernel = new StandardKernel();
+                    //var _customerRepository = new CustomerService(kernel.Get<IRepository<customer>>());
+                    //var customer = _customerRepository..Get().FirstOrDefault(c => c.email == userName);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

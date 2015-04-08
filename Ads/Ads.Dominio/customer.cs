@@ -8,11 +8,6 @@ namespace Ads.Dominio
     [Table("customer")]
     public partial class customer : EntityBase
     {
-
-        [Required]
-        [StringLength(20)]
-        public string username { get; set; }
-
         [Required]
         [StringLength(100)]
         public string fullname { get; set; }

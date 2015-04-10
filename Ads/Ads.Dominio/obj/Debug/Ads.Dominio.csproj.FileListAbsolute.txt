@@ -3,3 +3,8 @@ A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
 A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
 A:\apps\VS\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
 A:\apps\VS\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb

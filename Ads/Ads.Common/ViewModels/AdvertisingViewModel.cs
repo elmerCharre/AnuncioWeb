@@ -9,9 +9,12 @@ namespace Ads.Common.ViewModels
 {
     public class AdvertisingViewModel
     {
+        public AdvertisingViewModel()
+        {
+        }
+
         public AdvertisingViewModel(advertising advList)
         {
-
             this.id = advList.Id;
             this.title = advList.title;
             this.title = advList.detail;

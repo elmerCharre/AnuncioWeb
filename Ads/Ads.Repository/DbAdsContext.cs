@@ -41,5 +41,6 @@ namespace Ads.Repository
                 .HasForeignKey(e => e.category_id)
                 .WillCascadeOnDelete(false);
         }
+
     }
 }

@@ -12,6 +12,7 @@ using Ads.Models;
 using Ads.Repository;
 using Ads.Dominio;
 using Ads.Services.Entities;
+using Ads.Common.ViewModels;
 using Ninject;
 
 namespace Ads.Controllers
@@ -20,15 +21,13 @@ namespace Ads.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private CustomerService _customerService;
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, CustomerService customerService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this._customerService = customerService;
         }
 
         public ApplicationUserManager UserManager
@@ -81,9 +80,15 @@ namespace Ads.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //IKernel kernel = new StandardKernel();
-                    //var _customerRepository = new CustomerService(kernel.Get<IRepository<customer>>());
-                    //var customer = _customerRepository..Get().FirstOrDefault(c => c.email == userName);
+                    // set session variable
+                    var customer = _customerService.getCustomer(model.Email);
+                    Session["userID"] = customer.Id;
+                    Session["userEmail"] =  customer.Email;
+                    Session["userFullname"] = customer.FullName;
+                    Session["userAddress"] = customer.Address;
+                    Session["userPhone"] = customer.Phone;
+                    Session["userOccupation"] = customer.Occupation;
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -165,15 +170,24 @@ namespace Ads.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // Asignar el rol Cliente al USuario
+                    result = await UserManager.AddToRolesAsync(user.Id, "Cliente");
+                    _customerService.Create(new CustomerViewModel {
+                        Email = model.Email,
+                        FullName = model.FullName,
+                        Phone = model.Phone,
+                        Address = model.Address,
+                        Occupation = model.Occupation
+                    });
 
-                    return RedirectToAction("Index", "Home");
+                    // Tratar el Error
+                    // Si hay Error hacer un rollback de la creacion del usuario
+                    //
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    ViewBag.Link = callbackUrl;
+                    return View("DisplayEmail");
                 }
                 AddErrors(result);
             }

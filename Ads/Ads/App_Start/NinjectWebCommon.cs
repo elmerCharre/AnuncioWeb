@@ -1,5 +1,9 @@
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Ads.Repository;
+using Ads.Services;
 using Ninject.Web.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Ads.App_Start.NinjectWebCommon), "Start")]
@@ -13,6 +17,7 @@ namespace Ads.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Extensions.Conventions;
+    using Ads.Models;
 
     public static class NinjectWebCommon 
     {
@@ -56,6 +61,15 @@ namespace Ads.App_Start
                 );
                 //para añadir el contexto
                 kernel.Bind<DbAdsContext>().ToSelf().InRequestScope(); //genera una sola instancia
+                kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope(); //You can also do it this way
+                kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>()
+                            .InRequestScope()
+                            .WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
+                kernel.Bind<UserManager<ApplicationUser>>().ToSelf()
+                            .InRequestScope();
+                kernel.Bind<IAuthenticationManager>().ToMethod(
+                    c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+
                 //se le indica mvc que use ese resolver para crear los controllers
                 DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
 

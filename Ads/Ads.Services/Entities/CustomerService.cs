@@ -1,8 +1,8 @@
 ﻿using System;
-using System;
 using Ads.Dominio;
 using Ads.Repository;
 using Ads.Common.ViewModels;
+using System.Linq;
 
 namespace Ads.Services.Entities
 {
@@ -28,17 +28,18 @@ namespace Ads.Services.Entities
             _customerRepository.Create(customer);
         }
 
-        public void getCustomer(CustomerViewModel customerViewModel)
+        public CustomerViewModel getCustomer(string userName)
         {
-            var customer = new customer
+            var customer = _customerRepository.Get().FirstOrDefault(x => x.email == userName);
+            return new CustomerViewModel
             {
-                fullname = customerViewModel.FullName,
-                email = customerViewModel.Email,
-                phone = customerViewModel.Phone,
-                occupation = customerViewModel.Occupation,
-                address = customerViewModel.Address
+                Id = customer.Id,
+                Email = customer.email,
+                FullName = customer.fullname,
+                Address = customer.address,
+                Phone = customer.phone,
+                Occupation = customer.occupation
             };
-            _customerRepository.Create(customer);
         }
 
         public void Dispose()

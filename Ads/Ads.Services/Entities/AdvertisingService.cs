@@ -84,13 +84,13 @@ namespace Ads.Services.Entities
 
         public void AddResource(int advertisingId, int trackId)
         {
-            var playList = _playListRepository.Get().FirstOrDefault(x => x.Id == playListId);
-            if (playList == null) throw new InvalidOperationException("Playlist no encontrado");
-            var track = _trackRepository.Get().FirstOrDefault(x => x.Id==trackId);
-            if (playList == null) throw new InvalidOperationException("Track no encontrado");
+            //var playList = _playListRepository.Get().FirstOrDefault(x => x.Id == playListId);
+            //if (playList == null) throw new InvalidOperationException("Playlist no encontrado");
+            //var track = _trackRepository.Get().FirstOrDefault(x => x.Id==trackId);
+            //if (playList == null) throw new InvalidOperationException("Track no encontrado");
 
-            playList.Track.Add(track);
-            _playListRepository.Update(playList);
+            //playList.Track.Add(track);
+            //_playListRepository.Update(playList);
 
         }
 

@@ -65,9 +65,30 @@ namespace Ads.Models
     public class RegisterViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {3} characters long.", MinimumLength = 3)]
+        public string FullName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Teléfono")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {6} characters long.", MinimumLength = 6)]
+        public string Phone { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Dirección")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {10} characters long.", MinimumLength = 10)]
+        public string Address { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Ocupación")]
+        [StringLength(90, ErrorMessage = "The {0} must be at least {10} characters long.", MinimumLength = 10)]
+        public string Occupation { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

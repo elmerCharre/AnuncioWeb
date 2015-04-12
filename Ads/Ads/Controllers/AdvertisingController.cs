@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using Ads.Services.Entities;
 using Ads.Common.ViewModels;
+using Ads.Dominio;
+using System.IO;
 
 namespace Ads.Controllers
 {
@@ -57,6 +59,8 @@ namespace Ads.Controllers
         public ActionResult Create()
         {
             ViewBag.Title = "Agregar Anuncio";
+            ViewBag.category_id = new SelectList(_AdvertisingService.GetListCategory(), "id", "name");
+            ViewBag.subtype_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
             return View(new AdvertisingViewModel());
         }
 
@@ -65,17 +69,59 @@ namespace Ads.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id")] AdvertisingViewModel advertisingViewModel)
+        public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id,category_id,subtype_id")] AdvertisingViewModel advertisingViewModel, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
-                //db.AdvertisingViewModels.Add(advertisingViewModel);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var res = new resource()
+                    {
+                        Id = 0,
+                        advertising_id = 0,
+                        path = System.IO.Path.GetFileName(upload.FileName),
+                        type = upload.ContentType
+                    };
+                    //using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    //{
+                    //    resource.Content = reader.ReadBytes(upload.ContentLength);
+                    //}
+                    //advertisingViewModel.resource = new List<ResourceViewModel> { resource };
+                    advertisingViewModel.resource.Add(res);
+                }
+
+                _AdvertisingService.Create(advertisingViewModel);
+                return RedirectToAction("Index");
             }
 
             return View();
         }
+
+        //public ActionResult Create(FormCollection advertisingViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var trackIds = advertisingViewModel.GetValues("resource");
+        //        foreach (string trackId in trackIds)
+        //        {
+        //            Response.Write(trackId);
+        //            playListService.addTrack(playlistId, int.Parse(trackId));
+        //        }
+
+        //        var ads = new AdvertisingViewModel()
+        //        {
+        //            category_id = Convert.ToInt16(advertisingViewModel.Get("category_id")),
+        //            subtype_id = Convert.ToInt16(advertisingViewModel.Get("subtype_id")),
+        //            title = advertisingViewModel.Get("title").ToString(),
+        //            detail = advertisingViewModel.Get("detail").ToString(),
+        //            price = Convert.ToDecimal(advertisingViewModel.Get("price")),
+        //        };
+        //        _AdvertisingService.Create(ads);
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View();
+        //}
 
         // GET: Advertising/Edit/5
         public ActionResult Edit(int? id)

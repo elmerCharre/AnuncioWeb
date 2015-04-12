@@ -20,6 +20,8 @@ namespace Ads.Common.ViewModels
             this.title = advList.detail;
             this.price = advList.price;
             this.customer_id = advList.customer_id;
+            this.category_id = advList.category_id;
+            this.subtype_id = advList.subtype_id;
             this.resource = advList.resource;
         }
 
@@ -28,6 +30,8 @@ namespace Ads.Common.ViewModels
         public string detail { get; set; }
         public decimal? price { get; set; }
         public int customer_id { get; set; }
+        public int category_id { get; set; }
+        public int subtype_id { get; set; }
         public ICollection<resource> resource { get; set; }
     }
 }

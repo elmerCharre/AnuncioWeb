@@ -12,11 +12,17 @@ namespace Ads.Services.Entities
     {
         private IRepository<advertising> _advertisingRepository;
         private IRepository<customer> _customerRepository;
-        private IRepository<resource> _resourceRepository;
+        private IRepository<category> _categoryRepository;
+        private IRepository<subtype> _subtypeRepository;
 
-        public AdvertisingService(IRepository<resource> resourceRepository)
+        public AdvertisingService(IRepository<advertising> advertisingRepository, 
+            IRepository<customer> customerRepository, IRepository<category> categoryRepository,
+            IRepository<subtype> subtypeRepository)
         {
-            _resourceRepository = resourceRepository;
+            _advertisingRepository = advertisingRepository;
+            _customerRepository = customerRepository;
+            _categoryRepository = categoryRepository;
+            _subtypeRepository = subtypeRepository;
         }
 
         public IEnumerable<AdvertisingViewModel> GetListByUser(string userName)
@@ -36,7 +42,8 @@ namespace Ads.Services.Entities
          
         public void Dispose()
         {
-            _resourceRepository = null;
+            _advertisingRepository = null;
+            _customerRepository = null;
         }
 
         public void Create(AdvertisingViewModel model)
@@ -48,6 +55,8 @@ namespace Ads.Services.Entities
                 detail = model.detail,
                 price = model.price,
                 customer_id = customer.Id,
+                category_id = model.category_id,
+                subtype_id = model.subtype_id,
                 resource = model.resource
             };
             _advertisingRepository.Create(advertising);
@@ -80,6 +89,16 @@ namespace Ads.Services.Entities
                 customer_id = AdsList.customer_id,
                 resource = AdsList.resource.Where(x => x.advertising_id == AdsList.Id).ToList() 
             });
+        }
+
+        public IEnumerable<category> GetListCategory()
+        {
+            return _categoryRepository.Get().ToList();
+        }
+
+        public IEnumerable<subtype> GetListSubtypeByCategory(int category_id)
+        {
+            return _subtypeRepository.Get().Where(x => x.category_id == category_id ).ToList();
         }
 
         public void AddResource(int advertisingId, int trackId)

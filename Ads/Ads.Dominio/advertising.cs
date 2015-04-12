@@ -28,5 +28,9 @@ namespace Ads.Dominio
         public int customer_id { get; set; }
 
         public virtual ICollection<resource> resource { get; set; }
+
+        public int category_id { get; set; }
+
+        public int subtype_id { get; set; }
     }
 }

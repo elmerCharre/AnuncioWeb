@@ -8,6 +8,10 @@ namespace Ads.Common.ViewModels
 {
     public class ResourceViewModel
     {
+        public ResourceViewModel()
+        {
+        }
+
         public ResourceViewModel(resource res)
         {
             this.id = res.Id;

@@ -46,7 +46,7 @@ namespace Ads.Services.Entities
             _customerRepository = null;
         }
 
-        public void Create(AdvertisingViewModel model)
+        public int Create(AdvertisingViewModel model)
         {
             var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
@@ -57,24 +57,26 @@ namespace Ads.Services.Entities
                 customer_id = customer.Id,
                 category_id = model.category_id,
                 subtype_id = model.subtype_id,
+                //resource = model.resource
+            };
+            return _advertisingRepository.Create(advertising);
+        }
+
+        public void Update(AdvertisingViewModel model)
+        {
+            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
+            if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
+            var advertising = new advertising()
+            {
+                title = model.title,
+                detail = model.detail,
+                price = model.price,
+                customer_id = customer.Id,
+                category_id = model.category_id,
+                subtype_id = model.subtype_id,
                 resource = model.resource
             };
-            _advertisingRepository.Create(advertising);
-
-            // test
-            //var playListService = new AdvertisingService(IRepository<resource>);
-            //var playlist = new Playlist();
-            //playlist.Id = 0;
-            //playlist.Name = data.Get("Name").ToString();
-            //playlist.CustomerId = 60;
-
-            //var trackIds = data.GetValues("chk_tracklist");
-            //foreach (string trackId in trackIds)
-            //{
-            //    _advertisingRepository.Track.Add(playListService.GetTrack(int.Parse(trackId)));
-            //}
-            //playListService.create(playlist);
-            //
+            _advertisingRepository.Update(advertising);
         }
 
         public AdvertisingViewModel Get(int advertisingId)

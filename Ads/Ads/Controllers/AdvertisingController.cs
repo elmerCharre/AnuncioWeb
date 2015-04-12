@@ -73,6 +73,9 @@ namespace Ads.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id_ads = _AdvertisingService.Create(advertisingViewModel);
+                var ads = _AdvertisingService.Get(id_ads);
+
                 if (upload != null && upload.ContentLength > 0)
                 {
                     var res = new resource()
@@ -87,10 +90,10 @@ namespace Ads.Controllers
                     //    resource.Content = reader.ReadBytes(upload.ContentLength);
                     //}
                     //advertisingViewModel.resource = new List<ResourceViewModel> { resource };
-                    advertisingViewModel.resource.Add(res);
+                    ads.resource.Add(res);
+                    _AdvertisingService.Update(ads);
                 }
 
-                _AdvertisingService.Create(advertisingViewModel);
                 return RedirectToAction("Index");
             }
 

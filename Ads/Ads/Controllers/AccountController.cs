@@ -9,11 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ads.Models;
-using Ads.Repository;
-using Ads.Dominio;
 using Ads.Services.Entities;
 using Ads.Common.ViewModels;
-using Ninject;
 
 namespace Ads.Controllers
 {

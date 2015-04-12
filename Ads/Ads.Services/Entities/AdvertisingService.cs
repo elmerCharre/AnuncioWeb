@@ -2,9 +2,10 @@
 using Ads.Dominio;
 using Ads.Repository;
 using Ads.Common.ViewModels;
-using Ads.Services.Entities;
 using System.Collections.Generic;
 using System;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Ads.Services.Entities
 {
@@ -48,7 +49,7 @@ namespace Ads.Services.Entities
 
         public int Create(AdvertisingViewModel model)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
+            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == 1); //Session["userID"]
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
             var advertising = new advertising() {
                 title = model.title,

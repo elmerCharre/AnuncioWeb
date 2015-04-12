@@ -76,16 +76,20 @@ namespace Ads.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmar password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Nombre")]
         public string FullName { get; set; }
 
+        [Display(Name = "Teléfono")]
         public string Phone { get; set; }
 
+        [Display(Name = "Dirección")]
         public string Address { get; set; }
 
+        [Display(Name = "Ocupación")]
         public string Occupation { get; set; }
     }
 

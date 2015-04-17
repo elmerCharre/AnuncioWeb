@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
 A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
 A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
@@ -8,3 +9,21 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+=======
+A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+A:\apps\VS\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+>>>>>>> d21741e2f06b3d027394b94398c6f19e2fb4b30f

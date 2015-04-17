@@ -11,3 +11,16 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.xml
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb

@@ -55,6 +55,7 @@ namespace Ads.Controllers
             return View();
         }
 
+        [Authorize]
         // GET: Advertising/Create
         public ActionResult Create()
         {

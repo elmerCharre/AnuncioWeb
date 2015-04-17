@@ -5,3 +5,10 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
+C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb

@@ -63,6 +63,12 @@
         </div>
 
         <div class="form-group">
+            @Html.Label("Files", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="dragandrophandler">
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.Label("upload", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" class="form-control" name="upload" multiple />
@@ -81,6 +87,22 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+@Styles.Render("~/uploadFiles/css")
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/uploadFiles")
+
+    <script type="text/javascript" lang="javascript">
+        $(function() {
+            $('#dragandrophandler').DragDropTool({
+                //url: path_url,
+                fileExtensions: "jpg, png, jpeg",
+                allowedExtensions: true,
+                //maxFileSize: 0,
+                uploadStr: "Upload",
+                dragDropStr: "Drag & Drop Files"
+            });
+        });
+    </script>
 }

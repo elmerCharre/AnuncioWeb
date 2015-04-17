@@ -1,0 +1,287 @@
+/* 
+    Document   : uploadFiles.css
+    Created on : Jun 19, 2014, 10:53:34 AM
+    Author     : Elmer Charre Salazar
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.dragandrophandler {
+    border: 1px dashed #B3B3B3;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    color: #C7C7C7;
+    font-size: 20px;
+    font-weight: bolder;
+    height: 50px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    padding-top: 13px;
+    text-align: center;
+    text-transform: uppercase !important;
+    background: white;
+}
+
+#uploadFileJs_dragdrop {
+    opacity: 0;
+    filter:alpha(opacity=0);
+    position: absolute;
+    border: none;
+    margin: -1px 0px 0px;
+    padding: 0px;
+    right: 0px;
+    cursor: pointer;
+    height: 32px;
+}
+
+.message-label {
+    display: block;
+    margin: 0px;
+    background: white;
+    font-weight: normal;
+    padding: 7px !important;
+    font-size: 14px !important;
+    border: 1px dashed #B3B3B3;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    margin-top: 10px;
+    float: none;
+    width: auto;
+    height: auto !important;
+    text-align: center;
+    word-wrap: break-word;
+    color: #A8A8A8;
+}
+
+.message-label.accept {
+    background-image: url(images/accept.png);
+    background-repeat: no-repeat;
+    background-position-x: 4px;
+    background-position-y: 2px;
+    background-size: 27px;
+}
+
+.message-label.no-accept {
+    background-image: url(images/no-accept.png);
+    background-repeat: no-repeat;
+    background-position-x: 4px;
+    background-position-y: 2px;
+    background-size: 26px;
+}
+
+.send_data {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    background: url(images/send.png) no-repeat;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.remove_data {
+    display: inline-block;
+    background: url(images/cancel.png) no-repeat;
+    height: 30px;
+    width: 23px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.status-upload {
+    background: transparent;
+    border: 1px solid #A9CCD1;
+    padding: 5px 0 5px 0;
+    border-top: 0;
+}
+
+.status-filename {
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 10px;
+    width: 35%;
+}
+
+.status-image {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 5px;
+    max-width: 100px;
+    width: 100px;
+    margin-right: 10px;
+    min-height: 20px;
+    height: auto;
+    margin-left: 5px;
+}
+
+.status-size {
+    display: inline-block;
+    max-width: 10%;
+    width: 10%;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.status-progress {
+    border: 1px solid #DFDFDF;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    height: 28px !important;
+}
+
+.progress-bar {
+    width: 200px;
+    max-width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+    color: #dfdfdf;
+}
+
+.status-bar {
+    display: inline-block;
+    height: 28px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 26px;
+    color:#fff;
+    text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+    background-color:#149bdf;
+    background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,0.15)),color-stop(0.25,transparent),
+        color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,0.15)),color-stop(0.75,rgba(255,255,255,0.15)),
+        color-stop(0.75,transparent),to(transparent));
+    background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,
+        rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    background-image:-moz-linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,
+        rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    background-image:-o-linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,
+        rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    background-image:linear-gradient(45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,
+        rgba(255,255,255,0.15) 75%,transparent 75%,transparent);
+    /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf',endColorstr='#ff0480be',GradientType=0);*/
+    -webkit-background-size:40px 40px;
+    -moz-background-size:40px 40px;
+    -o-background-size:40px 40px;
+    background-size:40px 40px;
+    -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);
+    box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition:width .6s ease;
+    -moz-transition:width .6s ease;
+    -o-transition:width .6s ease;
+    transition:width .6s ease;
+    -webkit-animation:status-bar 2s linear infinite;
+    -moz-animation:status-bar 2s linear infinite;
+    -ms-animation:status-bar 2s linear infinite;
+    -o-animation:status-bar 2s linear infinite;
+    animation:status-bar 2s linear infinite;
+}
+
+.upload_txtInputFile {
+    display: inline;
+    width: 45%;
+    height: 20px;
+    margin: 0;
+    margin-left: -1px;
+    background-color: white;
+}
+
+.uploadInputFile {
+    height: 38px !important;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    border: none;
+    margin: 0;
+    padding: 0;
+    top: -5px !important;
+    left: -3px;
+    width: 82px;
+    cursor: pointer;
+}
+
+.NFI_InputFile {
+    font-family: arial;
+    font-size: 14px;
+    background-color: #2f8ab9;
+    box-shadow: 0 2px 0 0 #13648d;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 78px;
+    height: 30px;
+    line-height: 29px;
+    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    top: 0;
+    margin: 0;
+}
+
+.NFI_InputUpload {
+    font-family: arial;
+    font-size: 14px;
+    background-color: #2f8ab9;
+    box-shadow: 0 2px 0 0 #13648d;
+    color: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 90px;
+    height: 30px;
+    line-height: 29px;
+    border-radius: 5px;
+    cursor: pointer;
+    top: 0;
+    margin: 0;
+}
+
+.NFI_InputUpload:hover {
+    background: #696b6b;
+    background: -moz-linear-gradient(top, #696b6b 0%, #555556 50%, #4d4d4d 51%, #535454 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#696b6b), color-stop(50%,#555556), color-stop(51%,#4d4d4d), color-stop(100%,#535454));
+    background: -webkit-linear-gradient(top, #696b6b 0%,#555556 50%,#4d4d4d 51%,#535454 100%);
+    background: -o-linear-gradient(top, #696b6b 0%,#555556 50%,#4d4d4d 51%,#535454 100%);
+    background: -ms-linear-gradient(top, #696b6b 0%,#555556 50%,#4d4d4d 51%,#535454 100%);
+    background: linear-gradient(top, #696b6b 0%,#555556 50%,#4d4d4d 51%,#535454 100%);
+    color: #FFFFFF;
+    box-shadow: 0 2px 0 0 #696b6b;
+}
+
+#addInputFile {
+    float: right;
+    width: 40px;
+    height: 40px;
+    background-image: url(images/add_file.png);
+    background-repeat: no-repeat;
+}
+
+.objectRequired {
+    border: 1px solid red;
+    outline: 0px;
+}
+
+.objectRequired:focus { 
+    border: 1px solid red;
+}
+
+.objectRequired:hover { 
+    border: 1px solid red;
+}
+
+.required-input { 
+    display: inline-block;
+    width: 20px;
+}

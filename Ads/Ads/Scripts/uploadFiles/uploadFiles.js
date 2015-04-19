@@ -86,7 +86,7 @@ jQuery.fn.extend({
             showMessageLabel(setting.fileExtensions);
             //create object input file type
             var input_file = document.createElement('div');
-            $(input_file).css({'padding-top': '6px', display: 'block', height: '25px'});
+            $(input_file).css({'padding-top': '6px', display: 'block', height: '39px'});
             input_file.innerHTML = '<input type="file" name="'+setting.fileName+'" id="'+setting.idObjectInputFile+'" multiple>';
             object_dragging.before(input_file);
             setting.idObjectInputFile = '#' + setting.idObjectInputFile;
@@ -147,7 +147,7 @@ jQuery.fn.extend({
         showMessageLabel(setting.fileExtensions);
         //create object input file type
         var input_file = document.createElement('div');
-        $(input_file).css({'padding-top':'6px', display:'block', 'margin-bottom':'8px'});
+        $(input_file).css({'padding-top':'6px', display:'block', 'margin-bottom':'8px', height:'40px'});
         input_file.innerHTML = '<input type="file" class="uploadInputFile" id="uploadInputFile_0" name="'+setting.fileName+'" onchange="setFileName(this, 0);">';
         input_file.innerHTML += '<a id="addInputFile" href="javascript:void(0)" onclick="return addInputFile();"></a>';
         object_dragging.before(input_file);
@@ -162,7 +162,7 @@ function handleFileUpload(files, object_dragging) {
                 var objClassFile = new classFile(object_dragging);
                 objClassFile.setFileNameSize(data);
                 objClassFile.setAbortFile(data, null);
-                (setting.autoSubmit) ? setSerializeForm(data, objClassFile) : sendFile(data, objClassFile);
+                //(setting.autoSubmit) ? setSerializeForm(data, objClassFile) : sendFile(data, objClassFile);
             }
         }
     });
@@ -178,8 +178,8 @@ function classFile(object_dragging) {
             this.statusbar = $("<div class='status-upload' id="+(countObjectFiles-1)+"></div>");
             this.image = $("<img class='status-image' id='img_preview"+countObjectFiles+"' src=''>").appendTo(this.statusbar);
             this.filename = $("<div class='status-filename'></div>").appendTo(this.statusbar).html(file.name);
-            this.progress_bar = $("<div class='progress-bar'></div>").appendTo(this.statusbar);
-            this.progress = $("<div class='status-bar'></div>").appendTo(this.progress_bar);
+            //this.progress_bar = $("<div class='progress-bar'></div>").appendTo(this.statusbar);
+            //this.progress = $("<div class='status-bar'></div>").appendTo(this.progress_bar);
             this.size = $("<div class='status-size'></div>").appendTo(this.statusbar);
             this.sizereal = $("<div style='display:none;'></div>").appendTo(this.statusbar).html(file.size);
             if (setting.showSend) this.send = $("<div class='send_data'>").appendTo(this.statusbar);
@@ -255,8 +255,8 @@ function setSerializeForm(formData, objClassFile) {
         $.each(formData, function(key, data) {
             if (data) data_files.append(setting.fileName, data);
         });
-        alert(totalSize);
-        data_files.append('totalSize', totalSize);alert(data_files['totalSize']);
+        
+        data_files.append('totalSize', totalSize);
         //set the values of form input
         $.each($(":file"), function(key, data) {
             data_files.append(data.name, data);

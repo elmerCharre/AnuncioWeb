@@ -70,21 +70,21 @@ namespace Ads.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id,category_id,subtype_id")] AdvertisingViewModel advertisingViewModel, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id,category_id,subtype_id")] AdvertisingViewModel advertisingViewModel, HttpPostedFileBase files)
         {
             if (ModelState.IsValid)
             {
                 var id_ads = _AdvertisingService.Create(advertisingViewModel);
                 var ads = _AdvertisingService.Get(id_ads);
 
-                if (upload != null && upload.ContentLength > 0)
+                if (files != null && files.ContentLength > 0)
                 {
                     var res = new resource()
                     {
                         Id = 0,
                         advertising_id = 0,
-                        path = System.IO.Path.GetFileName(upload.FileName),
-                        type = upload.ContentType
+                        path = System.IO.Path.GetFileName(files.FileName),
+                        type = files.ContentType
                     };
                     //using (var reader = new System.IO.BinaryReader(upload.InputStream))
                     //{

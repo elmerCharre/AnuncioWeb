@@ -53,7 +53,7 @@ jQuery.fn.extend({
             filesRequired: true,
             fileExtensions: "*",
             allowedExtensions: true,
-            fileName: "files[]",
+            fileName: "files",
             maxNumberFiles: 100,
             maxFileSize: -1,
             autoSubmit: true,

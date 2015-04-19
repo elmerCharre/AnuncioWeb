@@ -33,3 +33,15 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll.config
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.pdb
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.dll
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.pdb
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.xml
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
+C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb

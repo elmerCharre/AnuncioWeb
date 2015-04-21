@@ -61,18 +61,27 @@ namespace Ads.App_Start
                 );
                 //para añadir el contexto
                 kernel.Bind<DbAdsContext>().ToSelf().InRequestScope(); //genera una sola instancia
-                kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope(); //You can also do it this way
-                kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>()
-                            .InRequestScope()
-                            .WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
-                kernel.Bind<UserManager<ApplicationUser>>().ToSelf()
-                            .InRequestScope();
-                kernel.Bind<IAuthenticationManager>().ToMethod(
-                    c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+
+                kernel.Bind<ApplicationDbContext>().ToSelf().InRequestScope();
+                kernel.Bind<IUserStore<ApplicationUser>>()
+                    .To<UserStore<ApplicationUser>>()
+                    .InRequestScope()
+                    .WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
+                kernel.Bind<UserManager<ApplicationUser>>()
+                    .ToSelf().InRequestScope();
+                kernel.Bind<IAuthenticationManager>()
+                    .ToMethod(
+                        m => HttpContext.Current.GetOwinContext().Authentication
+                    ).InRequestScope();
+
+                kernel.Bind<IRoleStore<IdentityRole, string>>()
+                    .To<RoleStore<IdentityRole>>()
+                    .InRequestScope()
+                    .WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
+                kernel.Bind<RoleManager<IdentityRole>>().ToSelf().InRequestScope();
 
                 //se le indica mvc que use ese resolver para crear los controllers
                 DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
-
                 RegisterServices(kernel);
                 return kernel;
             }

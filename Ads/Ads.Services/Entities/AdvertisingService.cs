@@ -5,7 +5,6 @@ using Ads.Common.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Web;
-using System.Web.Mvc;
 
 namespace Ads.Services.Entities
 {
@@ -49,7 +48,7 @@ namespace Ads.Services.Entities
 
         public int Create(AdvertisingViewModel model)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == 1); //Session["userID"]
+            var customer = _customerRepository.Get().FirstOrDefault(x => x.email == "elmer.nyd@gmail.com"); //Session["userID"]
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
             var advertising = new advertising() {
                 title = model.title,
@@ -58,7 +57,7 @@ namespace Ads.Services.Entities
                 customer_id = customer.Id,
                 category_id = model.category_id,
                 subtype_id = model.subtype_id,
-                //resource = model.resource
+                resource = model.resource
             };
             return _advertisingRepository.Create(advertising);
         }

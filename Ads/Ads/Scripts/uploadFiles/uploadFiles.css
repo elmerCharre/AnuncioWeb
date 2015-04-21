@@ -34,11 +34,13 @@
     right: 0px;
     cursor: pointer;
     height: 32px;
+    margin-top: -29px;
 }
 
 .message-label {
     display: block;
     margin: 0px;
+    margin-left: 15px;
     background: white;
     font-weight: normal;
     padding: 7px !important;
@@ -47,8 +49,7 @@
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    margin-top: 10px;
-    float: none;
+    float: left;
     width: auto;
     height: auto !important;
     text-align: center;

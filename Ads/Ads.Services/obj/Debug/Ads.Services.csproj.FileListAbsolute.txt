@@ -24,3 +24,16 @@ C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\bin\Debug\Entity
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.xml
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb

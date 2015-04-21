@@ -34,3 +34,15 @@ C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Enti
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll.config
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.xml
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb

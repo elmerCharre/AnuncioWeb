@@ -12,3 +12,9 @@ C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Domi
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
 C:\Users\Administrador\Source\Repos\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb

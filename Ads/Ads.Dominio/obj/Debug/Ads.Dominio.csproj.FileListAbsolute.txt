@@ -1,6 +1,6 @@
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.csprojResolveAssemblyReference.cache
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
-C:\Users\Administrador\Documents\GitHub\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.csprojResolveAssemblyReference.cache
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb

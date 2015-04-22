@@ -103,6 +103,22 @@ namespace Ads.Services.Entities
             return _subtypeRepository.Get().Where(x => x.category_id == category_id ).ToList();
         }
 
+        public List<subtype> GetListSubtypeByCategoryAsJson(int category_id)
+        {
+            var list_types = _subtypeRepository.Get().Where(x => x.category_id == category_id).ToList();
+            var json = new List<subtype>();
+            foreach (var obj in list_types) {
+                json.Add(new subtype
+                { 
+                    Id = obj.Id,
+                    category_id = obj.category_id,
+                    name = obj.name,
+                    status = obj.status
+                });
+            }
+            return json;
+        }
+
         public void AddResource(int advertisingId, int trackId)
         {
             //var playList = _playListRepository.Get().FirstOrDefault(x => x.Id == playListId);
@@ -115,5 +131,11 @@ namespace Ads.Services.Entities
 
         }
 
+
+        public string rows_customer()
+        {
+            var customer = _customerRepository.Get().FirstOrDefault(c => c.email == "elmer.nyd@gmail.com");
+            return customer.fullname;
+        }
     }
 }

@@ -1,32 +1,34 @@
 ﻿@model Ads.Common.ViewModels.AdvertisingViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Publicar un Anuncio";
 }
 
-<h2>Create</h2>
-
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Create", "Advertising", null, FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Agregar Anuncio</h4>
+        <h4>@Html.Raw((string)ViewBag.rows_customer)</h4>
         <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" style="width: 27%;">
-                @Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @Single = true })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.subtype_id, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" style="width: 27%;">
-                @Html.DropDownList("subtype_id", null, htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("subtype_id", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ListBox("subtype_id", null, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
@@ -94,7 +96,29 @@
     @Scripts.Render("~/bundles/uploadFiles")
 
     <script type="text/javascript" lang="javascript">
-        $(function() {
+        $(function () {
+
+            $('#category_id').change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Advertising/GetListSubtypeByCategory/" + $(this).val(),
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var markup = "";
+                        $.each(response, function (index, subtype) {
+                            markup += "<option value=" + subtype.Id + ">" + subtype.name + "</option>";
+                        });
+                        $("#subtype_id").html(markup).show();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
+
+            });
+
             $('#dragandrophandler').DragDropTool({
                 //url: path_url,
                 fileExtensions: "jpg, png, jpeg",

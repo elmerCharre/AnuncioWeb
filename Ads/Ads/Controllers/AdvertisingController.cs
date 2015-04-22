@@ -8,6 +8,7 @@ using Ads.Services.Entities;
 using Ads.Common.ViewModels;
 using Ads.Dominio;
 using System.IO;
+using System.Web.Script.Serialization;
 
 namespace Ads.Controllers
 {
@@ -59,10 +60,15 @@ namespace Ads.Controllers
         // GET: Advertising/Create
         public ActionResult Create()
         {
-            ViewBag.Title = "Agregar Anuncio";
+            ViewBag.rows_customer = _AdvertisingService.rows_customer();
             ViewBag.category_id = new SelectList(_AdvertisingService.GetListCategory(), "id", "name");
             ViewBag.subtype_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
             return View(new AdvertisingViewModel());
+        }
+
+        public JsonResult GetListSubtypeByCategory(int id)
+        {
+            return Json(_AdvertisingService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
         }
 
         // POST: Advertising/Create

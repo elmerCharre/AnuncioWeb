@@ -23,7 +23,8 @@ namespace Ads.Repository
         public int Create(TEntity _entity)
         {
             _context.Set<TEntity>().Add(_entity);
-            return _context.SaveChanges();
+            _context.SaveChanges();
+            return _entity.Id;
         }
 
         public IQueryable<TEntity> Get()

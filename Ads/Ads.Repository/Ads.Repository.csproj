@@ -56,6 +56,7 @@
     <Compile Include="DbAdsContext.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceRepository.cs" />
     <Compile Include="SubtypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>

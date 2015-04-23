@@ -79,12 +79,15 @@ namespace Ads.Services.Entities
             _advertisingRepository.Update(advertising);
         }
 
-        public AdvertisingViewModel Get(int advertisingId)
+        public AdvertisingViewModel Get(int id)
         {
-            var AdsList = _advertisingRepository.Get().FirstOrDefault(x => x.Id == advertisingId);
+            var AdsList = _advertisingRepository.Get().FirstOrDefault(x => x.Id == id);
             if (AdsList == null) throw new InvalidOperationException("Anuncio no encontrado");
+            
             return new AdvertisingViewModel(new advertising() {
                 Id = AdsList.Id,
+                category_id = AdsList.category_id,
+                subtype_id = AdsList.subtype_id,
                 title = AdsList.title,
                 detail = AdsList.detail,
                 price = AdsList.price,

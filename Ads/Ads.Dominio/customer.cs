@@ -8,6 +8,11 @@ namespace Ads.Dominio
     [Table("customer")]
     public partial class customer : EntityBase
     {
+        public customer()
+        {
+            advertising = new HashSet<advertising>();
+        }
+
         [Required]
         [StringLength(100)]
         public string fullname { get; set; }
@@ -25,5 +30,7 @@ namespace Ads.Dominio
 
         [StringLength(100)]
         public string address { get; set; }
+
+        public virtual ICollection<advertising> advertising { get; set; }
     }
 }

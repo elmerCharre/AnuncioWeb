@@ -8,6 +8,10 @@ namespace Ads.Dominio
     [Table("subtype")]
     public partial class subtype : EntityBase
     {
+        public subtype()
+        {
+            extra_fields = new HashSet<extra_fields>();
+        }
 
         [Required]
         [StringLength(50)]
@@ -18,5 +22,7 @@ namespace Ads.Dominio
         public int status { get; set; }
 
         public virtual category category { get; set; }
+
+        public virtual ICollection<extra_fields> extra_fields { get; set; }
     }
 }

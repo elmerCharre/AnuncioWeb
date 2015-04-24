@@ -16,6 +16,8 @@ namespace Ads.Repository
         public virtual DbSet<advertising> advertising { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<customer> customer { get; set; }
+        public virtual DbSet<elements> elements { get; set; }
+        public virtual DbSet<extra_fields> extra_fields { get; set; }
         public virtual DbSet<resource> resource { get; set; }
         public virtual DbSet<subtype> subtype { get; set; }
 
@@ -39,6 +41,18 @@ namespace Ads.Repository
                 .HasMany(e => e.subtype)
                 .WithRequired(e => e.category)
                 .HasForeignKey(e => e.category_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<customer>()
+                .HasMany(e => e.advertising)
+                .WithRequired(e => e.customer)
+                .HasForeignKey(e => e.customer_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<subtype>()
+                .HasMany(e => e.extra_fields)
+                .WithRequired(e => e.subtype)
+                .HasForeignKey(e => e.subtype_id)
                 .WillCascadeOnDelete(false);
         }
 

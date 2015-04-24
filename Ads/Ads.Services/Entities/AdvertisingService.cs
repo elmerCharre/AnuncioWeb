@@ -14,15 +14,20 @@ namespace Ads.Services.Entities
         private IRepository<customer> _customerRepository;
         private IRepository<category> _categoryRepository;
         private IRepository<subtype> _subtypeRepository;
+        private IRepository<extra_fields> _fieldRepository;
+        private IRepository<elements> _elementRepository;
 
         public AdvertisingService(IRepository<advertising> advertisingRepository, 
             IRepository<customer> customerRepository, IRepository<category> categoryRepository,
-            IRepository<subtype> subtypeRepository)
+            IRepository<subtype> subtypeRepository, IRepository<extra_fields> fieldRepository,
+            IRepository<elements> elementRepository)
         {
             _advertisingRepository = advertisingRepository;
             _customerRepository = customerRepository;
             _categoryRepository = categoryRepository;
             _subtypeRepository = subtypeRepository;
+            _fieldRepository = fieldRepository;
+            _elementRepository = elementRepository;
         }
 
         public IEnumerable<AdvertisingViewModel> GetListByUser(string userName)
@@ -122,6 +127,26 @@ namespace Ads.Services.Entities
             return json;
         }
 
+        public List<FieldsViewModel> GetListFieldsAsJson(int id)
+        {
+            var list = _fieldRepository.Get().Where(x => x.subtype_id == id).OrderBy(g => g.sort).ToList();
+            var json = new List<FieldsViewModel>();
+            foreach (var obj in list)
+            {
+                var element = _elementRepository.Get().Where(e => e.fields_id == obj.Id).ToList();
+                json.Add(new FieldsViewModel
+                {
+                    id = obj.Id,
+                    input = obj.input,
+                    label = obj.label,
+                    sort = obj.sort,
+                    subtype_id = obj.subtype_id,
+                    elements = element
+                });
+            }
+            return json;
+        }
+
         public void AddResource(int advertisingId, int trackId)
         {
             //var playList = _playListRepository.Get().FirstOrDefault(x => x.Id == playListId);
@@ -133,7 +158,6 @@ namespace Ads.Services.Entities
             //_playListRepository.Update(playList);
 
         }
-
 
         public string rows_customer()
         {

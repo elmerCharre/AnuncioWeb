@@ -45,7 +45,9 @@
     <Compile Include="advertising.cs" />
     <Compile Include="category.cs" />
     <Compile Include="customer.cs" />
+    <Compile Include="elements.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="extra_fields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="resource.cs" />
     <Compile Include="subtype.cs" />

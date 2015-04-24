@@ -1,0 +1,166 @@
+﻿@model Ads.Common.ViewModels.AdvertisingViewModel
+
+@{
+    ViewBag.Title = "Publicar un Anuncio";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Html.Raw((string)ViewBag.rows_customer)</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @size = 9 })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.subtype_id, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("subtype_id", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ListBox("subtype_id", null, htmlAttributes: new { @class = "form-control", @size = 5 })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @rows = 10})
+                @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.customer_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.Label("Files", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="dragandrophandler">
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.Label("upload", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="form-control" name="files" multiple />
+            </div>
+        </div>
+
+        <div id="extra_fields_html">
+            
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@Styles.Render("~/uploadFiles/css")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/uploadFiles")
+
+    <script type="text/javascript" lang="javascript">
+        $(function () {
+
+            $('#category_id').change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Ads/GetListSubtypeByCategory/" + $(this).val(),
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var markup = "";
+                        $.each(response, function (index, subtype) {
+                            markup += "<option value=" + subtype.Id + ">" + subtype.name + "</option>";
+                        });
+                        $("#subtype_id").html(markup).show();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
+            });
+
+            $('#subtype_id').change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Ads/getExtraFieldsAsJson/" + $(this).val(),
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var html = "";
+                        $.each(response, function (index, element) {
+                            if (element.input == "text") {
+                                html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
+                                    "<div class='col-md-10'><input type='text' class='form-control' name='files'/></div></div>";
+                            } else if (element.input == "select") {
+                                html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
+                                    "<div class='col-md-10'><select class='form-control' name='123'>";
+                                $.each(element.elements, function (index, select) {
+                                    console.log(select);
+                                    html += "<option value=" + select.value + ">" + select.label + "</option>";
+                                });
+                                html += "</select></div></div>";
+                            }
+                        });
+                        $("#extra_fields_html").html(html).show();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus);
+                    }
+                });
+            });
+
+            $('#dragandrophandler').DragDropTool({
+                //url: path_url,
+                fileExtensions: "jpg, png, jpeg",
+                allowedExtensions: true,
+                //maxFileSize: 0,
+                uploadStr: "Upload",
+                dragDropStr: "Drag & Drop Files"
+            });
+        });
+    </script>
+}

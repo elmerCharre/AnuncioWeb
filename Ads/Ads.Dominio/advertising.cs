@@ -24,13 +24,14 @@ namespace Ads.Dominio
         [Column(TypeName = "numeric")]
         public decimal? price { get; set; }
 
-        [Required]
         public int customer_id { get; set; }
-
-        public virtual ICollection<resource> resource { get; set; }
 
         public int category_id { get; set; }
 
         public int subtype_id { get; set; }
+
+        public virtual customer customer { get; set; }
+
+        public virtual ICollection<resource> resource { get; set; }
     }
 }

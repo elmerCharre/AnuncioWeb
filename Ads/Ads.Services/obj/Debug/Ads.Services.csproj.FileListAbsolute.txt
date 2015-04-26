@@ -24,3 +24,16 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.dll
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Services.pdb
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.dll
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.dll
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.dll
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.dll
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Common.pdb
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Dominio.pdb
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\Ads.Repository.pdb
+E:\AnuncioWeb\Ads\Ads.Services\bin\Debug\EntityFramework.xml
+E:\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.csprojResolveAssemblyReference.cache
+E:\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.dll
+E:\AnuncioWeb\Ads\Ads.Services\obj\Debug\Ads.Services.pdb

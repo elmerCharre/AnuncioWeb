@@ -20,5 +20,7 @@
 
         [Required]
         public int fields_id { get; set; }
+
+        public int parent_element { get; set; }
     }
 }

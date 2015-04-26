@@ -11,24 +11,23 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>@Html.Raw((string)ViewBag.rows_customer)</h4>
         <hr />
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @size = 9 })
+                @Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @multiple = false, @size = 9 })
+                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="list_types" style="display: none;">
             @Html.LabelFor(model => model.subtype_id, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("subtype_id", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.ListBox("subtype_id", null, htmlAttributes: new { @class = "form-control", @size = 5 })
+                @Html.ValidationMessageFor(model => model.subtype_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -43,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @rows = 10})
+                @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @rows = 10 })
                 @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,14 +70,14 @@
         </div>*@
 
         <div class="form-group">
-            @Html.Label("upload", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" class="form-control" name="files" multiple />
             </div>
         </div>
 
         <div id="extra_fields_html">
-            
+
         </div>
 
         <div class="form-group">
@@ -86,7 +85,7 @@
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>
+</div>
 }
 
 <div>
@@ -114,7 +113,8 @@
                         $.each(response, function (index, subtype) {
                             markup += "<option value=" + subtype.Id + ">" + subtype.name + "</option>";
                         });
-                        $("#subtype_id").html(markup).show();
+                        $("#subtype_id").html(markup);
+                        $("#list_types").show();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(textStatus);
@@ -134,33 +134,57 @@
                         $.each(response, function (index, element) {
                             if (element.input == "text") {
                                 html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
-                                    "<div class='col-md-10'><input type='text' class='form-control' name='files'/></div></div>";
+                                    "<div class='col-md-10'><input type='text' class='form-control' id='input-source-" + element.id + "' name='extra_" + element.id + "'/></div></div>";
                             } else if (element.input == "select") {
                                 html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
-                                    "<div class='col-md-10'><select class='form-control' name='123'>";
+                                    "<div class='col-md-10'><select class='form-control' id='input-source-" + element.id + "' name='extra_" + element.id + "'>";
                                 $.each(element.elements, function (index, select) {
-                                    console.log(select);
                                     html += "<option value=" + select.value + ">" + select.label + "</option>";
                                 });
                                 html += "</select></div></div>";
                             }
                         });
                         $("#extra_fields_html").html(html).show();
+
+                        //add event change to element select
+                        $.each(response, function (index, element) {
+                            if (element.input == "select") {
+                                if (element.parent_field > 0) {
+                                    $("#input-source-" + element.parent_field).change(function() {
+                                        ajax_change(this, element.id);
+                                    });
+                                    if (index == 1)
+                                        $("#input-source-" + element.parent_field).trigger("change");
+                                }
+                            }
+                        });
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(textStatus);
                     }
                 });
             });
-
-            $('#dragandrophandler').DragDropTool({
-                //url: path_url,
-                fileExtensions: "jpg, png, jpeg",
-                allowedExtensions: true,
-                //maxFileSize: 0,
-                uploadStr: "Upload",
-                dragDropStr: "Drag & Drop Files"
-            });
         });
+
+        function ajax_change(obj, target) {
+            $.ajax({
+                type: "POST",
+                url: "/Ads/GetElementsAsJson/" + obj.value,
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var markup = "";
+                    $.each(response, function (index, element) {
+                        markup += "<option value=" + element.Id + ">" + element.label + "</option>";
+                    });
+                    $("#input-source-" + target).html(markup);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                }
+            });
+        }
+
     </script>
 }

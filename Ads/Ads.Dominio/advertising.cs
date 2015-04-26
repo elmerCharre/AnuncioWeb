@@ -10,6 +10,7 @@ namespace Ads.Dominio
     {
         public advertising()
         {
+            fields_value = new HashSet<fields_value>();
             resource = new HashSet<resource>();
         }
 
@@ -31,6 +32,8 @@ namespace Ads.Dominio
         public int subtype_id { get; set; }
 
         public virtual customer customer { get; set; }
+
+        public virtual ICollection<fields_value> fields_value { get; set; }
 
         public virtual ICollection<resource> resource { get; set; }
     }

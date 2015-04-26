@@ -17,6 +17,10 @@ namespace Ads.Common.ViewModels
         public string input { get; set; }
 
         [Required]
+        [StringLength(20)]
+        public string name { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string label { get; set; }
 

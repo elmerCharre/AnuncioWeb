@@ -9,6 +9,7 @@ using Ads.Common.ViewModels;
 using Ads.Dominio;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Linq;
 
 namespace Ads.Controllers
 {
@@ -16,11 +17,15 @@ namespace Ads.Controllers
     {
         private AdvertisingService _AdvertisingService;
         private ResourceService _resourceService;
+        private ValuesService _valuesService;
+        private CustomerService _customerService;
 
-        public AdsController(AdvertisingService service, ResourceService res)
+        public AdsController(AdvertisingService service, ResourceService res, ValuesService valuesService, CustomerService customerService)
         {
             _AdvertisingService = service;
             _resourceService = res;
+            _valuesService = valuesService;
+            _customerService = customerService;
         }
 
         public ActionResult Index()
@@ -55,7 +60,6 @@ namespace Ads.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.rows_customer = _AdvertisingService.rows_customer();
             ViewBag.category_id = new SelectList(_AdvertisingService.GetListCategory(), "id", "name");
             ViewBag.subtype_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
             return View(new AdvertisingViewModel());
@@ -71,16 +75,72 @@ namespace Ads.Controllers
             return Json(_AdvertisingService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetElementsAsJson(int id)
+        {
+            return Json(_AdvertisingService.GetElementsAsJson(id), JsonRequestBehavior.AllowGet);
+        }
+
         // POST: Advertising/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id,category_id,subtype_id")] AdvertisingViewModel advertisingViewModel, HttpPostedFileBase[] files)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var id_ads = _AdvertisingService.Create(advertisingViewModel);
+
+        //        foreach (var file in files)
+        //        {
+        //            if (file != null && file.ContentLength > 0)
+        //            {
+        //                var filename = Path.GetFileName(file.FileName);
+        //                var res = new ResourceViewModel
+        //                {
+        //                    advertising_id = id_ads,
+        //                    path = filename,
+        //                    type = file.ContentType
+        //                };
+
+        //                var directory = Path.Combine(Server.MapPath("~/resources"), "resource_" + id_ads);
+        //                Directory.CreateDirectory(directory);
+        //                var path_file = directory + "/" + filename;
+        //                file.SaveAs(path_file);
+
+        //                _resourceService.Create(res);
+        //            }
+        //        }
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View();
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,detail,price,customer_id,category_id,subtype_id")] AdvertisingViewModel advertisingViewModel, HttpPostedFileBase[] files)
+        public ActionResult Create(FormCollection formData, HttpPostedFileBase[] files)
         {
             if (ModelState.IsValid)
             {
-                var id_ads = _AdvertisingService.Create(advertisingViewModel);
+                var _value = new Dictionary<string, string>();
+
+                foreach (string _key in formData.Keys)
+                {
+                    _value[_key] = formData[_key];
+                }
+
+                var ads = new AdvertisingViewModel
+                {
+                    category_id = Convert.ToInt16(_value["category_id"]),
+                    subtype_id = Convert.ToInt16(_value["subtype_id"]),
+                    title = _value["title"],
+                    detail = _value["detail"],
+                    price = Convert.ToDecimal(_value["price"]),
+                    customer_id = _customerService.getCustomer(User.Identity.Name).Id
+                };
+                var id_ads = _AdvertisingService.Create(ads);
 
                 foreach (var file in files)
                 {
@@ -98,8 +158,21 @@ namespace Ads.Controllers
                         Directory.CreateDirectory(directory);
                         var path_file = directory + "/" + filename;
                         file.SaveAs(path_file);
-
                         _resourceService.Create(res);
+                    }
+                }
+
+                foreach (var _object in _value)
+                {
+                    if (_object.Key.Length > 6 && _object.Key.Substring(0, 6) == "extra_")
+                    {
+                        var field_value = new ValuesViewModel
+                        {
+                            ads_id = id_ads,
+                            field_id = Convert.ToInt16(_object.Key.Replace("extra_", "")),
+                            value = _object.Value
+                        };
+                        _valuesService.Create(field_value);
                     }
                 }
 
@@ -108,32 +181,6 @@ namespace Ads.Controllers
 
             return View();
         }
-
-        //public ActionResult Create(FormCollection advertisingViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var trackIds = advertisingViewModel.GetValues("resource");
-        //        foreach (string trackId in trackIds)
-        //        {
-        //            Response.Write(trackId);
-        //            playListService.addTrack(playlistId, int.Parse(trackId));
-        //        }
-
-        //        var ads = new AdvertisingViewModel()
-        //        {
-        //            category_id = Convert.ToInt16(advertisingViewModel.Get("category_id")),
-        //            subtype_id = Convert.ToInt16(advertisingViewModel.Get("subtype_id")),
-        //            title = advertisingViewModel.Get("title").ToString(),
-        //            detail = advertisingViewModel.Get("detail").ToString(),
-        //            price = Convert.ToDecimal(advertisingViewModel.Get("price")),
-        //        };
-        //        _AdvertisingService.Create(ads);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View();
-        //}
 
         // GET: Advertising/Edit/5
         public ActionResult Edit(int? id)

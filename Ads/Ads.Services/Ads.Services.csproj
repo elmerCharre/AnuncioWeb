@@ -42,6 +42,7 @@
     <Compile Include="Entities\AdvertisingService.cs" />
     <Compile Include="Entities\CustomerService.cs" />
     <Compile Include="Entities\ResourceService.cs" />
+    <Compile Include="Entities\ValuesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

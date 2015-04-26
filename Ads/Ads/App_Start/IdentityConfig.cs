@@ -107,7 +107,7 @@ namespace Ads
         public Task SendAsync(IdentityMessage message)
         {
             var msj = new MailMessage();
-            msj.From = new MailAddress("elmer.nyd@gmail.com", "MyTunes Support");
+            msj.From = new MailAddress("elmer.nyd@gmail.com", "Anuncios Online");
             msj.To.Add(new MailAddress(message.Destination));
             msj.Subject = message.Subject;
             msj.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null, MediaTypeNames.Text.Plain));

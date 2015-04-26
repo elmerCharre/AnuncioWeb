@@ -8,9 +8,18 @@
     [Table("extra_fields")]
     public partial class extra_fields : EntityBase
     {
+        public extra_fields()
+        {
+            fields_value = new HashSet<fields_value>();
+        }
+
         [Required]
         [StringLength(50)]
         public string input { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string name { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -23,5 +32,7 @@
         public int? parent_field { get; set; }
 
         public virtual subtype subtype { get; set; }
+
+        public virtual ICollection<fields_value> fields_value { get; set; }
     }
 }

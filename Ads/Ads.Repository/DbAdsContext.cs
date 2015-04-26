@@ -18,6 +18,7 @@ namespace Ads.Repository
         public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<elements> elements { get; set; }
         public virtual DbSet<extra_fields> extra_fields { get; set; }
+        public virtual DbSet<fields_value> fields_value { get; set; }
         public virtual DbSet<resource> resource { get; set; }
         public virtual DbSet<subtype> subtype { get; set; }
 
@@ -30,6 +31,12 @@ namespace Ads.Repository
             modelBuilder.Entity<advertising>()
                 .Property(e => e.price)
                 .HasPrecision(7, 2);
+
+            modelBuilder.Entity<advertising>()
+                .HasMany(e => e.fields_value)
+                .WithRequired(e => e.advertising)
+                .HasForeignKey(e => e.ads_id)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<advertising>()
                 .HasMany(e => e.resource)
@@ -47,6 +54,12 @@ namespace Ads.Repository
                 .HasMany(e => e.advertising)
                 .WithRequired(e => e.customer)
                 .HasForeignKey(e => e.customer_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<extra_fields>()
+                .HasMany(e => e.fields_value)
+                .WithRequired(e => e.extra_fields)
+                .HasForeignKey(e => e.field_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<subtype>()

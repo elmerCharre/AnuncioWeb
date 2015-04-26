@@ -16,11 +16,12 @@ namespace Ads.Services.Entities
         private IRepository<subtype> _subtypeRepository;
         private IRepository<extra_fields> _fieldRepository;
         private IRepository<elements> _elementRepository;
+        private IRepository<fields_value> _valuesRepository;
 
         public AdvertisingService(IRepository<advertising> advertisingRepository, 
             IRepository<customer> customerRepository, IRepository<category> categoryRepository,
             IRepository<subtype> subtypeRepository, IRepository<extra_fields> fieldRepository,
-            IRepository<elements> elementRepository)
+            IRepository<elements> elementRepository, IRepository<fields_value> valuesRepository)
         {
             _advertisingRepository = advertisingRepository;
             _customerRepository = customerRepository;
@@ -28,6 +29,7 @@ namespace Ads.Services.Entities
             _subtypeRepository = subtypeRepository;
             _fieldRepository = fieldRepository;
             _elementRepository = elementRepository;
+            _valuesRepository = valuesRepository;
         }
 
         public IEnumerable<AdvertisingViewModel> GetListByUser(string userName)
@@ -53,7 +55,7 @@ namespace Ads.Services.Entities
 
         public int Create(AdvertisingViewModel model)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.email == "elmer.nyd@gmail.com"); //Session["userID"]
+            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
             var advertising = new advertising() {
                 title = model.title,
@@ -88,17 +90,33 @@ namespace Ads.Services.Entities
         {
             var AdsList = _advertisingRepository.Get().FirstOrDefault(x => x.Id == id);
             if (AdsList == null) throw new InvalidOperationException("Anuncio no encontrado");
+
+            var fields_values = _valuesRepository.Get().Where(v => v.ads_id == AdsList.Id).ToList();
+            var values = new List<ValuesViewModel>();
+            foreach (var field_value in fields_values) {
+                var valuesModel = new ValuesViewModel();
+                valuesModel.ads_id = AdsList.Id;
+                valuesModel.field_id = field_value.field_id;
+                valuesModel.field_label = _fieldRepository.Get().FirstOrDefault(f => f.Id == field_value.field_id).label;
+                valuesModel.value = (_fieldRepository.Get().FirstOrDefault(f => f.Id == field_value.field_id).input == "select") ?
+                    _elementRepository.Get().FirstOrDefault(e => e.Id.ToString() == field_value.value).label : field_value.value;
+                values.Add(valuesModel);
+            }
             
-            return new AdvertisingViewModel(new advertising() {
-                Id = AdsList.Id,
+            return new AdvertisingViewModel 
+            {
+                id = AdsList.Id,
                 category_id = AdsList.category_id,
+                category_name = _categoryRepository.Get().FirstOrDefault(c => c.Id == AdsList.category_id).name,
                 subtype_id = AdsList.subtype_id,
+                subtype_name = _subtypeRepository.Get().FirstOrDefault(s => s.Id == AdsList.subtype_id).name,
                 title = AdsList.title,
                 detail = AdsList.detail,
                 price = AdsList.price,
                 customer_id = AdsList.customer_id,
-                resource = AdsList.resource.Where(x => x.advertising_id == AdsList.Id).ToList() 
-            });
+                resource = AdsList.resource.Where(x => x.advertising_id == AdsList.Id).ToList(),
+                values = values
+            };
         }
 
         public IEnumerable<category> GetListCategory()
@@ -127,42 +145,47 @@ namespace Ads.Services.Entities
             return json;
         }
 
+        public List<elements> GetElementsAsJson(int id)
+        {
+            var elements = _elementRepository.Get().Where(x => x.parent_element == id).ToList();
+            var json = new List<elements>();
+            foreach (var obj in elements)
+            {
+                json.Add(new elements
+                {
+                    Id = obj.Id,
+                    label = obj.label,
+                    value = obj.value,
+                    status = obj.status,
+                    fields_id = obj.fields_id,
+                    parent_element = obj.parent_element
+                });
+            }
+            return json;
+        }
+
         public List<FieldsViewModel> GetListFieldsAsJson(int id)
         {
             var list = _fieldRepository.Get().Where(x => x.subtype_id == id).OrderBy(g => g.sort).ToList();
             var json = new List<FieldsViewModel>();
             foreach (var obj in list)
             {
-                var element = _elementRepository.Get().Where(e => e.fields_id == obj.Id).ToList();
+                var element = new List<elements>();
+                if (obj.parent_field == 0)
+                    element = _elementRepository.Get().Where(e => e.fields_id == obj.Id).ToList();
                 json.Add(new FieldsViewModel
                 {
                     id = obj.Id,
                     input = obj.input,
+                    name = obj.name,
                     label = obj.label,
                     sort = obj.sort,
                     subtype_id = obj.subtype_id,
+                    parent_field = obj.parent_field,
                     elements = element
                 });
             }
             return json;
-        }
-
-        public void AddResource(int advertisingId, int trackId)
-        {
-            //var playList = _playListRepository.Get().FirstOrDefault(x => x.Id == playListId);
-            //if (playList == null) throw new InvalidOperationException("Playlist no encontrado");
-            //var track = _trackRepository.Get().FirstOrDefault(x => x.Id==trackId);
-            //if (playList == null) throw new InvalidOperationException("Track no encontrado");
-
-            //playList.Track.Add(track);
-            //_playListRepository.Update(playList);
-
-        }
-
-        public string rows_customer()
-        {
-            var customer = _customerRepository.Get().FirstOrDefault(c => c.email == "elmer.nyd@gmail.com");
-            return customer.fullname;
         }
     }
 }

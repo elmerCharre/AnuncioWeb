@@ -10,18 +10,25 @@
     @*<h4>Detalle del Anuncio</h4>*@
     <hr />
     <dl class="dl-horizontal">
+        <div id="carousel">
+            @foreach (var item in Model.resource)
+            {
+                <img src="@Url.Content("/resources/resource_" + item.advertising_id + "/" + item.path)" style="max-width: 550px;"/>
+            }
+        </div>
+        <br>
         <dt>
             @Html.DisplayNameFor(model => model.category_id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.category_id)
+            @Html.DisplayFor(model => model.category_name)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.subtype_id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.subtype_id)
+            @Html.DisplayFor(model => model.subtype_name)
         </dd>
 
         <dt>
@@ -45,12 +52,16 @@
             @Html.DisplayFor(model => model.price)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customer_id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.customer_id)
-        </dd>
+        <br>
+        @foreach (var item in Model.values)
+        {
+            <dt>
+                @Html.DisplayFor(model => item.field_label)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.value)
+            </dd>
+        }
 
     </dl>
 </div>
@@ -58,3 +69,22 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/democarousel")
+
+    <script type="text/javascript" lang="javascript">
+        $(function () {
+            $('#carousel').carouFredSel({
+                auto: true,
+                direction: "up",
+                scroll: {
+                    items: 1,
+                    easing: "elastic",
+                    duration: 1000,
+                    pauseOnHover: true
+                }
+            });
+        });
+    </script>
+}

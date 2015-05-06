@@ -6,12 +6,7 @@
  * @author Elmer Charre Salazar <elmer.nyd@gmail.com>
  */
 
-$(document).ready(function () {
-    browser_support_api = (typeof FormData !== "undefined") ? true : false;
-});
-
 var setting;
-var browser_support_api = true;
 var array_ObjectFile = new Array();
 var object_dragging = "";
 var idObjectForm = "";
@@ -24,7 +19,6 @@ var value = 0;
 jQuery.fn.extend({
     DragDropTool: function (options) {
         setting = $.extend({
-            url: "",
             method: "POST",
             filesRequired: true,
             fileExtensions: "*",
@@ -32,8 +26,6 @@ jQuery.fn.extend({
             fileName: "files[]",
             maxNumberFiles: 10,
             maxFileSize: -1,
-            autoSubmit: true,
-            showSend: true,
             showDelete: true,
             returnType: 'json',
             uploadStr: "Upload",
@@ -43,13 +35,13 @@ jQuery.fn.extend({
             sizeErrorStr: "is not allowed. Allowed Max size: ",
             numberErrorStr: "is not allowed. Allowed Max number: ",
             defaultExtensionStr: "all extensions",
-            objectRequired: {}
+            supportAPI: true,
         }, options);
 
-        if (setting.fileExtensions === '*') setting.allowedExtensions = true;
-        if (setting.autoSubmit) setting.showSend = false;
+        setting.supportAPI = (typeof FormData !== "undefined") ? true : false;
+        setting.allowedExtensions = (setting.fileExtensions === '*') ? true : false;
 
-        if (!browser_support_api) {
+        if (!setting.supportAPI) {
             $(this).text('');
             $(this).DinamicUpload();
             return;
@@ -94,7 +86,8 @@ jQuery.fn.extend({
                 e.stopPropagation();
                 e.preventDefault();
                 object_dragging.css("border", "1px dashed #B3B3B3");
-                handleFileUpload(e.originalEvent.dataTransfer.files, object_dragging);
+                var objClassFile = new classFile(object_dragging);
+                objClassFile.handleFileUpload(e.originalEvent.dataTransfer.files, object_dragging);
             });
 
             $(document).on('dragenter', function (e) {
@@ -115,7 +108,8 @@ jQuery.fn.extend({
             $(setting.idObjectInputFile).change(function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                handleFileUpload(e.target.files, object_dragging);
+                var objClassFile = new classFile(object_dragging);
+                objClassFile.handleFileUpload(e.target.files, object_dragging);
             });
         });
     },
@@ -136,25 +130,11 @@ jQuery.fn.extend({
     }
 });
 
-function handleFileUpload(files, object_dragging) {
-    $.each(files, function (key, data) {
-        if (isFileTypeAllowed(data.name)) {
-            if (!searchFile(data.name)) {
-                var objClassFile = new classFile(object_dragging);
-                objClassFile.setFileNameSize(data);
-                objClassFile.setAbortFile(data, null);
-                (setting.autoSubmit) ? setSerializeForm(data, objClassFile) : sendFile(data, objClassFile);
-            }
-        }
-    });
-    $(setting.idObjectInputFile).val('');
-}
-
 function classFile(object_dragging) {
-    if (countObjectFiles < setting.maxNumberFiles) {
-        countObjectFiles++;
+    this.setFileNameSize = function (file) {
+        if (countObjectFiles < setting.maxNumberFiles) {
+            countObjectFiles++;
 
-        this.setFileNameSize = function (file) {
             file.id = countObjectFiles;
             //if (countObjectFiles < 1)
             this.statusbar = $("<div class='status-upload' id=" + (countObjectFiles - 1) + " onhover='test(" + (countObjectFiles - 1) + ");'></div>");
@@ -165,7 +145,6 @@ function classFile(object_dragging) {
             //this.progress = $("<div class='status-bar'></div>").appendTo(this.progress_bar);
             //this.size = $("<div class='status-size'></div>").appendTo(this.statusbar);
             //this.sizereal = $("<div style='display:none;'></div>").appendTo(this.statusbar).html(file.size);
-            //if (setting.showSend) this.send = $("<div class='send_data'>").appendTo(this.statusbar);
             //if (setting.showDelete) this.abort = $("<div class='remove_data'>").appendTo(this.statusbar);
             //object_dragging.after(this.statusbar);
             this.statusbar.appendTo($(".list_files_dragging"));
@@ -193,15 +172,42 @@ function classFile(object_dragging) {
 
             if (countObjectFiles > 0)
                 object_dragging.css('height', 'auto');
-        };
-        this.setSendFile = function (formData, objClassFile) {
-            if (setting.showSend) {
-                this.send.click(function () {
-                    setSerializeForm(formData, objClassFile);
-                });
-            }
-        };
-        this.setAbortFile = function (formData, jqxhr) {
+        } else
+            showMessageLabel(setting.numberErrorStr + " " + setting.maxNumberFiles);
+    }
+
+    this.handleFileUpload = function (files, object_dragging) {
+        $.each(files, function (key, data) {
+            //if (this.isFileTypeAllowed(data.name)) {
+                if (!searchFile(data.name)) {
+                    setFileNameSize(data);
+                    setAbortFile(data, null);
+                }
+            //}
+        });
+        $(setting.idObjectInputFile).val('');
+    }
+
+    this.isFileTypeAllowed = function (fileName) {
+            if (setting.fileExtensions === '*') return true;
+            var fileExtensions = setting.fileExtensions.toLowerCase().replace(/ /g, '');
+            fileExtensions = fileExtensions.split(",");
+            var ext = fileName.split('.').pop().toLowerCase();
+            return (setting.allowedExtensions) ? (($.inArray(ext, fileExtensions) > -1) ? true : false) : (($.inArray(ext, fileExtensions) > -1) ? false : true);
+    }
+
+    this.searchFile = function (fileName) {
+            var result = false;
+            $.each(array_ObjectFile, function (key, data) {
+                if (data && fileName === data.name) {
+                    result = true;
+                    return false;
+                }
+            });
+            return result;
+    }
+
+    this.setAbortFile = function (formData, jqxhr) {
             if (setting.showDelete) {
                 //var sb = this.statusbar;
                 //var size = this.sizereal;
@@ -214,17 +220,12 @@ function classFile(object_dragging) {
                 //    countFiles--;
                 //});
             }
-        };
-        this.setProgress = function (percent) {
+    }
+
+    this.setProgress = function (percent) {
             this.progress.text(percent + "%");
             this.progress.css({ width: percent + "%" });
-        };
-    } else
-        showMessageLabel(setting.numberErrorStr + " " + setting.maxNumberFiles);
-}
-
-function sendFile(formData, objClassFile) {
-    objClassFile.setSendFile(formData, objClassFile);
+    }
 }
 
 function setSerializeForm(formData, objClassFile) {
@@ -236,7 +237,6 @@ function setSerializeForm(formData, objClassFile) {
         if (objClassFile) {
             formData = new Array(formData);
             objClassFile.progress_bar.css({ border: "1px solid", 'border-radius': '5px' });
-            if (setting.showSend) objClassFile.send.remove();
         }
         var data_files = new FormData();
         //set the input files of the form by dragging
@@ -255,117 +255,6 @@ function setSerializeForm(formData, objClassFile) {
         });
         //send files to server
         //sendFileToServer(data_files, objClassFile);
-    }
-}
-
-function sendFileToServer(formData, objClassFile) {
-    value = 0;
-    var jqXHR = $.ajax({
-        xhr: function () {
-            var xhrobj = $.ajaxSettings.xhr();
-            if (xhrobj.upload) {
-                xhrobj.upload.addEventListener('progress', function (event) {
-                    value = Math.ceil((event.loaded || event.position) / event.total * 100);
-                    if (objClassFile) objClassFile.setProgress(value);
-                    else {
-                        $('.status-bar').css({ width: value + '%' });
-                        $('.status-bar').text(value + "%");
-                    }
-                }, false);
-            }
-            return xhrobj;
-        },
-        url: setting.url,
-        type: setting.method,
-        dataType: setting.returnType,
-        contentType: false,
-        processData: false,
-        cache: false,
-        data: formData,
-        success: function (url) {
-            delete formData;
-            setting.maxFileSize -= 215;
-            currentFileSize -= 215;
-            countFiles--;
-            if (objClassFile) {
-                delete array_ObjectFile[objClassFile.statusbar.prop("id")];
-                objClassFile.statusbar.remove();
-            } else (validateURL(url)) ? (window.location.href = url) : window.location.reload();
-        }
-    });
-    if (objClassFile) objClassFile.setAbortFile(formData, jqXHR);
-}
-
-function getFiles() {
-    var data_files = new FormData();
-    $.each(array_ObjectFile, function (key, data) {
-        if (data) data_files.append(setting.fileName, data);
-    });
-    return data_files;
-}
-
-function searchFile(fileName) {
-    var result = false;
-    $.each(array_ObjectFile, function (key, data) {
-        if (data && fileName === data.name) {
-            result = true;
-            return false;
-        }
-    });
-    return result;
-}
-
-function preventSubmit() {
-    showMessageLabel('');
-    $('.status-bar').prop('class', '');
-    $('.message-label').append($('<div class="status-bar"></div>'));
-    $('.message-label').prop('class', 'status-progress');
-    $(':submit').prop("disabled", true);
-    $('.dragandrophandler').remove();
-    $('img.remove_data').remove();
-    $('img.send_data').remove();
-    $('.NFI_InputUpload').remove();
-}
-
-function submitData() {
-    if (!browser_support_api) SubmitForm();
-    else {
-        preventSubmit();
-        setSerializeForm(array_ObjectFile, null);
-    }
-}
-
-function SubmitForm() {
-    preventSubmit();
-    value = 0;
-    var progressSimulator;
-    $('#addInputFile').hide();
-    $(idObjectForm).ajaxForm({
-        type: setting.method,
-        url: setting.url,
-        dataType: setting.returnType,
-        beforeSend: function () {
-            $(".status-bar").css({ width: "0%" });
-            $(".status-bar").text("0%");
-            progressSimulator = setInterval(function () { progressFallback(); }, 2000);
-        },
-        success: function (url) {
-            clearInterval(progressSimulator);
-            $(".status-bar").css({ width: "100%" });
-            $(".status-bar").text("100%");
-            (validateURL(url)) ? (window.location.href = url) : window.location.reload();
-        },
-        error: function () {
-            setTimeout('SubmitForm()', 300);
-        }
-    }).submit();
-}
-
-function progressFallback() {
-    if (value < 97) {
-        value += 1;
-        $('.status-bar').css({ width: value + '%' });
-        $('.status-bar').text(value + "%");
     }
 }
 
@@ -401,14 +290,14 @@ function addInputFile() {
 }
 
 function setFileName(objInputUpload, item) {
-    if (isFileTypeAllowed(objInputUpload.value)) {
+    /*if (isFileTypeAllowed(objInputUpload.value)) {
         $('#txtInputFile' + item).val(objInputUpload.value.replace('C:\\fakepath\\', ''));
         countFiles++;
     } else {
         if ($('#txtInputFile' + item).val() && countFiles > 0) countFiles--;
         $('#txtInputFile' + item).val('');
         $('#type_file' + item).replaceWith($('#type_file' + item).clone(true));
-    }
+    }*/
 }
 
 function showMessageLabel(message) {
@@ -416,12 +305,4 @@ function showMessageLabel(message) {
     $('.message-label').text((message !== '*') ? message : setting.defaultExtensionStr);
     //setTimeout(function() { $('.message-label').text(setting.fileExtensions); }, 4000);
     setTimeout(function () { $('.message-label').text((setting.fileExtensions !== '*') ? setting.fileExtensions : setting.defaultExtensionStr); }, 4000);
-}
-
-function isFileTypeAllowed(fileName) {
-    if (setting.fileExtensions === '*') return true;
-    var fileExtensions = setting.fileExtensions.toLowerCase().replace(/ /g, '');
-    fileExtensions = fileExtensions.split(",");
-    var ext = fileName.split('.').pop().toLowerCase();
-    return (setting.allowedExtensions) ? (($.inArray(ext, fileExtensions) > -1) ? true : false) : (($.inArray(ext, fileExtensions) > -1) ? false : true);
 }

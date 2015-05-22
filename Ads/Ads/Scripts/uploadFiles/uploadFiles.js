@@ -8,7 +8,6 @@
 
 var setting;
 var array_ObjectFile = new Array();
-var object_dragging = "";
 var idObjectForm = "";
 var countObjectFiles = 0;
 var currentFileSize = 0;
@@ -40,6 +39,7 @@ jQuery.fn.extend({
 
         setting.supportAPI = (typeof FormData !== "undefined") ? true : false;
         setting.allowedExtensions = (setting.fileExtensions === '*') ? true : false;
+        setting.object_dragging = $(this);
 
         if (!setting.supportAPI) {
             $(this).text('');
@@ -48,9 +48,7 @@ jQuery.fn.extend({
         }
 
         return this.each(function () {
-            object_dragging = $(this);
-            //object_dragging.addClass("dragandrophandler").text(setting.dragDropStr);
-            object_dragging.addClass("dragandrophandler").html("<span>" + setting.dragDropStr + "</span>" +
+            setting.object_dragging.addClass("dragandrophandler").html("<span>" + setting.dragDropStr + "</span>" +
                 "<input type='file' name='" + setting.fileName + "' id='" + setting.idObjectInputFile + "' multiple>" +
                 "<div class='list_files_dragging'></div>");
 
@@ -65,29 +63,28 @@ jQuery.fn.extend({
             setting.idObjectInputFile = '#' + setting.idObjectInputFile;
             //$(setting.idObjectInputFile).nicefileUpload();
 
-            object_dragging.on("dragenter", function (e) {
+            setting.object_dragging.on("dragenter", function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                object_dragging.css("border", "1px solid #B3B3B3");
+                setting.object_dragging.css("border", "1px solid #B3B3B3");
             });
 
-            object_dragging.on("dragover", function (e) {
+            setting.object_dragging.on("dragover", function (e) {
                 e.stopPropagation();
                 e.preventDefault();
             });
 
-            object_dragging.on("dragleave", function (e) {
+            setting.object_dragging.on("dragleave", function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                object_dragging.css("border", "1px dashed #B3B3B3");
+                setting.object_dragging.css("border", "1px dashed #B3B3B3");
             });
 
-            object_dragging.on("drop", function (e) {
+            setting.object_dragging.on("drop", function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                object_dragging.css("border", "1px dashed #B3B3B3");
-                var objClassFile = new classFile(object_dragging);
-                objClassFile.handleFileUpload(e.originalEvent.dataTransfer.files, object_dragging);
+                setting.object_dragging.css("border", "1px dashed #B3B3B3");
+                classFile.handleFileUpload(e.originalEvent.dataTransfer.files);
             });
 
             $(document).on('dragenter', function (e) {
@@ -108,30 +105,29 @@ jQuery.fn.extend({
             $(setting.idObjectInputFile).change(function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-                var objClassFile = new classFile(object_dragging);
-                objClassFile.handleFileUpload(e.target.files, object_dragging);
+                classFile.handleFileUpload(e.target.files);
             });
         });
     },
     DinamicUpload: function () {
         if (typeof $("form").prop('id') === 'undefined') $("form").prop('id', 'form_uploadFiles');
         idObjectForm = '#' + $("form").prop('id');
-        object_dragging = $(this);
         $('.dragandrophandler').remove();
-        object_dragging.before($('<div class="message-label">'));
+        setting.object_dragging.before($('<div class="message-label">'));
         showMessageLabel(setting.fileExtensions);
         //create object input file type
         var input_file = document.createElement('div');
         $(input_file).css({ 'padding-top': '6px', display: 'block', 'margin-bottom': '8px' });
         input_file.innerHTML = '<input type="file" class="uploadInputFile" id="uploadInputFile_0" name="' + setting.fileName + '" onchange="setFileName(this, 0);">';
         input_file.innerHTML += '<a id="addInputFile" href="javascript:void(0)" onclick="return addInputFile();"></a>';
-        object_dragging.before(input_file);
+        setting.object_dragging.before(input_file);
         $("#uploadInputFile_0").nicefileinput();
     }
 });
 
-function classFile(object_dragging) {
-    this.setFileNameSize = function (file) {
+var classFile = {
+
+    setFileNameSize: function (file) {
         if (countObjectFiles < setting.maxNumberFiles) {
             countObjectFiles++;
 
@@ -171,62 +167,62 @@ function classFile(object_dragging) {
             countFiles++;
 
             if (countObjectFiles > 0)
-                object_dragging.css('height', 'auto');
+                setting.object_dragging.css('height', 'auto');
         } else
             showMessageLabel(setting.numberErrorStr + " " + setting.maxNumberFiles);
-    }
+    },
 
-    this.handleFileUpload = function (files, object_dragging) {
+    handleFileUpload: function (files) {
         $.each(files, function (key, data) {
-            //if (this.isFileTypeAllowed(data.name)) {
+            if (this.isFileTypeAllowed(data.name)) {
                 if (!searchFile(data.name)) {
                     setFileNameSize(data);
                     setAbortFile(data, null);
                 }
-            //}
+            }
         });
         $(setting.idObjectInputFile).val('');
-    }
+    },
 
-    this.isFileTypeAllowed = function (fileName) {
-            if (setting.fileExtensions === '*') return true;
-            var fileExtensions = setting.fileExtensions.toLowerCase().replace(/ /g, '');
-            fileExtensions = fileExtensions.split(",");
-            var ext = fileName.split('.').pop().toLowerCase();
-            return (setting.allowedExtensions) ? (($.inArray(ext, fileExtensions) > -1) ? true : false) : (($.inArray(ext, fileExtensions) > -1) ? false : true);
-    }
+    isFileTypeAllowed: function (fileName) {
+        if (setting.fileExtensions === '*') return true;
+        var fileExtensions = setting.fileExtensions.toLowerCase().replace(/ /g, '');
+        fileExtensions = fileExtensions.split(",");
+        var ext = fileName.split('.').pop().toLowerCase();
+        return (setting.allowedExtensions) ? (($.inArray(ext, fileExtensions) > -1) ? true : false) : (($.inArray(ext, fileExtensions) > -1) ? false : true);
+    },
 
-    this.searchFile = function (fileName) {
-            var result = false;
-            $.each(array_ObjectFile, function (key, data) {
-                if (data && fileName === data.name) {
-                    result = true;
-                    return false;
-                }
-            });
-            return result;
-    }
-
-    this.setAbortFile = function (formData, jqxhr) {
-            if (setting.showDelete) {
-                //var sb = this.statusbar;
-                //var size = this.sizereal;
-                //this.abort.click(function() {
-                //    if (jqxhr) jqxhr.abort();
-                //    currentFileSize = currentFileSize - parseFloat(size.text());
-                //    delete array_ObjectFile[sb.prop("id")];
-                //    delete formData;
-                //    sb.remove();
-                //    countFiles--;
-                //});
+    searchFile: function (fileName) {
+        var result = false;
+        $.each(array_ObjectFile, function (key, data) {
+            if (data && fileName === data.name) {
+                result = true;
+                return false;
             }
-    }
+        });
+        return result;
+    },
 
-    this.setProgress = function (percent) {
-            this.progress.text(percent + "%");
-            this.progress.css({ width: percent + "%" });
+    setAbortFile: function (formData, jqxhr) {
+        if (setting.showDelete) {
+            //var sb = this.statusbar;
+            //var size = this.sizereal;
+            //this.abort.click(function() {
+            //    if (jqxhr) jqxhr.abort();
+            //    currentFileSize = currentFileSize - parseFloat(size.text());
+            //    delete array_ObjectFile[sb.prop("id")];
+            //    delete formData;
+            //    sb.remove();
+            //    countFiles--;
+            //});
+        }
+    },
+
+    setProgress: function (percent) {
+        this.progress.text(percent + "%");
+        this.progress.css({ width: percent + "%" });
     }
-}
+};
 
 function setSerializeForm(formData, objClassFile) {
 
@@ -286,7 +282,7 @@ function addInputFile() {
     newInput.innerHTML = '<div class="NFI_InputFile">' + setting.uploadStr + '\n\
                           <input type="file" class="uploadInputFile" name="'+ setting.fileName + '" id="uploadInputFile_' + countObjectFiles + '" title="' + setting.uploadStr + '" onchange="setFileName(this, ' + countObjectFiles + ');"></div>\n\
                           <input type="text" class="upload_txtInputFile" id="txtInputFile'+ countObjectFiles + '" disabled>';
-    object_dragging.append(newInput);
+    setting.object_dragging.append(newInput);
 }
 
 function setFileName(objInputUpload, item) {

@@ -19,7 +19,7 @@ namespace Ads.Services.Entities
         {
             var res = new resource
             {
-                advertising_id = resourceRepository.advertising_id,
+                article_id = resourceRepository.article_id,
                 path = resourceRepository.path,
                 type = resourceRepository.type
             };

@@ -6,11 +6,11 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("customer")]
-    public partial class customer : EntityBase
+    public class customer : EntityBase
     {
         public customer()
         {
-            advertising = new HashSet<advertising>();
+            article = new HashSet<article>();
         }
 
         [Required]
@@ -31,6 +31,6 @@ namespace Ads.Dominio
         [StringLength(100)]
         public string address { get; set; }
 
-        public virtual ICollection<advertising> advertising { get; set; }
+        public virtual ICollection<article> article { get; set; }
     }
 }

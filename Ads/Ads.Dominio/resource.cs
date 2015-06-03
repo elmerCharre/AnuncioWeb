@@ -6,7 +6,7 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("resource")]
-    public partial class resource : EntityBase
+    public class resource : EntityBase
     {
 
         [Required]
@@ -17,8 +17,8 @@ namespace Ads.Dominio
         [StringLength(20)]
         public string type { get; set; }
 
-        public int advertising_id { get; set; }
+        public int article_id { get; set; }
 
-        public virtual advertising advertising { get; set; }
+        public virtual article article { get; set; }
     }
 }

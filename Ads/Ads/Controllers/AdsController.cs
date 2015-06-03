@@ -15,16 +15,14 @@ namespace Ads.Controllers
 {
     public class AdsController : Controller
     {
-        private AdvertisingService _AdvertisingService;
+        private ArticleService _AdvertisingService;
         private ResourceService _resourceService;
-        private ValuesService _valuesService;
         private CustomerService _customerService;
 
-        public AdsController(AdvertisingService service, ResourceService res, ValuesService valuesService, CustomerService customerService)
+        public AdsController(ArticleService service, ResourceService res, CustomerService customerService)
         {
             _AdvertisingService = service;
             _resourceService = res;
-            _valuesService = valuesService;
             _customerService = customerService;
         }
 
@@ -39,7 +37,7 @@ namespace Ads.Controllers
             catch (InvalidOperationException ex)
             {
                 ModelState.AddModelError("", "Cliente no registrado");
-                return View(new List<AdvertisingViewModel>());
+                return View(new List<ArticleViewModel>());
             }
             catch (Exception ex)
             {
@@ -61,23 +59,13 @@ namespace Ads.Controllers
         public ActionResult Create()
         {
             ViewBag.category_id = new SelectList(_AdvertisingService.GetListCategory(), "id", "name");
-            ViewBag.subtype_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
-            return View(new AdvertisingViewModel());
-        }
-
-        public JsonResult getExtraFieldsAsJson(int id = 0)
-        {
-            return Json(_AdvertisingService.GetListFieldsAsJson(id), JsonRequestBehavior.AllowGet);
+            ViewBag.articleType_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
+            return View(new ArticleViewModel());
         }
 
         public JsonResult GetListSubtypeByCategory(int id)
         {
             return Json(_AdvertisingService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetElementsAsJson(int id)
-        {
-            return Json(_AdvertisingService.GetElementsAsJson(id), JsonRequestBehavior.AllowGet);
         }
 
         // POST: Advertising/Create
@@ -131,13 +119,13 @@ namespace Ads.Controllers
                     _value[_key] = formData[_key];
                 }
 
-                var ads = new AdvertisingViewModel
+                var ads = new ArticleViewModel
                 {
-                    category_id = Convert.ToInt16(_value["category_id"]),
-                    subtype_id = Convert.ToInt16(_value["subtype_id"]),
+                    //category_id = Convert.ToInt16(_value["category_id"]),
+                    //articleType = Convert.ToInt16(_value["subtype_id"]),
                     title = _value["title"],
                     detail = _value["detail"],
-                    price = Convert.ToDecimal(_value["price"]),
+                    //price = Convert.ToDecimal(_value["price"]),
                     customer_id = _customerService.getCustomer(User.Identity.Name).Id
                 };
                 var id_ads = _AdvertisingService.Create(ads);
@@ -149,7 +137,7 @@ namespace Ads.Controllers
                         var filename = Path.GetFileName(file.FileName);
                         var res = new ResourceViewModel
                         {
-                            advertising_id = id_ads,
+                            article_id = id_ads,
                             path = filename,
                             type = file.ContentType
                         };
@@ -159,20 +147,6 @@ namespace Ads.Controllers
                         var path_file = directory + "/" + filename;
                         file.SaveAs(path_file);
                         _resourceService.Create(res);
-                    }
-                }
-
-                foreach (var _object in _value)
-                {
-                    if (_object.Key.Length > 6 && _object.Key.Substring(0, 6) == "extra_")
-                    {
-                        var field_value = new ValuesViewModel
-                        {
-                            ads_id = id_ads,
-                            field_id = Convert.ToInt16(_object.Key.Replace("extra_", "")),
-                            value = _object.Value
-                        };
-                        _valuesService.Create(field_value);
                     }
                 }
 
@@ -202,7 +176,7 @@ namespace Ads.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,detail,price,customer_id")] AdvertisingViewModel advertisingViewModel)
+        public ActionResult Edit([Bind(Include = "id,title,detail,price,customer_id")] ArticleViewModel advertisingViewModel)
         {
             //if (ModelState.IsValid)
             //{

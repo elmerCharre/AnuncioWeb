@@ -53,7 +53,7 @@ namespace Ads.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                kernel.Bind(o => o.FromAssemblyContaining<AdvertisingRepository>()
+                kernel.Bind(o => o.FromAssemblyContaining<ArticleRepository>()
                     .SelectAllClasses()
                     .WhichAreNotGeneric()
                     .InheritedFrom(typeof(IRepository<>))

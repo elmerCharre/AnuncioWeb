@@ -6,11 +6,12 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("category")]
-    public partial class category : EntityBase
+    public class category : EntityBase
     {
         public category()
         {
-            subtype = new HashSet<subtype>();
+            article = new HashSet<article>();
+            articleType = new HashSet<articleType>();
         }
 
         [Required]
@@ -19,6 +20,8 @@ namespace Ads.Dominio
 
         public int status { get; set; }
 
-        public virtual ICollection<subtype> subtype { get; set; }
+        public virtual ICollection<article> article { get; set; }
+
+        public virtual ICollection<articleType> articleType { get; set; }
     }
 }

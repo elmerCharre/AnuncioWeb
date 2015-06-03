@@ -5,69 +5,53 @@ namespace Ads.Repository
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using Ads.Dominio;
+    using System.Data.Entity.ModelConfiguration;
 
     public class DbAdsContext : DbContext
     {
         public DbAdsContext()
             : base("name=Ads")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<advertising> advertising { get; set; }
+        public virtual DbSet<article> article { get; set; }
+        public virtual DbSet<articleType> articleType { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<customer> customer { get; set; }
-        public virtual DbSet<elements> elements { get; set; }
-        public virtual DbSet<extra_fields> extra_fields { get; set; }
-        public virtual DbSet<fields_value> fields_value { get; set; }
         public virtual DbSet<resource> resource { get; set; }
-        public virtual DbSet<subtype> subtype { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<advertising>()
+            modelBuilder.Entity<article>()
                 .Property(e => e.detail)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<advertising>()
-                .Property(e => e.price)
-                .HasPrecision(7, 2);
-
-            modelBuilder.Entity<advertising>()
-                .HasMany(e => e.fields_value)
-                .WithRequired(e => e.advertising)
-                .HasForeignKey(e => e.ads_id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<advertising>()
+            modelBuilder.Entity<article>()
                 .HasMany(e => e.resource)
-                .WithRequired(e => e.advertising)
-                .HasForeignKey(e => e.advertising_id)
+                .WithRequired(e => e.article)
+                .HasForeignKey(e => e.article_id)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<article>()
+                .Map<moto>(x => x.Requires("articleType").HasValue("Moto").HasColumnType("string").HasMaxLength(20))
+                .Map<auto>(x => x.Requires("articleType").HasValue("Auto"));
 
             modelBuilder.Entity<category>()
-                .HasMany(e => e.subtype)
+                .HasMany(e => e.articleType)
                 .WithRequired(e => e.category)
                 .HasForeignKey(e => e.category_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<customer>()
-                .HasMany(e => e.advertising)
+                .HasMany(e => e.article)
                 .WithRequired(e => e.customer)
                 .HasForeignKey(e => e.customer_id)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<extra_fields>()
-                .HasMany(e => e.fields_value)
-                .WithRequired(e => e.extra_fields)
-                .HasForeignKey(e => e.field_id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<subtype>()
-                .HasMany(e => e.extra_fields)
-                .WithRequired(e => e.subtype)
-                .HasForeignKey(e => e.subtype_id)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Configurations.Add(new articleMap());
         }
-
     }
+
 }

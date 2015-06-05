@@ -5,12 +5,11 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("article")]
-    public class article : EntityBase
+    public class articles : EntityBase
     {
-        public article()
+        public articles()
         {
-            resource = new HashSet<resource>();
+            resources = new HashSet<resources>();
         }
 
         [Required]
@@ -23,23 +22,23 @@ namespace Ads.Dominio
 
         public int customer_id { get; set; }
 
-        public int category_id { get; set; }
+        public int? category_Id { get; set; }
 
-        public virtual category category { get; set; }
+        public virtual categories categories { get; set; }
 
-        public virtual customer customer { get; set; }
+        public virtual customers customers { get; set; }
 
-        public virtual ICollection<resource> resource { get; set; }
+        public virtual ICollection<resources> resources { get; set; }
     }
 
-    public class moto : article
+    public class moto : articles
     {
         public decimal price_moto { get; set; }
 
         public string vin { get; set; }
     }
 
-    public class auto : article
+    public class auto : articles
     {
         public decimal price_auto { get; set; }
         public string kilometraje { get; set; }

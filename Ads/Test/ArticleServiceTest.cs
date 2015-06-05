@@ -19,10 +19,10 @@ namespace Test
 
         private void InitializeTestData()
         {
-            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<article>>();
-            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleType>>();
-            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customer>>();
-            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<category>>();
+            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<articles>>();
+            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleTypes>>();
+            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customers>>();
+            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<categories>>();
             var articleService = new ArticleService(articleRepositoryStub, articleTypeRepositoryStub, customerRepositoryStub, categoryRepositoryStub);
 
             moto = new moto()
@@ -30,22 +30,22 @@ namespace Test
                title = "moto 1",
                detail = "moto 1 detail",
                customer_id = 1,
-               category_id = 1,
+               category_Id = 1,
                price_moto = 10,
                vin = "001"
             };
-            articleService.CreateMoto(moto);
+            articleService.CreateModel(moto);
 
             auto = new auto()
             {
                 title = "auto 1",
                 detail = "auto 1 detail",
                 customer_id = 1,
-                category_id = 1,
+                category_Id = 1,
                 price_auto = 50,
                 kilometraje = "100 km"
             };
-            articleService.CreateAuto(auto);
+            articleService.CreateModel(auto);
         }
 
         [Test]
@@ -54,12 +54,12 @@ namespace Test
         {
             InitializeTestData();
 
-            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<article>>();
-            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleType>>();
-            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customer>>();
-            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<category>>();
+            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<articles>>();
+            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleTypes>>();
+            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customers>>();
+            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<categories>>();
             var articleService = new ArticleService(articleRepositoryStub, articleTypeRepositoryStub, customerRepositoryStub, categoryRepositoryStub);
-            List<article> listIntArticle = articleService.GetAllArticleTest();
+            List<articles> listIntArticle = articleService.GetAllArticleTest();
 
             Assert.AreEqual(listIntArticle.Count, 2);
             Assert.IsInstanceOf<moto>(listIntArticle[0]);
@@ -71,10 +71,10 @@ namespace Test
         {
             InitializeTestData();
 
-            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<article>>();
-            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleType>>();
-            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customer>>();
-            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<category>>();
+            var articleRepositoryStub = MockRepository.GenerateMock<IRepository<articles>>();
+            var articleTypeRepositoryStub = MockRepository.GenerateMock<IRepository<articleTypes>>();
+            var customerRepositoryStub = MockRepository.GenerateMock<IRepository<customers>>();
+            var categoryRepositoryStub = MockRepository.GenerateMock<IRepository<categories>>();
             var articleService = new ArticleService(articleRepositoryStub, articleTypeRepositoryStub, customerRepositoryStub, categoryRepositoryStub);
             List<moto> listIntArticle = articleService.GetAllMotoType();
 

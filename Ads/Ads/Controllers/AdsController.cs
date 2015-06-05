@@ -15,13 +15,13 @@ namespace Ads.Controllers
 {
     public class AdsController : Controller
     {
-        private ArticleService _AdvertisingService;
+        private ArticleService _articleService;
         private ResourceService _resourceService;
         private CustomerService _customerService;
 
         public AdsController(ArticleService service, ResourceService res, CustomerService customerService)
         {
-            _AdvertisingService = service;
+            _articleService = service;
             _resourceService = res;
             _customerService = customerService;
         }
@@ -30,7 +30,30 @@ namespace Ads.Controllers
         {
             try
             {
-                var ads = this._AdvertisingService.GetAll();
+
+                var moto = new moto()
+                {
+                    title = "moto 1",
+                    detail = "moto 1 detail",
+                    customer_id = 1,
+                    category_Id = 1,
+                    price_moto = 10,
+                    vin = "001"
+                };
+                _articleService.CreateModel(moto);
+
+                var auto = new auto()
+                {
+                    title = "auto 1",
+                    detail = "auto 1 detail",
+                    customer_id = 1,
+                    category_Id = 1,
+                    price_auto = 50,
+                    kilometraje = "100 km"
+                };
+                _articleService.CreateModel(auto);
+
+                var ads = this._articleService.GetAll();
                 ViewBag.Titulo = "Anuncios";
                 return View(ads);
             }
@@ -51,21 +74,21 @@ namespace Ads.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var ads = _AdvertisingService.Get(id);
+            var ads = _articleService.Get(id);
             return View(ads);
         }
 
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.category_id = new SelectList(_AdvertisingService.GetListCategory(), "id", "name");
-            ViewBag.articleType_id = new SelectList(_AdvertisingService.GetListSubtypeByCategory(1), "id", "name");
+            ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
+            ViewBag.articleType_id = new SelectList(_articleService.GetListSubtypeByCategory(1), "id", "name");
             return View(new ArticleViewModel());
         }
 
         public JsonResult GetListSubtypeByCategory(int id)
         {
-            return Json(_AdvertisingService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
+            return Json(_articleService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
         }
 
         // POST: Advertising/Create
@@ -77,7 +100,7 @@ namespace Ads.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var id_ads = _AdvertisingService.Create(advertisingViewModel);
+        //        var id_ads = _articleService.Create(advertisingViewModel);
 
         //        foreach (var file in files)
         //        {
@@ -128,7 +151,7 @@ namespace Ads.Controllers
                     //price = Convert.ToDecimal(_value["price"]),
                     customer_id = _customerService.getCustomer(User.Identity.Name).Id
                 };
-                var id_ads = _AdvertisingService.Create(ads);
+                var id_ads = _articleService.Create(ads);
 
                 foreach (var file in files)
                 {
@@ -217,7 +240,7 @@ namespace Ads.Controllers
         {
             if (disposing)
             {
-                this._AdvertisingService = null;
+                this._articleService = null;
             }
             base.Dispose(disposing);
         }

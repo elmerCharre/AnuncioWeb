@@ -5,10 +5,8 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("resource")]
-    public class resource : EntityBase
+    public class resources : EntityBase
     {
-
         [Required]
         [StringLength(100)]
         public string path { get; set; }
@@ -19,6 +17,6 @@ namespace Ads.Dominio
 
         public int article_id { get; set; }
 
-        public virtual article article { get; set; }
+        public virtual articles articles { get; set; }
     }
 }

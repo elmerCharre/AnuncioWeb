@@ -8,16 +8,16 @@ namespace Ads.Services.Entities
 {
     public class ResourceService : IDisposable
     {
-        private IRepository<resource> _resourceRepository;
+        private IRepository<resources> _resourceRepository;
 
-        public ResourceService(IRepository<resource> resourceRepository)
+        public ResourceService(IRepository<resources> resourceRepository)
         {
             _resourceRepository = resourceRepository;
         }
 
         public void Create(ResourceViewModel resourceRepository)
         {
-            var res = new resource
+            var res = new resources
             {
                 article_id = resourceRepository.article_id,
                 path = resourceRepository.path,

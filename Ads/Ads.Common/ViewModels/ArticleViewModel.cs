@@ -14,14 +14,14 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public ArticleViewModel(article advList)
+        public ArticleViewModel(articles advList)
         {
             this.id = advList.Id;
             this.title = advList.title;
             this.detail = advList.detail;
-            this.category_id = advList.category_id;
+            this.category_id = advList.category_Id;
             this.customer_id = advList.customer_id;
-            this.resource = advList.resource;
+            this.resource = advList.resources;
             this.category_name = "";
             this.subtype_name = "";
         }
@@ -38,7 +38,7 @@ namespace Ads.Common.ViewModels
         public string detail { get; set; }
 
         [Column(TypeName = "int")]
-        public int category_id { get; set; }
+        public int? category_id { get; set; }
 
         [Column(TypeName = "int")]
         public int customer_id { get; set; }
@@ -47,6 +47,6 @@ namespace Ads.Common.ViewModels
 
         public string subtype_name { get; set; }
 
-        public ICollection<resource> resource { get; set; }
+        public ICollection<resources> resource { get; set; }
     }
 }

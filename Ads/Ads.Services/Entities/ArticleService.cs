@@ -10,14 +10,14 @@ namespace Ads.Services.Entities
 {
     public class ArticleService
     {
-        private IRepository<article> _articleRepository;
-        private IRepository<articleType> _articleTypeRepository;
-        private IRepository<customer> _customerRepository;
-        private IRepository<category> _categoryRepository;
+        private IRepository<articles> _articleRepository;
+        private IRepository<articleTypes> _articleTypeRepository;
+        private IRepository<customers> _customerRepository;
+        private IRepository<categories> _categoryRepository;
 
-        public ArticleService(IRepository<article> articleRepository,
-            IRepository<articleType> articleTypeRepository, 
-            IRepository<customer> customerRepository, IRepository<category> categoryRepository)
+        public ArticleService(IRepository<articles> articleRepository,
+            IRepository<articleTypes> articleTypeRepository, 
+            IRepository<customers> customerRepository, IRepository<categories> categoryRepository)
         {
             _articleRepository = articleRepository;
             _articleTypeRepository = articleTypeRepository;
@@ -50,30 +50,31 @@ namespace Ads.Services.Entities
         {
             var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
-            var advertising = new article()
-            {
-                title = model.title,
-                detail = model.detail,
-                customer_id = customer.Id,
-                //articleType = model.articleType,
-                resource = model.resource
-            };
-            return _articleRepository.Create(advertising);
+            //var advertising = new article()
+            //{
+            //    title = model.title,
+            //    detail = model.detail,
+            //    customer_id = customer.Id,
+            //    //articleType = model.articleType,
+            //    resource = model.resource
+            //};
+            //return _articleRepository.Create(advertising);
+            return 1;
         }
 
         public void Update(ArticleViewModel model)
         {
             var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
             if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
-            var advertising = new article()
-            {
-                title = model.title,
-                detail = model.detail,
-                customer_id = customer.Id,
-                //articleType = model.articleType,
-                resource = model.resource
-            };
-            _articleRepository.Update(advertising);
+            //var advertising = new article()
+            //{
+            //    title = model.title,
+            //    detail = model.detail,
+            //    customer_id = customer.Id,
+            //    //articleType = model.articleType,
+            //    resource = model.resource
+            //};
+            //_articleRepository.Update(advertising);
         }
 
         public ArticleViewModel Get(int id)
@@ -90,26 +91,26 @@ namespace Ads.Services.Entities
                 //title = AdsList.title,
                 //detail = AdsList.detail,
                 //customer_id = AdsList.customer_id,
-                resource = AdsList.resource.Where(x => x.article_id == AdsList.Id).ToList()
+                resource = AdsList.resources.Where(x => x.article_id == AdsList.Id).ToList()
             };
         }
 
-        public IEnumerable<category> GetListCategory()
+        public IEnumerable<categories> GetListCategory()
         {
             return _categoryRepository.Get().ToList();
         }
 
-        public IEnumerable<articleType> GetListSubtypeByCategory(int category_id)
+        public IEnumerable<articleTypes> GetListSubtypeByCategory(int category_id)
         {
             return _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
         }
 
-        public List<articleType> GetListSubtypeByCategoryAsJson(int category_id)
+        public List<articleTypes> GetListSubtypeByCategoryAsJson(int category_id)
         {
             var list_types = _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
-            var json = new List<articleType>();
+            var json = new List<articleTypes>();
             foreach (var obj in list_types) {
-                json.Add(new articleType
+                json.Add(new articleTypes
                 { 
                     Id = obj.Id,
                     category_id = obj.category_id,
@@ -130,20 +131,15 @@ namespace Ads.Services.Entities
             return _articleRepository.Get().OfType<auto>().ToList();
         }
 
-        public List<article> GetAllArticleTest()
+        public List<articles> GetAllArticleTest()
         {
             var AdvertisingLists = _articleRepository.Get().ToList();
             return AdvertisingLists;
         }
 
-        public int CreateMoto(moto moto)
+        public int CreateModel(articles entity)
         {
-            return _articleRepository.Create(moto);
-        }
-
-        public int CreateAuto(auto auto)
-        {
-            return _articleRepository.Create(auto);
+            return _articleRepository.Create(entity);
         }
     }
 }

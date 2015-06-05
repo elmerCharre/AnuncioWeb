@@ -8,7 +8,7 @@ using Ads.Dominio;
 
 namespace Ads.Repository
 {
-    public class ArticleTypeRepository : BaseRepository<articleType, DbAdsContext>
+    public class ArticleTypeRepository : BaseRepository<articleTypes, DbAdsContext>
     {
         public ArticleTypeRepository(DbAdsContext context)
             : base(context)

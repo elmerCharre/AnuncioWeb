@@ -5,13 +5,12 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("category")]
-    public class category : EntityBase
+    public class categories : EntityBase
     {
-        public category()
+        public categories()
         {
-            article = new HashSet<article>();
-            articleType = new HashSet<articleType>();
+            articles = new HashSet<articles>();
+            articleTypes = new HashSet<articleTypes>();
         }
 
         [Required]
@@ -20,8 +19,8 @@ namespace Ads.Dominio
 
         public int status { get; set; }
 
-        public virtual ICollection<article> article { get; set; }
+        public virtual ICollection<articles> articles { get; set; }
 
-        public virtual ICollection<articleType> articleType { get; set; }
+        public virtual ICollection<articleTypes> articleTypes { get; set; }
     }
 }

@@ -10,47 +10,49 @@ namespace Ads.Repository
     public class DbAdsContext : DbContext
     {
         public DbAdsContext()
-            : base("name=Ads")
+            : base("name=Adstmp")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<article> article { get; set; }
-        public virtual DbSet<articleType> articleType { get; set; }
-        public virtual DbSet<category> category { get; set; }
-        public virtual DbSet<customer> customer { get; set; }
-        public virtual DbSet<resource> resource { get; set; }
+        public virtual DbSet<articles> articles { get; set; }
+        public virtual DbSet<articleTypes> articleTypes { get; set; }
+        public virtual DbSet<categories> categories { get; set; }
+        public virtual DbSet<customers> customers { get; set; }
+        public virtual DbSet<resources> resources { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<article>()
+            modelBuilder.Entity<articles>()
                 .Property(e => e.detail)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<article>()
-                .HasMany(e => e.resource)
-                .WithRequired(e => e.article)
+            modelBuilder.Entity<articles>()
+                .HasMany(e => e.resources)
+                .WithRequired(e => e.articles)
                 .HasForeignKey(e => e.article_id)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<article>()
-                .Map<moto>(x => x.Requires("articleType").HasValue("Moto").HasColumnType("string").HasMaxLength(20))
-                .Map<auto>(x => x.Requires("articleType").HasValue("Auto"));
+            modelBuilder.Entity<articles>()
+                .HasKey(x => x.Id)
+                .Map<moto>(x => x.Requires("Type").HasValue("I").HasColumnType("char").HasMaxLength(1))
+                .Map<auto>(x => x.Requires("Type").HasValue("E"));
 
-            modelBuilder.Entity<category>()
-                .HasMany(e => e.articleType)
-                .WithRequired(e => e.category)
+            modelBuilder.Entity<categories>()
+                .HasMany(e => e.articles)
+                .WithOptional(e => e.categories)
+                .HasForeignKey(e => e.category_Id);
+
+            modelBuilder.Entity<categories>()
+                .HasMany(e => e.articleTypes)
+                .WithRequired(e => e.categories)
                 .HasForeignKey(e => e.category_id)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<customer>()
-                .HasMany(e => e.article)
-                .WithRequired(e => e.customer)
+            modelBuilder.Entity<customers>()
+                .HasMany(e => e.articles)
+                .WithRequired(e => e.customers)
                 .HasForeignKey(e => e.customer_id)
                 .WillCascadeOnDelete(false);
-
-            //modelBuilder.Configurations.Add(new articleMap());
         }
     }
 

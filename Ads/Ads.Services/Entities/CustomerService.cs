@@ -8,16 +8,16 @@ namespace Ads.Services.Entities
 {
     public class CustomerService : IDisposable
     {
-        private IRepository<customer> _customerRepository;
+        private IRepository<customers> _customerRepository;
 
-        public CustomerService(IRepository<customer> customerRepository)
+        public CustomerService(IRepository<customers> customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
         public void Create(CustomerViewModel customerViewModel)
         {
-            var customer = new customer
+            var customer = new customers
             {
                 fullname = customerViewModel.FullName,
                 email = customerViewModel.Email,

@@ -12,7 +12,7 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public ResourceViewModel(resource res)
+        public ResourceViewModel(resources res)
         {
             this.id = res.Id;
             this.path = res.path;

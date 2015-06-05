@@ -5,8 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("articleType")]
-    public class articleType : EntityBase
+    public class articleTypes : EntityBase
     {
         [Required]
         [StringLength(50)]
@@ -16,6 +15,6 @@
 
         public int status { get; set; }
 
-        public virtual category category { get; set; }
+        public virtual categories categories { get; set; }
     }
 }

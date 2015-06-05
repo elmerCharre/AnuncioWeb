@@ -16,22 +16,4 @@ namespace Ads.Repository
 
         }
     }
-
-    public class motoRepository : BaseRepository<moto, DbAdsContext>
-    {
-        public motoRepository(DbAdsContext context)
-            : base(context)
-        {
-
-        }
-    }
-
-    public class autoRepository : BaseRepository<auto, DbAdsContext>
-    {
-        public autoRepository(DbAdsContext context)
-            : base(context)
-        {
-
-        }
-    }
 }

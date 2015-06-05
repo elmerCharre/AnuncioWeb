@@ -37,8 +37,14 @@ namespace Ads.Controllers
                     detail = "moto 1 detail",
                     customer_id = 1,
                     category_Id = 1,
-                    price_moto = 10,
-                    vin = "001"
+                    precio = 10,
+                    marca = 1,
+                    modelo = 1,
+                    tipo = 1,
+                    anio = 1000,
+                    vin = "vin 1",
+                    condicion = 1,
+                    kilometraje = "100 km"
                 };
                 _articleService.CreateModel(moto);
 
@@ -48,10 +54,33 @@ namespace Ads.Controllers
                     detail = "auto 1 detail",
                     customer_id = 1,
                     category_Id = 1,
-                    price_auto = 50,
-                    kilometraje = "100 km"
+                    precio = 20,
+                    marca = 2,
+                    modelo = 2,
+                    tipo = 2,
+                    anio = 2000,
+                    vin = "vin 2",
+                    condicion = 2,
+                    kilometraje = "200 km"
                 };
                 _articleService.CreateModel(auto);
+
+                var camion = new camion()
+                {
+                    title = "camion 1",
+                    detail = "camion 1 detail",
+                    customer_id = 1,
+                    category_Id = 2,
+                    precio = 30,
+                    marca = 3,
+                    modelo = 3,
+                    tipo = 3,
+                    anio = 3000,
+                    vin = "vin 3",
+                    condicion = 3,
+                    kilometraje = "300 km"
+                };
+                _articleService.CreateModel(camion);
 
                 var ads = this._articleService.GetAll();
                 ViewBag.Titulo = "Anuncios";

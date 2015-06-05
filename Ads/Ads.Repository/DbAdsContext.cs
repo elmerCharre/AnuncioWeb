@@ -34,8 +34,9 @@ namespace Ads.Repository
 
             modelBuilder.Entity<articles>()
                 .HasKey(x => x.Id)
-                .Map<moto>(x => x.Requires("Type").HasValue("I").HasColumnType("char").HasMaxLength(1))
-                .Map<auto>(x => x.Requires("Type").HasValue("E"));
+                .Map<moto>(x => x.Requires("Type").HasValue("M").HasColumnType("char").HasMaxLength(1))
+                .Map<auto>(x => x.Requires("Type").HasValue("A"))
+                .Map<camion>(x => x.Requires("Type").HasValue("C"));
 
             modelBuilder.Entity<categories>()
                 .HasMany(e => e.articles)

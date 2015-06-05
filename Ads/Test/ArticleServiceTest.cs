@@ -31,7 +31,7 @@ namespace Test
                detail = "moto 1 detail",
                customer_id = 1,
                category_Id = 1,
-               price_moto = 10,
+               precio = 10,
                vin = "001"
             };
             articleService.CreateModel(moto);

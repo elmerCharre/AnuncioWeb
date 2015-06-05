@@ -31,17 +31,28 @@ namespace Ads.Dominio
         public virtual ICollection<resources> resources { get; set; }
     }
 
-    public class moto : articles
+    public class moto : automovil
     {
-        public decimal price_moto { get; set; }
-
-        public string vin { get; set; }
     }
 
-    public class auto : articles
+    public class auto : automovil
     {
-        public decimal price_auto { get; set; }
+    }
+
+    public class camion : automovil
+    {
+    }
+
+    public class automovil : articles
+    {
+        public decimal precio { get; set; }
+        public int marca { get; set; }
+        public int modelo { get; set; }
+        public int tipo { get; set; }
+        public int anio { get; set; }
         public string kilometraje { get; set; }
+        public string vin { get; set; }
+        public int condicion { get; set; }
     }
 
 }

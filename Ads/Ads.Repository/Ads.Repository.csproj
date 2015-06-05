@@ -55,11 +55,6 @@
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="DbAdsContext.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Migrations\201506050503085_elmer.cs" />
-    <Compile Include="Migrations\201506050503085_elmer.Designer.cs">
-      <DependentUpon>201506050503085_elmer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceRepository.cs" />
     <Compile Include="ArticleRepository.cs" />
@@ -77,11 +72,6 @@
       <Project>{5fb26d65-c4e2-443f-8ff9-67b19402dc8e}</Project>
       <Name>Ads.Dominio</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506050503085_elmer.resx">
-      <DependentUpon>201506050503085_elmer.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

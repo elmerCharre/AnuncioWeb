@@ -34,9 +34,12 @@ namespace Ads.Repository
 
             modelBuilder.Entity<articles>()
                 .HasKey(x => x.Id)
-                .Map<moto>(x => x.Requires("Type").HasValue("M").HasColumnType("char").HasMaxLength(1))
-                .Map<auto>(x => x.Requires("Type").HasValue("A"))
-                .Map<camion>(x => x.Requires("Type").HasValue("C"));
+                .Map<moto>(x => x.Requires("Type").HasValue("moto").HasColumnType("varchar").HasMaxLength(20))
+                .Map<auto>(x => x.Requires("Type").HasValue("auto"))
+                .Map<camion>(x => x.Requires("Type").HasValue("camion"))
+                .Map<departamento_venta>(x => x.Requires("Type").HasValue("depa_venta"))
+                .Map<departamento_alquiler>(x => x.Requires("Type").HasValue("depa_alquiler"))
+                ;
 
             modelBuilder.Entity<categories>()
                 .HasMany(e => e.articles)

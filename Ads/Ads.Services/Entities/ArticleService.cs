@@ -115,7 +115,7 @@ namespace Ads.Services.Entities
                     Id = obj.Id,
                     category_id = obj.category_id,
                     name = obj.name,
-                    status = obj.status
+                    type = obj.type
                 });
             }
             return json;

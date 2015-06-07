@@ -82,6 +82,21 @@ namespace Ads.Controllers
                 };
                 _articleService.CreateModel(camion);
 
+                var depa = new departamento_venta()
+                {
+                    title = "depa 1",
+                    detail = "depa 1 detail",
+                    customer_id = 1,
+                    category_Id = 2,
+                    precio = 40,
+                    amueblado = 1,
+                    cuartos = 4,
+                    cuartos_banio = 2,
+                    comision = 2,
+                    metros = "120x90"
+                };
+                _articleService.CreateModel(depa);
+
                 var ads = this._articleService.GetAll();
                 ViewBag.Titulo = "Anuncios";
                 return View(ads);

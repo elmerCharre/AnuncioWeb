@@ -31,19 +31,19 @@ namespace Ads.Dominio
         public virtual ICollection<resources> resources { get; set; }
     }
 
-    public class moto : automovil
+    public class moto : vehiculos
     {
     }
 
-    public class auto : automovil
+    public class auto : vehiculos
     {
     }
 
-    public class camion : automovil
+    public class camion : vehiculos
     {
     }
 
-    public class automovil : articles
+    public class vehiculos : articles
     {
         public decimal precio { get; set; }
         public int marca { get; set; }
@@ -53,6 +53,24 @@ namespace Ads.Dominio
         public string kilometraje { get; set; }
         public string vin { get; set; }
         public int condicion { get; set; }
+    }
+
+    public class departamento_venta : propiedades
+    {
+    }
+
+    public class departamento_alquiler : propiedades
+    {
+    }
+
+    public class propiedades : articles
+    {
+        public decimal precio { get; set; }
+        public int amueblado { get; set; }
+        public int cuartos { get; set; }
+        public int cuartos_banio { get; set; }
+        public int comision { get; set; }
+        public string metros { get; set; }
     }
 
 }

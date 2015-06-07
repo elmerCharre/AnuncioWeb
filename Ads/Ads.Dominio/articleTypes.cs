@@ -13,7 +13,7 @@
 
         public int category_id { get; set; }
 
-        public int status { get; set; }
+        public string type { get; set; }
 
         public virtual categories categories { get; set; }
     }

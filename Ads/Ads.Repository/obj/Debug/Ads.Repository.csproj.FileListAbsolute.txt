@@ -34,3 +34,5 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.Migrations.elmer.resources
+A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csproj.GenerateResource.Cache

@@ -16,14 +16,19 @@ namespace Ads.Controllers
     public class AdsController : Controller
     {
         private ArticleService _articleService;
+        private ArticleTypeService _typeService;
+        private CategoryService _categoryService;
         private ResourceService _resourceService;
         private CustomerService _customerService;
 
-        public AdsController(ArticleService service, ResourceService res, CustomerService customerService)
+        public AdsController(ArticleService service, ResourceService res, CustomerService customerService,
+            ArticleTypeService typeService, CategoryService categoryService)
         {
             _articleService = service;
             _resourceService = res;
             _customerService = customerService;
+            _typeService = typeService;
+            _categoryService = categoryService;
         }
 
         public ActionResult Index()
@@ -31,71 +36,87 @@ namespace Ads.Controllers
             try
             {
 
-                var moto = new moto()
-                {
-                    title = "moto 1",
-                    detail = "moto 1 detail",
-                    customer_id = 1,
-                    category_Id = 1,
-                    precio = 10,
-                    marca = 1,
-                    modelo = 1,
-                    tipo = 1,
-                    anio = 1000,
-                    vin = "vin 1",
-                    condicion = 1,
-                    kilometraje = "100 km"
-                };
-                _articleService.CreateModel(moto);
+                //var cat = new categories()
+                //{
+                //    Id = 1,
+                //    name = "Vehículos",
+                //    status = 1
+                //};
+                //_categoryService.Create(cat);
 
-                var auto = new auto()
-                {
-                    title = "auto 1",
-                    detail = "auto 1 detail",
-                    customer_id = 1,
-                    category_Id = 1,
-                    precio = 20,
-                    marca = 2,
-                    modelo = 2,
-                    tipo = 2,
-                    anio = 2000,
-                    vin = "vin 2",
-                    condicion = 2,
-                    kilometraje = "200 km"
-                };
-                _articleService.CreateModel(auto);
+                //var cat2 = new categories()
+                //{
+                //    Id = 2,
+                //    name = "Propiedades - Inmuebles",
+                //    status = 1
+                //};
+                //_categoryService.Create(cat2);
 
-                var camion = new camion()
-                {
-                    title = "camion 1",
-                    detail = "camion 1 detail",
-                    customer_id = 1,
-                    category_Id = 2,
-                    precio = 30,
-                    marca = 3,
-                    modelo = 3,
-                    tipo = 3,
-                    anio = 3000,
-                    vin = "vin 3",
-                    condicion = 3,
-                    kilometraje = "300 km"
-                };
-                _articleService.CreateModel(camion);
+                //var moto = new moto()
+                //{
+                //    title = "moto 1",
+                //    detail = "moto 1 detail",
+                //    customer_id = 1,
+                //    category_Id = 1,
+                //    precio = 10,
+                //    marca = 1,
+                //    modelo = 1,
+                //    tipo = 1,
+                //    anio = 1000,
+                //    vin = "vin 1",
+                //    condicion = 1,
+                //    kilometraje = "100 km"
+                //};
+                //_articleService.CreateModel(moto);
 
-                var depa = new departamento_venta()
-                {
-                    title = "depa 1",
-                    detail = "depa 1 detail",
-                    customer_id = 1,
-                    category_Id = 2,
-                    precio = 40,
-                    amueblado = 1,
-                    cuartos = 4,
-                    cuartos_banio = 2,
-                    comision = 2,
-                    metros = "120x90"
-                };
-                _articleService.CreateModel(depa);
+                //var auto = new auto()
+                //{
+                //    title = "auto 1",
+                //    detail = "auto 1 detail",
+                //    customer_id = 1,
+                //    category_Id = 1,
+                //    precio = 20,
+                //    marca = 2,
+                //    modelo = 2,
+                //    tipo = 2,
+                //    anio = 2000,
+                //    vin = "vin 2",
+                //    condicion = 2,
+                //    kilometraje = "200 km"
+                //};
+                //_articleService.CreateModel(auto);
+
+                //var camion = new camion()
+                //{
+                //    title = "camion 1",
+                //    detail = "camion 1 detail",
+                //    customer_id = 1,
+                //    category_Id = 2,
+                //    precio = 30,
+                //    marca = 3,
+                //    modelo = 3,
+                //    tipo = 3,
+                //    anio = 3000,
+                //    vin = "vin 3",
+                //    condicion = 3,
+                //    kilometraje = "300 km"
+                //};
+                //_articleService.CreateModel(camion);
+
+                //var depa = new departamento_venta()
+                //{
+                //    title = "depa 1",
+                //    detail = "depa 1 detail",
+                //    customer_id = 1,
+                //    category_Id = 2,
+                //    precio = 40,
+                //    amueblado = 1,
+                //    cuartos = 4,
+                //    cuartos_banio = 2,
+                //    comision = 2,
+                //    metros = "120x90"
+                //};
+                //_articleService.CreateModel(depa);
 
                 var ads = this._articleService.GetAll();
                 ViewBag.Titulo = "Anuncios";
@@ -128,6 +149,15 @@ namespace Ads.Controllers
             ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
             ViewBag.articleType_id = new SelectList(_articleService.GetListSubtypeByCategory(1), "id", "name");
             return View(new ArticleViewModel());
+        }
+
+        public ActionResult CreateMoto()
+        {
+            ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
+            ViewBag.articleType_id = new SelectList(_articleService.GetListSubtypeByCategory(1), "id", "name");
+
+            return PartialView("~/views/Articles/Moto/Create.cshtml");
+            //return View("~/views/Articles/Moto/Create.cshtml");
         }
 
         public JsonResult GetListSubtypeByCategory(int id)

@@ -142,7 +142,6 @@ E:\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.csprojResolveAssemblyReference.cache
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.dll
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Newtonsoft.Json.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll.config
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.pdb
@@ -197,6 +196,7 @@ A:\apps\VS\AnuncioWeb\Ads\Ads\bin\System.Web.WebPages.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\System.Web.WebPages.Deployment.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\System.Web.WebPages.Razor.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Antlr3.Runtime.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Newtonsoft.Json.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\EntityFramework.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\EntityFramework.SqlServer.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.AspNet.Identity.Core.xml

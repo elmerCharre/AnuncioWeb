@@ -5,7 +5,7 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class articles : EntityBase
+    public abstract class articles : EntityBase
     {
         public articles()
         {

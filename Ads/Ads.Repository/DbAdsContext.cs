@@ -33,7 +33,6 @@ namespace Ads.Repository
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<articles>()
-                .HasKey(x => x.Id)
                 .Map<moto>(x => x.Requires("Type").HasValue("moto").HasColumnType("varchar").HasMaxLength(20))
                 .Map<auto>(x => x.Requires("Type").HasValue("auto"))
                 .Map<camion>(x => x.Requires("Type").HasValue("camion"))

@@ -36,8 +36,9 @@ namespace Ads.Services.Entities
 
         public IEnumerable<ArticleViewModel> GetAll()
         {
-            var AdvertisingLists = _articleRepository.Get().ToList();
-            return AdvertisingLists.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
+            var articles = _articleRepository.Get().OfType<camion>().ToList();
+            //var articles = _articleRepository.Get().ToList();
+            return articles.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
          
         public void Dispose()

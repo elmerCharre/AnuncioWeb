@@ -47,10 +47,34 @@ namespace Ads.Services.Entities
             _customerRepository = null;
         }
 
-        public int Create(ArticleViewModel model)
+        public int Create(Object modelView)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
-            if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
+            //var model = modelView;
+            //if (modelView is MotoViewModel)
+            //{
+                MotoViewModel model = (MotoViewModel) modelView;
+                var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
+                if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
+
+                var Entity = new moto()
+                {
+                    title = model.title,
+                    detail = model.detail,
+                    customer_id = 1,
+                    category_Id = model.category_Id,
+                    precio = model.precio,
+                    marca = model.marca,
+                    modelo = model.modelo,
+                    anio = model.anio,
+                    vin = model.vin,
+                    condicion = model.condicion,
+                    kilometraje = model.kilometraje
+                };
+                return _articleRepository.Create(Entity);
+            //}
+
+            //return 1;
+
             //var advertising = new article()
             //{
             //    title = model.title,

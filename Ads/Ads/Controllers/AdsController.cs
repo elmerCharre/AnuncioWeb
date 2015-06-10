@@ -147,16 +147,24 @@ namespace Ads.Controllers
         public ActionResult Create()
         {
             ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
-            ViewBag.articleType_id = new SelectList(_articleService.GetListSubtypeByCategory(1), "id", "name");
+            ViewBag.articleType = new SelectList(_articleService.GetListSubtypeByCategory(1), "type", "name");
             return View(new ArticleViewModel());
         }
 
-        public ActionResult CreateMoto()
+        public PartialViewResult CreateModel()
         {
             ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
-            ViewBag.articleType_id = new SelectList(_articleService.GetListSubtypeByCategory(1), "id", "name");
+            var type = Request.QueryString["articleType"];
+            Type classname = Type.GetType(type + "ViewModel");
+            object clase = Activator.CreateInstance(classname);
+            
 
-            return PartialView("~/views/Articles/Moto/Create.cshtml");
+            var items = new AutoViewModel()
+            {
+                category_Id = Convert.ToInt32(Request.QueryString["category_id"]),
+                customer_id = 1
+            };
+            return PartialView(type + "/Create", items);
             //return View("~/views/Articles/Moto/Create.cshtml");
         }
 
@@ -205,47 +213,31 @@ namespace Ads.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection formData, HttpPostedFileBase[] files)
+        public ActionResult Create(Object model, HttpPostedFileBase[] files)
         {
             if (ModelState.IsValid)
             {
-                var _value = new Dictionary<string, string>();
+                var id_ads = _articleService.Create(model);
 
-                foreach (string _key in formData.Keys)
-                {
-                    _value[_key] = formData[_key];
-                }
+                //foreach (var file in files)
+                //{
+                //    if (file != null && file.ContentLength > 0)
+                //    {
+                //        var filename = Path.GetFileName(file.FileName);
+                //        var res = new ResourceViewModel
+                //        {
+                //            article_id = id_ads,
+                //            path = filename,
+                //            type = file.ContentType
+                //        };
 
-                var ads = new ArticleViewModel
-                {
-                    //category_id = Convert.ToInt16(_value["category_id"]),
-                    //articleType = Convert.ToInt16(_value["subtype_id"]),
-                    title = _value["title"],
-                    detail = _value["detail"],
-                    //price = Convert.ToDecimal(_value["price"]),
-                    customer_id = _customerService.getCustomer(User.Identity.Name).Id
-                };
-                var id_ads = _articleService.Create(ads);
-
-                foreach (var file in files)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var filename = Path.GetFileName(file.FileName);
-                        var res = new ResourceViewModel
-                        {
-                            article_id = id_ads,
-                            path = filename,
-                            type = file.ContentType
-                        };
-
-                        var directory = Path.Combine(Server.MapPath("~/resources"), "resource_" + id_ads);
-                        Directory.CreateDirectory(directory);
-                        var path_file = directory + "/" + filename;
-                        file.SaveAs(path_file);
-                        _resourceService.Create(res);
-                    }
-                }
+                //        var directory = Path.Combine(Server.MapPath("~/resources"), "resource_" + id_ads);
+                //        Directory.CreateDirectory(directory);
+                //        var path_file = directory + "/" + filename;
+                //        file.SaveAs(path_file);
+                //        _resourceService.Create(res);
+                //    }
+                //}
 
                 return RedirectToAction("Index");
             }

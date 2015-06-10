@@ -6,102 +6,77 @@
 
 <h2>@ViewBag.Title</h2>
 
-@*@using (Html.BeginForm("Create", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" }))*@
-@using (Ajax.BeginForm("CreateMoto", "Ads", new AjaxOptions
-{
-    HttpMethod = "Get",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "FormArticle",
-
-}, new
-{
-    id = "AdsForm",
-    @class = "form-horizontal",
-    role = "form"
-}))
-{
-    @Html.AntiForgeryToken()
+@*@using (Html.BeginForm("Create", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" }))*@    
     
-    <div class="form-horizontal">
+    <div class="row col-md-12 form-horizontal">
+    @using (Ajax.BeginForm("CreateModel", "Ads", new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "FormArticle"
+        }))
+    {
         <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group col-md-5">
+            @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label  col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @multiple = false, @size = 9 })
-
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-warning">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-
+                @Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @multiple = false, @size = 9 })*@
                 @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div id="FormArticle"></div>
+        <div class="form-group col-md-5">
+            @Html.Label("Tipo", "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("articleType", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-2">
+            <button class="btn btn-default form-inline" type="submit">Search</button>
+        </div>
 
         @*<div class="form-group" id="list_types" style="display: none;">
-            @Html.LabelFor(model => model.articleType, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.ListBox("articleType_id", null, htmlAttributes: new { @class = "form-control", @size = 5 })
-                @Html.ValidationMessageFor(model => model.articleType, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.articleType, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ListBox("articleType_id", null, htmlAttributes: new { @class = "form-control", @size = 5 })
+                    @Html.ValidationMessageFor(model => model.articleType, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.Label("Files", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" id="dragandrophandler">
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @rows = 10 })
-                @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        @*<div class="form-group" style="display: none;">
-            @Html.LabelFor(model => model.customer_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="dragandrophandler"></div>
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.Label("Files", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" id="dragandrophandler">
-            </div>
-        </div>*@
+                @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" class="form-control" name="files" multiple />
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div id="dragandrophandler"></div>
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" class="form-control" name="files" multiple />
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>*@
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>*@
+    }
 </div>
-}
+
+
+
+<div id="FormArticle"></div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -110,6 +85,7 @@
 @Styles.Render("~/uploadFiles/css")
 
 @section Scripts {
+    
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/uploadFiles")
     @Scripts.Render("~/bundles/unobtrusive")

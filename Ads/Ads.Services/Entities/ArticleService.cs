@@ -47,12 +47,12 @@ namespace Ads.Services.Entities
             _customerRepository = null;
         }
 
-        public int Create(Object modelView)
+        public int Create(AutoViewModel model)
         {
             //var model = modelView;
             //if (modelView is MotoViewModel)
             //{
-                MotoViewModel model = (MotoViewModel) modelView;
+
                 var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
                 if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
 
@@ -84,7 +84,6 @@ namespace Ads.Services.Entities
             //    resource = model.resource
             //};
             //return _articleRepository.Create(advertising);
-            return 1;
         }
 
         public void Update(ArticleViewModel model)

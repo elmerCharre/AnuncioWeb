@@ -151,21 +151,17 @@ namespace Ads.Controllers
             return View(new ArticleViewModel());
         }
 
-        public PartialViewResult CreateModel()
+        public ActionResult CreateModel()
         {
             ViewBag.category_id = new SelectList(_articleService.GetListCategory(), "id", "name");
             var type = Request.QueryString["articleType"];
-            Type classname = Type.GetType(type + "ViewModel");
-            object clase = Activator.CreateInstance(classname);
             
-
             var items = new AutoViewModel()
             {
                 category_Id = Convert.ToInt32(Request.QueryString["category_id"]),
                 customer_id = 1
             };
             return PartialView(type + "/Create", items);
-            //return View("~/views/Articles/Moto/Create.cshtml");
         }
 
         public JsonResult GetListSubtypeByCategory(int id)
@@ -213,7 +209,7 @@ namespace Ads.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Object model, HttpPostedFileBase[] files)
+        public ActionResult Create(AutoViewModel model, HttpPostedFileBase[] files)
         {
             if (ModelState.IsValid)
             {

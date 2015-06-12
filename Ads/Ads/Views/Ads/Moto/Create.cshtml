@@ -1,7 +1,7 @@
 ﻿@model Ads.Common.ViewModels.MotoViewModel
 
 
-@using (Html.BeginForm(Html.BeginForm("Create", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" })))
+@using (Html.BeginForm("Create", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     

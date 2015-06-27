@@ -1,7 +1,7 @@
 ﻿@model Ads.Common.ViewModels.MotoViewModel
 
 
-@using (Html.BeginForm("Create", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateMoto", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -27,15 +27,15 @@
         <div class="form-group hidden">
             @Html.LabelFor(model => model.customer_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.customerID } })
                 @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group hidden">
-            @Html.HiddenFor(model => model.category_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.category_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.category_Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.category_Id, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.categoryID } })
                 @Html.ValidationMessageFor(model => model.category_Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -103,10 +103,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

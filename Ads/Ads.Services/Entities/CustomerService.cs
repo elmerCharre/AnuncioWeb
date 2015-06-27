@@ -28,9 +28,19 @@ namespace Ads.Services.Entities
             _customerRepository.Create(customer);
         }
 
-        public CustomerViewModel getCustomer(string userName)
+        public CustomerViewModel getCustomerById(int userID)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.email == userName);
+            return getCustomer(_customerRepository.Get().FirstOrDefault(x => x.Id == userID));
+        }
+
+        public CustomerViewModel getCustomerByEmail(string userEmail)
+        {
+            return getCustomer(_customerRepository.Get().FirstOrDefault(x => x.email == userEmail));
+        }
+
+        public CustomerViewModel getCustomer(customers customer)
+        {
+            if (customer == null) return null;
             return new CustomerViewModel
             {
                 Id = customer.Id,

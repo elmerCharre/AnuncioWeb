@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using Ads.Dominio;
 using Ads.Repository;
 using Ads.Common.ViewModels;
@@ -16,9 +15,9 @@ namespace Ads.Services.Entities
             _typeRepository = typeRepository;
         }
 
-        public void Create(articleTypes typeRepository)
+        public articleTypes getArticleType(string type)
         {
-            _typeRepository.Create(typeRepository);
+            return _typeRepository.Get().FirstOrDefault(x => x.type == type);
         }
 
         public void Dispose()

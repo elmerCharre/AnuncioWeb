@@ -8,29 +8,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ads.Common.ViewModels
 {
-    public class AutoViewModel
+    public class AutoViewModel : ArticleViewModel
     {
         public AutoViewModel()
         {
         }
-
-        [Key]
-        public int id { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Título")]
-        public string title { get; set; }
-
-        [Required]
-        [Display(Name = "Detalle")]
-        [Column(TypeName = "text")]
-        public string detail { get; set; }
-
-        public int customer_id { get; set; }
-
-        public int category_Id { get; set; }
-
+        
         [Required]
         [Display(Name = "Precio")]
         public decimal precio { get; set; }

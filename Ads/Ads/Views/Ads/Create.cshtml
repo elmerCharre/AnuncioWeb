@@ -18,11 +18,11 @@
     {
         <hr />
         <div class="form-group col-md-5">
-            @Html.LabelFor(model => model.category_id, "Categoría", htmlAttributes: new { @class = "control-label  col-md-2" })
+            @Html.LabelFor(model => model.category_Id, "Categoría", htmlAttributes: new { @class = "control-label  col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("category_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("categories", null, htmlAttributes: new { @class = "form-control" })
                 @*@Html.ListBox("category_id", null, htmlAttributes: new { @class = "form-control", @multiple = false, @size = 9 })*@
-                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.category_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             @Html.Label("Tipo", "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("articleType", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.category_id, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.category_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 

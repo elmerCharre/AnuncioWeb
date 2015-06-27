@@ -44,11 +44,17 @@
   <ItemGroup>
     <Compile Include="articleTypes.cs" />
     <Compile Include="categories.cs" />
+    <Compile Include="conditions.cs" />
     <Compile Include="customers.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="marcas.cs" />
+    <Compile Include="modelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="relationship_condition.cs" />
+    <Compile Include="relationship_marca.cs" />
     <Compile Include="resources.cs" />
     <Compile Include="articles.cs" />
+    <Compile Include="tipos.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

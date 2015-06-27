@@ -8,28 +8,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ads.Common.ViewModels
 {
-    public class MotoViewModel
+    public class MotoViewModel : ArticleViewModel
     {
         public MotoViewModel()
         {
         }
-
-        [Key]
-        public int id { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Título")]
-        public string title { get; set; }
-
-        [Required]
-        [Display(Name = "Detalle")]
-        [Column(TypeName = "text")]
-        public string detail { get; set; }
-
-        public int customer_id { get; set; }
-
-        public int category_Id { get; set; }
 
         [Required]
         [Display(Name = "Precio")]

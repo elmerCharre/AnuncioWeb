@@ -78,14 +78,6 @@ namespace Ads.Controllers
             {
                 case SignInStatus.Success:
                     // set session variable
-                    var customer = _customerService.getCustomer(model.Email);
-                    Session["userID"] = customer.Id;
-                    Session["userEmail"] =  customer.Email;
-                    Session["userFullname"] = customer.FullName;
-                    Session["userAddress"] = customer.Address;
-                    Session["userPhone"] = customer.Phone;
-                    Session["userOccupation"] = customer.Occupation;
-
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

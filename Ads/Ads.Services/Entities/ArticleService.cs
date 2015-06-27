@@ -14,15 +14,25 @@ namespace Ads.Services.Entities
         private IRepository<articleTypes> _articleTypeRepository;
         private IRepository<customers> _customerRepository;
         private IRepository<categories> _categoryRepository;
+        private IRepository<marcas> _marcaRepository;
+        private IRepository<relationship_marca> _relationMarcaRepository;
+        private IRepository<conditions> _conditionRepository;
+        private IRepository<relationship_condition> _relationConditionRepository;
 
         public ArticleService(IRepository<articles> articleRepository,
             IRepository<articleTypes> articleTypeRepository, 
-            IRepository<customers> customerRepository, IRepository<categories> categoryRepository)
+            IRepository<customers> customerRepository, IRepository<categories> categoryRepository,
+            IRepository<marcas> marcaRepository, IRepository<relationship_marca> relationMarcaRepository,
+            IRepository<conditions> conditionRepository, IRepository<relationship_condition> relationConditionRepository)
         {
             _articleRepository = articleRepository;
             _articleTypeRepository = articleTypeRepository;
             _customerRepository = customerRepository;
             _categoryRepository = categoryRepository;
+            _marcaRepository = marcaRepository;
+            _relationMarcaRepository = relationMarcaRepository;
+            _conditionRepository = conditionRepository;
+            _relationConditionRepository = relationConditionRepository;
         }
 
         public IEnumerable<ArticleViewModel> GetListByUser(string userName)
@@ -36,8 +46,8 @@ namespace Ads.Services.Entities
 
         public IEnumerable<ArticleViewModel> GetAll()
         {
-            var articles = _articleRepository.Get().OfType<camion>().ToList();
-            //var articles = _articleRepository.Get().ToList();
+            //var articles = _articleRepository.Get().OfType<camion>().ToList();
+            var articles = _articleRepository.Get().ToList();
             return articles.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
          
@@ -47,43 +57,9 @@ namespace Ads.Services.Entities
             _customerRepository = null;
         }
 
-        public int Create(AutoViewModel model)
+        public int Create(articles Entity)
         {
-            //var model = modelView;
-            //if (modelView is MotoViewModel)
-            //{
-
-                var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
-                if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
-
-                var Entity = new moto()
-                {
-                    title = model.title,
-                    detail = model.detail,
-                    customer_id = 1,
-                    category_Id = model.category_Id,
-                    precio = model.precio,
-                    marca = model.marca,
-                    modelo = model.modelo,
-                    anio = model.anio,
-                    vin = model.vin,
-                    condicion = model.condicion,
-                    kilometraje = model.kilometraje
-                };
-                return _articleRepository.Create(Entity);
-            //}
-
-            //return 1;
-
-            //var advertising = new article()
-            //{
-            //    title = model.title,
-            //    detail = model.detail,
-            //    customer_id = customer.Id,
-            //    //articleType = model.articleType,
-            //    resource = model.resource
-            //};
-            //return _articleRepository.Create(advertising);
+            return _articleRepository.Create(Entity);
         }
 
         public void Update(ArticleViewModel model)
@@ -115,13 +91,35 @@ namespace Ads.Services.Entities
                 //title = AdsList.title,
                 //detail = AdsList.detail,
                 //customer_id = AdsList.customer_id,
-                resource = AdsList.resources.Where(x => x.article_id == AdsList.Id).ToList()
+                resources = AdsList.resources.Where(x => x.article_id == AdsList.Id).ToList()
             };
         }
 
         public IEnumerable<categories> GetListCategory()
         {
             return _categoryRepository.Get().ToList();
+        }
+
+        public IEnumerable<marcas> GetListMarca(int articleType_id)
+        {
+            var marcas = _relationMarcaRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
+            var json = new List<marcas>();
+            foreach (var marca in marcas)
+            {
+                json.Add(_marcaRepository.Get().FirstOrDefault(m => m.Id == marca.marca_id));
+            }
+            return json;
+        }
+
+        public IEnumerable<conditions> GetListCondition(int articleType_id)
+        {
+            var condiciones = _relationConditionRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
+            var json = new List<conditions>();
+            foreach (var condicion in condiciones)
+            {
+                json.Add(_conditionRepository.Get().FirstOrDefault(m => m.Id == condicion.condition_id));
+            }
+            return json;
         }
 
         public IEnumerable<articleTypes> GetListSubtypeByCategory(int category_id)

@@ -142,6 +142,7 @@ E:\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.csprojResolveAssemblyReference.cache
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.dll
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.Net4.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll.config
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.pdb
@@ -150,6 +151,7 @@ A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Dominio.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Services.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Antlr3.Runtime.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\EntityFramework.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\EntityFramework.SqlServer.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.AspNet.Identity.Core.dll
@@ -184,6 +186,9 @@ A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Common.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Dominio.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Repository.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.Services.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.xml
+A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.Net4.pdb
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ninject.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ninject.Extensions.Conventions.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ninject.Web.Common.xml

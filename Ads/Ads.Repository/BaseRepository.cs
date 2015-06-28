@@ -38,6 +38,12 @@ namespace Ads.Repository
             _context.SaveChanges();
         }
 
+        public int Delete(TEntity _entity)
+        {
+            _context.Entry(_entity).State = EntityState.Deleted;
+            return _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             _context = null;

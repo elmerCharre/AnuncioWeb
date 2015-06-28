@@ -13,5 +13,6 @@ namespace Ads.Repository
         int Create(T _entity);
         IQueryable<T> Get();
         void Update(T _entity);
+        int Delete(T _entity);
     }
 }

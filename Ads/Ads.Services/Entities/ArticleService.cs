@@ -18,12 +18,15 @@ namespace Ads.Services.Entities
         private IRepository<relationship_marca> _relationMarcaRepository;
         private IRepository<conditions> _conditionRepository;
         private IRepository<relationship_condition> _relationConditionRepository;
+        private IRepository<modelos> _modeloRepository;
+        private IRepository<tipos> _tipoRepository;
 
         public ArticleService(IRepository<articles> articleRepository,
             IRepository<articleTypes> articleTypeRepository, 
             IRepository<customers> customerRepository, IRepository<categories> categoryRepository,
             IRepository<marcas> marcaRepository, IRepository<relationship_marca> relationMarcaRepository,
-            IRepository<conditions> conditionRepository, IRepository<relationship_condition> relationConditionRepository)
+            IRepository<conditions> conditionRepository, IRepository<relationship_condition> relationConditionRepository,
+            IRepository<modelos> modeloRepository, IRepository<tipos> tipoRepository)
         {
             _articleRepository = articleRepository;
             _articleTypeRepository = articleTypeRepository;
@@ -33,6 +36,8 @@ namespace Ads.Services.Entities
             _relationMarcaRepository = relationMarcaRepository;
             _conditionRepository = conditionRepository;
             _relationConditionRepository = relationConditionRepository;
+            _modeloRepository = modeloRepository;
+            _tipoRepository = tipoRepository;
         }
 
         public IEnumerable<ArticleViewModel> GetListByUser(string userName)
@@ -40,17 +45,21 @@ namespace Ads.Services.Entities
             var customer = _customerRepository.Get().FirstOrDefault(c => c.email == userName);
             if (customer == null) throw new InvalidOperationException(string.Format("Cliente no encontrado {0}", userName));
             var AdvertisingLists = _articleRepository.Get().Where(x => x.customer_id == customer.Id).ToList();
-            // aqui se tiene que hacer un mapeo del dominio al viewmodel
             return AdvertisingLists.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
 
-        public IEnumerable<ArticleViewModel> GetAll()
+        public IEnumerable<ArticleViewModel> getAll()
         {
-            //var articles = _articleRepository.Get().OfType<camion>().ToList();
             var articles = _articleRepository.Get().ToList();
             return articles.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
-         
+
+        public IEnumerable<AutoViewModel> getListAuto()
+        {
+            var articles = _articleRepository.Get().OfType<auto>().ToList();
+            return articles.Select(auto => new AutoViewModel(auto)).ToList();
+        }
+        
         public void Dispose()
         {
             _articleRepository = null;
@@ -85,12 +94,6 @@ namespace Ads.Services.Entities
             return new ArticleViewModel 
             {
                 id = AdsList.Id,
-                //category_name = _categoryRepository.Get().FirstOrDefault(c => c.Id == AdsList.category_id).name,
-                //subtype_id = AdsList.article_id,
-                //subtype_name = _articleRepository.Get().FirstOrDefault(s => s.Id == AdsList.article_id).name,
-                //title = AdsList.title,
-                //detail = AdsList.detail,
-                //customer_id = AdsList.customer_id,
                 resources = AdsList.resources.Where(x => x.article_id == AdsList.Id).ToList()
             };
         }
@@ -100,26 +103,41 @@ namespace Ads.Services.Entities
             return _categoryRepository.Get().ToList();
         }
 
-        public IEnumerable<marcas> GetListMarca(int articleType_id)
+        public IEnumerable<MarcaViewModel> GetListMarca(int articleType_id)
         {
-            var marcas = _relationMarcaRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
-            var json = new List<marcas>();
-            foreach (var marca in marcas)
+            var rel_marcas = _relationMarcaRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
+            var json = new List<MarcaViewModel>();
+            foreach (var rel_marca in rel_marcas)
             {
-                json.Add(_marcaRepository.Get().FirstOrDefault(m => m.Id == marca.marca_id));
+                var marca = _marcaRepository.Get().FirstOrDefault(m => m.Id == rel_marca.marca_id);
+                json.Add(new MarcaViewModel {
+                    Id = marca.Id,
+                    Name = marca.name
+                });
             }
             return json;
         }
 
-        public IEnumerable<conditions> GetListCondition(int articleType_id)
+        public IEnumerable<ConditionViewModel> GetListCondition(int articleType_id)
         {
-            var condiciones = _relationConditionRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
-            var json = new List<conditions>();
-            foreach (var condicion in condiciones)
+            var rel_condiciones = _relationConditionRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
+            var json = new List<ConditionViewModel>();
+            foreach (var rel_condicion in rel_condiciones)
             {
-                json.Add(_conditionRepository.Get().FirstOrDefault(m => m.Id == condicion.condition_id));
+                var condicion = _conditionRepository.Get().FirstOrDefault(m => m.Id == rel_condicion.condition_id);
+                json.Add(new ConditionViewModel
+                {
+                    Id = condicion.Id,
+                    Name = condicion.name
+                });
             }
             return json;
+        }
+
+        public IEnumerable<TipoViewModel> GetListTipo(int articleType_id)
+        {
+            var tipos = _tipoRepository.Get().Where(r => r.articleType_id == articleType_id).ToList();
+            return tipos.Select(tipo => new TipoViewModel(tipo)).ToList();
         }
 
         public IEnumerable<articleTypes> GetListSubtypeByCategory(int category_id)
@@ -127,36 +145,28 @@ namespace Ads.Services.Entities
             return _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
         }
 
-        public List<articleTypes> GetListSubtypeByCategoryAsJson(int category_id)
+        public IEnumerable<ArticleTypeViewModel> GetListSubtypeByCategoryAsJson(int category_id)
         {
-            var list_types = _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
-            var json = new List<articleTypes>();
-            foreach (var obj in list_types) {
-                json.Add(new articleTypes
-                { 
-                    Id = obj.Id,
-                    category_id = obj.category_id,
-                    name = obj.name,
-                    type = obj.type
-                });
-            }
-            return json;
+            var article_type = _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
+            return article_type.Select(type => new ArticleTypeViewModel(type)).ToList();
         }
 
-        public List<moto> GetAllMotoType()
+        public IEnumerable<ModeloViewModel> GetListModeloByMarca(int marca_id)
         {
-            return _articleRepository.Get().OfType<moto>().ToList();
+            var modelos = _modeloRepository.Get().Where(x => x.marca_id == marca_id).ToList();
+            return modelos.Select(modelo => new ModeloViewModel(modelo)).ToList();
         }
 
-        public List<auto> GetAllAutoType()
+        public IEnumerable<ArticleTypeViewModel> GetListArticleTypeByCategory(int category_id)
         {
-            return _articleRepository.Get().OfType<auto>().ToList();
+            var article_type = _articleTypeRepository.Get().Where(x => x.category_id == category_id).ToList();
+            return article_type.Select(type => new ArticleTypeViewModel(type)).ToList();
         }
 
-        public List<articles> GetAllArticleTest()
+        public int deleteArticle(int article_id)
         {
-            var AdvertisingLists = _articleRepository.Get().ToList();
-            return AdvertisingLists;
+            var article = _articleRepository.Get().FirstOrDefault(x => x.Id == article_id);
+            return _articleRepository.Delete(article);
         }
 
         public int CreateModel(articles entity)

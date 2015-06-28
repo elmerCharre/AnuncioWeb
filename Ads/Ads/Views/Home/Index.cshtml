@@ -1,31 +1,141 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<br><br>
+<header id="header-view" class="header-view wrapper" data-view="header/index" data-subid="">
+    <div class="brand"><a href="http://www.olx.com.pe" data-increment-metric="dgd.home.home" data-increment-include="currentRoute:categories#list"><img src="http://static01.olx-st.com/mobile-webapp/images/desktop/logo.png" alt="OLX Logo"></a></div>
+    <div id="search" class="partials_search_view" data-view="partials/search" data-subid="">
+        <form action="http://www.olx.com.pe/nf/search/redirect" method="post" role="search" class="search-form ">
+            <fieldset>
+                <input class="text-field" name="search" type="text" placeholder="¿Qué estás buscando?" tabindex="1" data-qa="search-input" value="">
+                <button class="icons icon-search button" type="submit" data-qa="search-submit"></button>
+            </fieldset>
+        </form>
+    </div>
+    <h6 class="posting-title disabled">Clasificados gratis<span>donde los compradores encuentran vendedores</span></h6>
+    <a href="/Ads/Create" rel="nofollow" class="posting" role="button">Publica un anuncio gratis</a>
+</header>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="form-horizontal">
+    <section id="category-tree">
+        <div class="title-bar">
+            <h2>Categorías</h2>
+        </div>
+        <ul class="category-list category-list-first">
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/telefonos-tablets-cat-830" data-increment-metric="dgd.home.category.830" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-830"></span>
+                    <h3>Teléfonos - Tablets</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/telefonos-celulares-cat-831" data-increment-metric="dgd.home.subcategory.831" data-increment-include="currentRoute:categories#list">Teléfonos - Celulares</a></li>
+                    <li><a href="http://www.olx.com.pe/accesorios-celulares-cat-832" data-increment-metric="dgd.home.subcategory.832" data-increment-include="currentRoute:categories#list">Accesorios</a></li>
+                    <li><a href="http://www.olx.com.pe/tablets-cat-857" data-increment-metric="dgd.home.subcategory.857" data-increment-include="currentRoute:categories#list">Tablets</a></li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/electronicos-video-cat-800" data-increment-metric="dgd.home.category.800" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-800"></span>
+                    <h3>Electrónicos - Video</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/computadoras-laptops-cat-803" data-increment-metric="dgd.home.subcategory.803" data-increment-include="currentRoute:categories#list">Computadoras - Laptops</a></li>
+                    <li><a href="http://www.olx.com.pe/tv-audio-video-cat-805" data-increment-metric="dgd.home.subcategory.805" data-increment-include="currentRoute:categories#list">TV - Audio - Video</a></li>
+                    <li><a href="http://www.olx.com.pe/video-juegos-consolas-cat-802" data-increment-metric="dgd.home.subcategory.802" data-increment-include="currentRoute:categories#list">Video Juegos - Consolas</a></li>
+                    <li><a href="http://www.olx.com.pe/camaras-accesorios-cat-804" data-increment-metric="dgd.home.subcategory.804" data-increment-include="currentRoute:categories#list">Cámaras y accesorios</a></li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/animales-mascotas-cat-811" data-increment-metric="dgd.home.category.811" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-811"></span>
+                    <h3>Animales y Mascotas</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/perros-gatos-cat-812" data-increment-metric="dgd.home.subcategory.812" data-increment-include="currentRoute:categories#list">Perros - Gatos</a></li>
+                    <li><a href="http://www.olx.com.pe/otros-animales-cat-813" data-increment-metric="dgd.home.subcategory.813" data-increment-include="currentRoute:categories#list">Otros Animales</a></li>
+                    <li><a href="http://www.olx.com.pe/accesorios-mascotas-cat-814" data-increment-metric="dgd.home.subcategory.814" data-increment-include="currentRoute:categories#list">Accesorios para Mascotas</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="category-list">
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/casa-muebles-jardin-cat-806" data-increment-metric="dgd.home.category.806" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-806"></span>
+                    <h3>Casa - Muebles - Jardín</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/muebles-cat-807" data-increment-metric="dgd.home.subcategory.807" data-increment-include="currentRoute:categories#list">Muebles</a></li>
+                    <li><a href="http://www.olx.com.pe/negocios-oficinas-cat-868" data-increment-metric="dgd.home.subcategory.868" data-increment-include="currentRoute:categories#list">Negocios y Oficinas</a></li>
+                    <li><a href="http://www.olx.com.pe/electrodomesticos-cat-808" data-increment-metric="dgd.home.subcategory.808" data-increment-include="currentRoute:categories#list">Electrodomésticos</a></li>
+                    <li><a href="http://www.olx.com.pe/decoracion-jardin-accesorios-cat-867" data-increment-metric="dgd.home.subcategory.867" data-increment-include="currentRoute:categories#list">Decoración - Jardín -  Accesorios</a></li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/autos-motos-y-barcos-cat-362" data-increment-metric="dgd.home.category.362" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-362"></span>
+                    <h3>Vehículos</h3>
+                </a>
+                <ul>
+                    <li><a href="/Ads?type=Auto">Autos</a></li>
+                    <li><a href="http://www.olx.com.pe/camiones-vehiculos-comerciales-cat-416" data-increment-metric="dgd.home.subcategory.416" data-increment-include="currentRoute:categories#list">Camiones - Vehículos Comerciales</a></li>
+                    <li><a href="/Ads?type=Moto">Motos</a></li>
+                    <li><a href="http://www.olx.com.pe/accesorios-autos-cat-377" data-increment-metric="dgd.home.subcategory.377" data-increment-include="currentRoute:categories#list">Accesorios para Autos</a></li>
+                    <li><a href="http://www.olx.com.pe/otros-vehiculos-cat-380" data-increment-metric="dgd.home.subcategory.380" data-increment-include="currentRoute:categories#list">Otros Vehículos</a></li>
+                </ul>
+            </li>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+        </ul>
+        <ul class="category-list">
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/moda-belleza-cat-815" data-increment-metric="dgd.home.category.815" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-815"></span>
+                    <h3>Moda y Belleza</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/ropa-calzado-cat-817" data-increment-metric="dgd.home.subcategory.817" data-increment-include="currentRoute:categories#list">Ropa y Calzado</a></li>
+                    <li><a href="http://www.olx.com.pe/relojes-joyas-accesorios-cat-818" data-increment-metric="dgd.home.subcategory.818" data-increment-include="currentRoute:categories#list">Relojes - Joyas - Accesorios</a></li>
+                    <li><a href="http://www.olx.com.pe/bebes-ninos-cat-866" data-increment-metric="dgd.home.subcategory.866" data-increment-include="currentRoute:categories#list">Bebés y Niños</a></li>
+                    <li><a href="http://www.olx.com.pe/salud-belleza-cat-816" data-increment-metric="dgd.home.subcategory.816" data-increment-include="currentRoute:categories#list">Salud y Belleza</a></li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/hobbies-arte-deportes-cat-859" data-increment-metric="dgd.home.category.859" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-859"></span>
+                    <h3>Hobbies - Arte - Deportes</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/deportes-bicicletas-cat-864" data-increment-metric="dgd.home.subcategory.864" data-increment-include="currentRoute:categories#list">Deportes - Bicicletas</a></li>
+                    <li><a href="http://www.olx.com.pe/juegos-juguetes-cat-865" data-increment-metric="dgd.home.subcategory.865" data-increment-include="currentRoute:categories#list">Juegos y Juguetes</a></li>
+                    <li><a href="http://www.olx.com.pe/instrumentos-musicales-cat-861" data-increment-metric="dgd.home.subcategory.861" data-increment-include="currentRoute:categories#list">Instrumentos Musicales</a></li>
+                    <li><a href="http://www.olx.com.pe/libros-cd-dvd-cat-860" data-increment-metric="dgd.home.subcategory.860" data-increment-include="currentRoute:categories#list">Libros - CDs - DVDs</a></li>
+                    <li><a href="http://www.olx.com.pe/arte-antiguedades-cat-862" data-increment-metric="dgd.home.subcategory.862" data-increment-include="currentRoute:categories#list">Arte - Antigüedades</a></li>
+                    <li><a href="http://www.olx.com.pe/manualidades-artesanias-cat-863" data-increment-metric="dgd.home.subcategory.863" data-increment-include="currentRoute:categories#list">Manualidades</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="category-list">
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/inmuebles-y-propiedades-cat-16" data-increment-metric="dgd.home.category.16" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-16"></span>
+                    <h3>Propiedades - Inmuebles</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/departamento-casa-en-venta-cat-367" data-increment-metric="dgd.home.subcategory.367" data-increment-include="currentRoute:categories#list">Departamentos- Casas en Venta</a></li>
+                    <li><a href="http://www.olx.com.pe/terrenos-cat-410" data-increment-metric="dgd.home.subcategory.410" data-increment-include="currentRoute:categories#list">Terrenos</a></li>
+                    <li><a href="http://www.olx.com.pe/departamento-casa-en-alquiler-cat-363" data-increment-metric="dgd.home.subcategory.363" data-increment-include="currentRoute:categories#list">Departamentos - Casas en Alquiler</a></li>
+                    <li><a href="http://www.olx.com.pe/oficinas-locales-cat-368" data-increment-metric="dgd.home.subcategory.368" data-increment-include="currentRoute:categories#list">Oficinas y Locales</a></li>
+                    <li><a href="http://www.olx.com.pe/alquiler-temporario-cat-388" data-increment-metric="dgd.home.subcategory.388" data-increment-include="currentRoute:categories#list">Alquiler temporario - Vacaciones</a></li>
+                </ul>
+            </li>
+            <li class="category">
+                <a class="category-link" href="http://www.olx.com.pe/empleos-servicios-cat-821" data-increment-metric="dgd.home.category.821" data-increment-include="currentRoute:categories#list">
+                    <span class="icon cat-821"></span>
+                    <h3>Empleos - Servicios</h3>
+                </a>
+                <ul>
+                    <li><a href="http://www.olx.com.pe/servicios-cat-824" data-increment-metric="dgd.home.subcategory.824" data-increment-include="currentRoute:categories#list">Servicios</a></li>
+                    <li><a href="http://www.olx.com.pe/ofertas-trabajo-ofrecido-cat-822" data-increment-metric="dgd.home.subcategory.822" data-increment-include="currentRoute:categories#list">Ofertas de Trabajo</a></li>
+                    <li><a href="http://www.olx.com.pe/clases-cursos-cat-876" data-increment-metric="dgd.home.subcategory.876" data-increment-include="currentRoute:categories#list">Clases - Cursos</a></li>
+                    <li><a href="http://www.olx.com.pe/busqueda-trabajo-cat-823" data-increment-metric="dgd.home.subcategory.823" data-increment-include="currentRoute:categories#list">Búsqueda de Trabajo - CVs</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 </div>

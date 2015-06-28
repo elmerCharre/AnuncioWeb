@@ -13,6 +13,18 @@ namespace Ads.Common.ViewModels
         public AutoViewModel()
         {
         }
+
+        public AutoViewModel(auto auto)
+        {
+            this.id = auto.Id;
+            this.title = auto.title;
+            this.detail = auto.detail;
+            this.marca = auto.marca;
+            this.modelo = auto.modelo;
+            this.tipo = auto.tipo;
+            this.precio = auto.precio;
+            this.resources = auto.resources;
+        }
         
         [Required]
         [Display(Name = "Precio")]

@@ -14,6 +14,14 @@ namespace Ads
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/Scripts/angular.js",
+                        "~/Scripts/toastr.js",
+                        "~/App/app.js",
+                        "~/App/Services/*.js",
+                        "~/App/Controllers/*.js"
+                        ));
+
             bundles.Add(new ScriptBundle("~/bundles/uploadFiles").Include(
                         "~/Scripts/uploadFiles/uploadFiles.js"));
 
@@ -35,7 +43,9 @@ namespace Ads
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/toastr.css",
+                      "~/Content/category.css"));
 
             bundles.Add(new StyleBundle("~/uploadFiles/css").Include(
                       "~/Scripts/uploadFiles/uploadFiles.css"));

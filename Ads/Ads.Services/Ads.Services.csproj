@@ -44,6 +44,7 @@
     <Compile Include="Entities\CategoryService.cs" />
     <Compile Include="Entities\CustomerService.cs" />
     <Compile Include="Entities\MarcaService.cs" />
+    <Compile Include="Entities\ModeloService.cs" />
     <Compile Include="Entities\RelationshipMarcaService.cs" />
     <Compile Include="Entities\ResourceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

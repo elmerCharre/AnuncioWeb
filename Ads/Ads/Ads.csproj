@@ -197,14 +197,23 @@
     <Compile Include="tokenProvider\MachineKeyProtectionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\Controllers\AdsController.js" />
+    <Content Include="App\Services\AnuncioService.js" />
+    <Content Include="App\Services\Notification.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\category.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DemoCarousel.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -219,6 +228,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\uploadFiles\images\accept.png" />
     <Content Include="Scripts\uploadFiles\images\add_file.png" />
     <Content Include="Scripts\uploadFiles\images\cancel.png" />
@@ -286,6 +296,7 @@
     <Content Include="Views\Ads\Index.cshtml" />
     <Content Include="Views\Ads\Moto\Createtmp.cshtml" />
     <Content Include="Views\Ads\Moto\Create.cshtml" />
+    <Content Include="Views\Ads\Auto\Create1.cshtml" />
     <Content Include="Views\Ads\Auto\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>

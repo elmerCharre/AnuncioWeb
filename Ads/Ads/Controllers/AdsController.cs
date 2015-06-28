@@ -34,7 +34,8 @@ namespace Ads.Controllers
         {
             try
             {
-                var ads = this._articleService.GetAll();
+                string type = Request.QueryString["Type"];
+                var ads = this._articleService.getListAuto();
                 ViewBag.Titulo = "Anuncios";
                 return View(ads);
             }
@@ -63,21 +64,18 @@ namespace Ads.Controllers
         public ActionResult Create()
         {
             ViewBag.categories = new SelectList(_articleService.GetListCategory(), "id", "name");
-            ViewBag.articleType = new SelectList(_articleService.GetListSubtypeByCategory(1), "type", "name");
             return View(new ArticleViewModel());
         }
 
         public ActionResult CreateModel()
         {
-            //ViewBag.tipos = new SelectList(_articleService.GetListCategory(), "id", "name");
-            //ViewBag.condiciones = new SelectList(_articleService.GetListCategory(), "id", "name");
-            
             string type = Request.QueryString["articleType"];
             int articleType_id = _articleTypeService.getArticleType(type).Id;
             ViewBag.marcas = new SelectList(_articleService.GetListMarca(articleType_id), "id", "name");
             ViewBag.condiciones = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
+            ViewBag.Tipos = new SelectList(_articleService.GetListTipo(articleType_id), "id", "name");
 
-            ViewBag.categoryID = Convert.ToInt32(Request.QueryString["category_id"]);
+            ViewBag.categoryID = Convert.ToInt32(Request.QueryString["categories"]);
             ViewBag.customerID = _customerService.getCustomerByEmail(User.Identity.Name).Id;
             return PartialView(type + "/Create");
         }
@@ -85,6 +83,21 @@ namespace Ads.Controllers
         public JsonResult GetListSubtypeByCategory(int id)
         {
             return Json(_articleService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListModeloByMarca(int id)
+        {
+            return Json(_articleService.GetListModeloByMarca(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListArticleTypeByCategory(int id)
+        {
+            return Json(_articleService.GetListArticleTypeByCategory(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public int deleteArticle(int id)
+        {
+            return _articleService.deleteArticle(id);
         }
 
         private void addResources(int articleID, HttpPostedFileBase[] files)

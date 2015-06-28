@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2> 
     
-<div class="row col-md-12 form-horizontal" ng-app="myAds" ng-controller="myAdsController">
+<div class="row col-md-12 form-horizontal" ng-app="myAds" ng-cloak ng-controller="myAdsController">
     @using (Ajax.BeginForm("CreateModel", "Ads", new AjaxOptions
         {
             HttpMethod = "GET",
@@ -35,17 +35,13 @@
 
         <div class="form-group col-md-2">
             <button class="btn btn-default form-inline" type="submit">Search</button>
+            <a href="/Ads/CreateModel/?categories=1&articleType=Auto">Route One</a>
         </div>
-
-        @*<div class="form-group">
-                @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" class="form-control" name="files" multiple />
-                </div>
-            </div>*@
     }
 
     <div id="FormArticle" class="col-md-6"></div>
+
+    <div ng-view></div>
 
 </div>
 
@@ -71,92 +67,7 @@
                 maxFileSize: "",
                 uploadStr: 'upload',
                 dragDropStr: "Drag & Drop or Select Files"
-            });
-
-            $('#category_id').change(function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/Ads/GetListSubtypeByCategory/" + $(this).val(),
-                    data: "{}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        var markup = "";
-                        $.each(response, function (index, subtype) {
-                            markup += "<option value=" + subtype.Id + ">" + subtype.name + "</option>";
-                        });
-                        $("#subtype_id").html(markup);
-                        $("#list_types").show();
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
-                    }
-                });
-            });
-
-            $('#subtype_id').change(function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/Ads/getExtraFieldsAsJson/" + $(this).val(),
-                    data: "{}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        var html = "";
-                        $.each(response, function (index, element) {
-                            if (element.input == "text") {
-                                html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
-                                    "<div class='col-md-10'><input type='text' class='form-control' id='input-source-" + element.id + "' name='extra_" + element.id + "'/></div></div>";
-                            } else if (element.input == "select") {
-                                html += "<div class='form-group'><label class='control-label col-md-2' for=''>" + element.label + "</label>" +
-                                    "<div class='col-md-10'><select class='form-control' id='input-source-" + element.id + "' name='extra_" + element.id + "'>";
-                                $.each(element.elements, function (index, select) {
-                                    html += "<option value=" + select.value + ">" + select.label + "</option>";
-                                });
-                                html += "</select></div></div>";
-                            }
-                        });
-                        $("#extra_fields_html").html(html).show();
-
-                        //add event change to element select
-                        $.each(response, function (index, element) {
-                            if (element.input == "select") {
-                                if (element.parent_field > 0) {
-                                    $("#input-source-" + element.parent_field).change(function() {
-                                        ajax_change(this, element.id);
-                                    });
-                                    if (index == 1)
-                                        $("#input-source-" + element.parent_field).trigger("change");
-                                }
-                            }
-                        });
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
-                    }
-                });
-            });
-        });
-
-        function ajax_change(obj, target) {
-            $.ajax({
-                type: "POST",
-                url: "/Ads/GetElementsAsJson/" + obj.value,
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var markup = "";
-                    $.each(response, function (index, element) {
-                        markup += "<option value=" + element.Id + ">" + element.label + "</option>";
-                    });
-                    $("#input-source-" + target).html(markup);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
-                }
             });*/
         });
-
     </script>
 }

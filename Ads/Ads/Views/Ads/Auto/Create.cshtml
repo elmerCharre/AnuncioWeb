@@ -46,10 +46,10 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-app="myAds" ng-controller="myAdsController">
+            <div class="form-group" ng-controller="typeController">
                 @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("marcas", null, htmlAttributes: new { @class = "form-control", @ng_model = "marca", @ng_change = "getModelosByMarca()" })
+                    @Html.DropDownList("marcas", null, htmlAttributes: new { @class = "form-control", @ng_model = "test", @ng_change = "test()" })
                     @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -108,7 +108,8 @@
             <div class="form-group">
                 @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" class="form-control" name="files" multiple />
+                    @*<input type="file" class="form-control" name="files" multiple />*@
+                    <div id="dragandrophandler"></div>
                 </div>
             </div>
 
@@ -122,3 +123,16 @@
 
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/app")
+
+<script type="text/javascript" lang="javascript">
+        $(function () {
+
+            $('#dragandrophandler').DragDropTool({
+                fileExtensions: "jpg, png, gif",
+                allowedExtensions: true,
+                maxFileSize: "",
+                uploadStr: 'upload',
+                dragDropStr: "Drag & Drop or Select Files"
+            });
+        });
+</script>

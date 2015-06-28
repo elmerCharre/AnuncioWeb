@@ -2,9 +2,8 @@
 
 app.controller('myAdsController', ['$scope', '$log', 'anuncioService', 'notificationService',
     function ($scope, $log, anuncioService, notificationService) {
-
         $scope.marca = 0;
-        $scope.category = 0;
+        $scope.category = 1;
         $scope.article_id = 0;
         $scope.modelos = [];
         $scope.articleTypes = [];
@@ -25,6 +24,10 @@ app.controller('myAdsController', ['$scope', '$log', 'anuncioService', 'notifica
         $scope.deleteArticle = function () {
             anuncioService.deleteArticle($scope.article_id);
         };
+
+        setTimeout(function () {
+            $scope.getArticleTypesByCategory();
+        }, 0);
 
         var getModelos = function (marcaId) {
             anuncioService.getModelos(marcaId).then(function (data) {
@@ -49,5 +52,4 @@ app.controller('myAdsController', ['$scope', '$log', 'anuncioService', 'notifica
                 notificationService.error(errorMsg);
             });
         };
-
-    }]);
+}]);

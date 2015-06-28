@@ -16,6 +16,7 @@ namespace Ads
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                         "~/Scripts/angular.js",
+                        "~/Scripts/angular-route.js",
                         "~/Scripts/toastr.js",
                         "~/App/app.js",
                         "~/App/Services/*.js",

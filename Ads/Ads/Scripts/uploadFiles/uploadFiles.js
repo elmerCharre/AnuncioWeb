@@ -38,7 +38,7 @@ jQuery.fn.extend({
         }, options);
 
         setting.supportAPI = (typeof FormData !== "undefined") ? true : false;
-        setting.allowedExtensions = (setting.fileExtensions === '*') ? true : false;
+        setting.allowedExtensions = (setting.fileExtensions === '*') ? true : setting.allowedExtensions;
         setting.object_dragging = $(this);
 
         if (!setting.supportAPI) {
@@ -174,10 +174,10 @@ var classFile = {
 
     handleFileUpload: function (files) {
         $.each(files, function (key, data) {
-            if (this.isFileTypeAllowed(data.name)) {
-                if (!searchFile(data.name)) {
-                    setFileNameSize(data);
-                    setAbortFile(data, null);
+            if (classFile.isFileTypeAllowed(data.name)) {
+                if (!classFile.searchFile(data.name)) {
+                    classFile.setFileNameSize(data);
+                    classFile.setAbortFile(data, null);
                 }
             }
         });
@@ -239,8 +239,8 @@ function setSerializeForm(formData, objClassFile) {
         $.each(formData, function (key, data) {
             if (data) data_files.append(setting.fileName, data);
         });
-        alert(totalSize);
-        data_files.append('totalSize', totalSize); alert(data_files['totalSize']);
+        
+        data_files.append('totalSize', totalSize);
         //set the values of form input
         $.each($(":file"), function (key, data) {
             data_files.append(data.name, data);

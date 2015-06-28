@@ -10,3 +10,15 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll.config
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.pdb
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.dll
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.dll
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.dll
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.pdb
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.xml
+E:\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
+E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
+E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
+E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb

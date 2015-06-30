@@ -48,16 +48,16 @@ namespace Ads.Services.Entities
             return AdvertisingLists.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
 
-        public IEnumerable<ArticleViewModel> getAll()
-        {
-            var articles = _articleRepository.Get().ToList();
-            return articles.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
-        }
-
         public IEnumerable<AutoViewModel> getListAuto()
         {
             var articles = _articleRepository.Get().OfType<auto>().ToList();
             return articles.Select(auto => new AutoViewModel(auto)).ToList();
+        }
+
+        public IEnumerable<CategoryViewModel> getListCategories()
+        {
+            var categories = _categoryRepository.Get().OrderBy(c => c.status).ToList();
+            return categories.Select(category => new CategoryViewModel(category)).ToList();
         }
         
         public void Dispose()
@@ -155,6 +155,27 @@ namespace Ads.Services.Entities
         {
             var modelos = _modeloRepository.Get().Where(x => x.marca_id == marca_id).ToList();
             return modelos.Select(modelo => new ModeloViewModel(modelo)).ToList();
+        }
+
+        public IEnumerable<ArticleViewModel> getArticlesByCategory(int category_id)
+        {
+            var articles = _articleRepository.Get().Where(x => x.category_Id == category_id).ToList();
+            var json = new List<ArticleViewModel>();
+            foreach (var article in articles)
+            {
+                json.Add(new ArticleViewModel
+                {
+                    id = article.Id,
+                    title = article.title,
+                    detail = article.detail,
+                    customer_id = article.customer_id,
+                    category_Id = article.category_Id,
+                    resources = article.resources,
+                    articleType = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == article.Id).precio.ToString(),
+                    Type = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == article.Id)
+                });
+            }
+            return json;
         }
 
         public IEnumerable<ArticleTypeViewModel> GetListArticleTypeByCategory(int category_id)

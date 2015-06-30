@@ -31,46 +31,67 @@ namespace Ads.Dominio
         public virtual ICollection<resources> resources { get; set; }
     }
 
-    public class moto : vehiculos
+    public class moto : modeloAtributo
     {
     }
 
-    public class auto : vehiculos
+    public class auto : modeloAtributo
     {
-    }
-
-    public class camion : vehiculos
-    {
-    }
-
-    public class vehiculos : articles
-    {
-        public decimal precio { get; set; }
-        public int marca { get; set; }
-        public int modelo { get; set; }
         public int tipo { get; set; }
+    }
+
+    public class camion : vehiculo
+    {
+    }
+
+    public class vehiculo : precioAtributo
+    {
+        public int marca { get; set; }
         public int anio { get; set; }
         public string kilometraje { get; set; }
         public string vin { get; set; }
         public int condicion { get; set; }
     }
 
-    public class departamento_venta : propiedades
+    public class modeloAtributo : vehiculo
+    {
+        public int modelo { get; set; }
+    }
+
+    public class departamento_venta : propiedad
     {
     }
 
-    public class departamento_alquiler : propiedades
+    public class departamento_alquiler : propiedad
     {
     }
 
-    public class propiedades : articles
+    public class propiedad : precioAtributo
     {
-        public decimal precio { get; set; }
         public int amueblado { get; set; }
         public int cuartos { get; set; }
         public int cuartos_banio { get; set; }
         public int comision { get; set; }
         public string metros { get; set; }
+    }
+
+    public class servicio : propiedad
+    {
+
+    }
+
+    public class ModelEstandar : precioAtributo
+    {
+    }
+
+    public class precioAtributo : articles
+    {
+        public decimal precio { get; set; }
+    }
+
+    public class tipoAtributo : precioAtributo
+    {
+        public int tipo { get; set; }
     }
 
 }

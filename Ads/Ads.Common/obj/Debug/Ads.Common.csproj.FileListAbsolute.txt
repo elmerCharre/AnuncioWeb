@@ -5,13 +5,6 @@ E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
 E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
 E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
 E:\Proyectos_Elmer\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.dll
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.dll
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
-A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb
 E:\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.dll
 E:\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.pdb
 E:\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.dll
@@ -19,3 +12,10 @@ E:\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
 E:\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
 E:\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
 E:\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Common.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Common\obj\Debug\Ads.Common.pdb

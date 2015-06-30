@@ -30,24 +30,18 @@ namespace Ads.Controllers
             _customerService = customerService;
         }
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    string type = Request.QueryString["Type"];
+        //    var ads = this._articleService.getListAuto();
+        //    ViewBag.Titulo = "Anuncios";
+        //    return View(ads);
+        //}
+
+        public ActionResult Index(int id)
         {
-            try
-            {
-                string type = Request.QueryString["Type"];
-                var ads = this._articleService.getListAuto();
-                ViewBag.Titulo = "Anuncios";
-                return View(ads);
-            }
-            catch (InvalidOperationException ex)
-            {
-                ModelState.AddModelError("", "Cliente no registrado");
-                return View(new List<ArticleViewModel>());
-            }
-            catch (Exception ex)
-            {
-                throw; // redirigir a una pagina de error
-            }
+            var articles = _articleService.getArticlesByCategory(id);
+            return View(articles);
         }
 
         public ActionResult Details(int id = 0)
@@ -167,32 +161,6 @@ namespace Ads.Controllers
             //    return HttpNotFound();
             //}
             return View();
-        }
-
-        // GET: Advertising/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //AdvertisingViewModel advertisingViewModel = db.AdvertisingViewModels.Find(id);
-            //if (advertisingViewModel == null)
-            //{
-            //   return HttpNotFound();
-            //}
-            return View();
-        }
-
-        // POST: Advertising/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            //AdvertisingViewModel advertisingViewModel = db.AdvertisingViewModels.Find(id);
-            //db.AdvertisingViewModels.Remove(advertisingViewModel);
-            //db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

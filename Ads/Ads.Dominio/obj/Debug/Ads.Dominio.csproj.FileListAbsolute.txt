@@ -1,10 +1,11 @@
-A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
-A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
-A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
-A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
 E:\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
 E:\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
 E:\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
 E:\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
 E:\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.csprojResolveAssemblyReference.cache
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll.config
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb\Ads\Ads.Dominio\obj\Debug\Ads.Dominio.pdb

@@ -57,6 +57,11 @@
     <Compile Include="DbAdsContext.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="MarcaRepository.cs" />
+    <Compile Include="Migrations\201507020220067_App.cs" />
+    <Compile Include="Migrations\201507020220067_App.Designer.cs">
+      <DependentUpon>201507020220067_App.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModeloRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationConditionRepository.cs" />
@@ -78,6 +83,11 @@
       <Project>{5fb26d65-c4e2-443f-8ff9-67b19402dc8e}</Project>
       <Name>Ads.Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201507020220067_App.resx">
+      <DependentUpon>201507020220067_App.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

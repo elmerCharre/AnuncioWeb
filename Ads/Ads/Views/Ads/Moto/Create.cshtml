@@ -41,17 +41,17 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.precio, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.marca, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("marcas", null, htmlAttributes: new { @class = "form-control", @ng_model = "test", @ng_change = "test()" })
                 @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,8 +91,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.condicion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.condicion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("condiciones", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.condicion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="form-control" name="files" multiple />
+                <!--div id="dragandrophandler"></!--div-->
             </div>
         </div>
 
@@ -104,6 +112,4 @@
     </div>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/bundles/jqueryval")

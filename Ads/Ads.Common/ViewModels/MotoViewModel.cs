@@ -14,9 +14,23 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        [Required]
-        [Display(Name = "Precio")]
-        public decimal precio { get; set; }
+        public MotoViewModel(moto entity)
+        {
+            this.id = entity.Id;
+            this.title = entity.title;
+            this.detail = entity.detail;
+            this.price = entity.price;
+            this.date = entity.date;
+            this.customer_id = entity.customer_id;
+            this.category_Id = entity.category_Id;
+            this.resources = entity.resources;
+            this.marca = entity.marca;
+            this.modelo = entity.modelo;
+            this.anio = entity.anio;
+            this.kilometraje = entity.kilometraje;
+            this.vin = entity.vin;
+            this.condicion = entity.condicion;
+        }
 
         [Required]
         [Display(Name = "Marca")]

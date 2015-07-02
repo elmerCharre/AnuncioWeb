@@ -1,65 +1,149 @@
 ﻿@model IEnumerable<Ads.Common.ViewModels.ArticleViewModel>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Lista de Articulos";
 }
 
-<!DOCTYPE html>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.detail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.customer_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.category_Id)
-            </th>
-            <th>Precio</th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.detail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.customer_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.articleType)
-            </td>
+<section id="listing-items" ng-app="myAds" ng-controller="myAdsController">
+    <nav id="items-locations" class="items-locations">
+        <ul class="locations-tabs">
+            <li>
+                Perú
+            </li>
+        </ul>
+        <div class="locations-list">
+            <ul class="visible-locations">
+                <li class="locations">
+                    <a href="http://lima.olx.com.pe/autos-cat-378" rel="nofollow">Lima <span>38.884</span></a>
+                </li>
+            </ul>
+            <div class="actions">
+                <span class="see more icons icon-arrow-down">Ver más</span>
+                <span class="see less hide icons icon-arrow-up">Ver menos</span>
+            </div>
+        </div>
+    </nav>
+    <main id="items-list-view" class="items-list-view">
+        <nav id="listing-tabs" class="listing-tabs">
+            <div class="order-by">
+                <label for="order-by-select">Ordenar por:</label>
+                <select id="order-by-select" class="form-control">
+                    <option value="datedesc">Publicación reciente</option>
+                    <option value="price">Precio: primero más bajo</option>
+                    <option value="pricedesc">Precio: primero más alto</option>
+                </select>
+            </div>
+        </nav>
+        <ul class="items-list">
+            @foreach (var item in Model)
+            {
+                <li class="item article-id-@item.id">
+                    <a href="javascript:void(0);">
+                        <figure class="items-image lines">
+                            @foreach (var imagen in item.resources)
+                            {
+                                <img alt="@item.title" src="@Url.Content("/resources/resource_" + item.id + "/" + imagen.path)">
+                                break;
+                            }
+                        </figure>
+                        <div class="items-info">
+                            <h3>@item.title</h3>
+                            <span class="description">
+                                @if (item.detail.Length > 125)
+                                {
+                                    @(item.detail.Substring(0, 125) + "...");
+                                }
+                                else
+                                {
+                                    @item.detail;
+                                }
+                            </span>
+                        </div>
+                        <p class="items-price">
+                            @item.price
+                            <span class="price-type">Precio USD</span>
+                        </p>
+                        <p class="items-date">@String.Format("{0:D}", item.date), <br>@String.Format("{0:t}", item.date)</p>
+                        <p class="items-optional right" ng-click="ModalDelete(@item.id)">Delete</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    </main>
 
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Type.precio)*@
-            </td>
+    <div id="items-pagination">
+        <ul class="items-paginations-numbers">
+            <li>
+                <a href="#" rel="prev" class="icons pagination-arrow icon-arrow-left disable"></a>
+            </li>
+            <li class="current">
+                1
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-2" class="pagination-number">2</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-3" class="pagination-number">3</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-4" class="pagination-number">4</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-5" class="pagination-number">5</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-6" class="pagination-number">6</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-7" class="pagination-number">7</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-8" class="pagination-number">8</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-9" class="pagination-number">9</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-10" class="pagination-number">10</a>
+            </li>
+            <li>
+                <a href="http://www.olx.com.pe/autos-cat-378-p-2" rel="next" class="icons pagination-arrow icon-arrow-right "></a>
+            </li>
+        </ul>
+    </div>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.id })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+    <div class="modal fade" id="modal-popup" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close modal-close-title" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="post_read_more_container">
+                            <div class="post_bg">
+                                Confirm Delete?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="deleteArticle()">Delete</button>
+                    <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app")
+}

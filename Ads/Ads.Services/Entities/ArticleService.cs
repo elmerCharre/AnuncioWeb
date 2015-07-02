@@ -160,22 +160,7 @@ namespace Ads.Services.Entities
         public IEnumerable<ArticleViewModel> getArticlesByCategory(int category_id)
         {
             var articles = _articleRepository.Get().Where(x => x.category_Id == category_id).ToList();
-            var json = new List<ArticleViewModel>();
-            foreach (var article in articles)
-            {
-                json.Add(new ArticleViewModel
-                {
-                    id = article.Id,
-                    title = article.title,
-                    detail = article.detail,
-                    customer_id = article.customer_id,
-                    category_Id = article.category_Id,
-                    resources = article.resources,
-                    articleType = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == article.Id).precio.ToString(),
-                    Type = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == article.Id)
-                });
-            }
-            return json;
+            return articles.Select(article => new ArticleViewModel(article)).ToList();
         }
 
         public IEnumerable<ArticleTypeViewModel> GetListArticleTypeByCategory(int category_id)

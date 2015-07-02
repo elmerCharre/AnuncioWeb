@@ -39,11 +39,23 @@ namespace Ads.Repository
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<articles>()
+                /* Vehículos */
                 .Map<moto>(x => x.Requires("Type").HasValue("moto").HasColumnType("varchar").HasMaxLength(20))
                 .Map<auto>(x => x.Requires("Type").HasValue("auto"))
                 .Map<camion>(x => x.Requires("Type").HasValue("camion"))
+
+                /* Propiedades Inmuebles */
                 .Map<departamento_venta>(x => x.Requires("Type").HasValue("depa_venta"))
                 .Map<departamento_alquiler>(x => x.Requires("Type").HasValue("depa_alquiler"))
+                .Map<vacaciones_alquiler>(x => x.Requires("Type").HasValue("temp_alquiler"))
+
+                /* Empleos Servicios */
+                .Map<oferta>(x => x.Requires("Type").HasValue("oferta_empleo"))
+                .Map<busqueda>(x => x.Requires("Type").HasValue("busqueda_empleo"))
+                .Map<servicio>(x => x.Requires("Type").HasValue("servicio"))
+
+                /* Modelos Estándar */
+                .Map<ModelBasic>(x => x.Requires("Type").HasValue("model"))
                 ;
 
             modelBuilder.Entity<articleTypes>()

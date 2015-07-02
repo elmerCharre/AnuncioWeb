@@ -14,21 +14,24 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public AutoViewModel(auto auto)
+        public AutoViewModel(auto entity)
         {
-            this.id = auto.Id;
-            this.title = auto.title;
-            this.detail = auto.detail;
-            this.marca = auto.marca;
-            this.modelo = auto.modelo;
-            this.tipo = auto.tipo;
-            this.precio = auto.precio;
-            this.resources = auto.resources;
+            this.id = entity.Id;
+            this.title = entity.title;
+            this.detail = entity.detail;
+            this.price = entity.price;
+            this.date = entity.date;
+            this.customer_id = entity.customer_id;
+            this.category_Id = entity.category_Id;
+            this.resources = entity.resources;
+            this.marca = entity.marca;
+            this.modelo = entity.modelo;
+            this.tipo = entity.tipo;
+            this.anio = entity.anio;
+            this.kilometraje = entity.kilometraje;
+            this.vin = entity.vin;
+            this.condicion = entity.condicion;
         }
-        
-        [Required]
-        [Display(Name = "Precio")]
-        public decimal precio { get; set; }
 
         [Required]
         [Display(Name = "Marca")]

@@ -30,18 +30,20 @@ namespace Ads.Controllers
             _customerService = customerService;
         }
 
-        //public ActionResult Index()
-        //{
-        //    string type = Request.QueryString["Type"];
-        //    var ads = this._articleService.getListAuto();
-        //    ViewBag.Titulo = "Anuncios";
-        //    return View(ads);
-        //}
+        public ActionResult Index()
+        {
+            //string type = Request.QueryString["Type"];
+            //var articles = this._articleService.getListAuto();
+            var articles = _articleService.getArticlesByCategory(1);
 
-        public ActionResult Index(int id)
+            ViewBag.Titulo = "Anuncios";
+            return View(articles);
+        }
+
+        public ActionResult Category(int id)
         {
             var articles = _articleService.getArticlesByCategory(id);
-            return View(articles);
+            return View("Index", articles);
         }
 
         public ActionResult Details(int id = 0)

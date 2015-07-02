@@ -147,7 +147,6 @@ E:\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.csprojResolveAssemblyReference.cache
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.dll
 E:\AnuncioWeb\Ads\Ads\obj\Debug\Ads.pdb
-A:\apps\VS\AnuncioWeb\Ads\Ads\obj\Debug\Ads.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\AutoMapper.Net4.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll.config
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Ads.dll
@@ -222,5 +221,6 @@ A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.OAuth.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.Google.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.Twitter.xml
 A:\apps\VS\AnuncioWeb\Ads\Ads\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+A:\apps\VS\AnuncioWeb\Ads\Ads\obj\Debug\Ads.csprojResolveAssemblyReference.cache
 A:\apps\VS\AnuncioWeb\Ads\Ads\obj\Debug\Ads.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads\obj\Debug\Ads.pdb

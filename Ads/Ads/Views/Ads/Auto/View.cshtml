@@ -1,0 +1,244 @@
+﻿@model Ads.Common.ViewModels.AutoViewModel
+
+<br>
+<br>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<section id="item-page" class="dl-horizontal">
+    <div class="col-md-8">
+        <article id="item-content">
+            <div>
+                <h2 class="item-title">@Html.DisplayFor(model => model.title)</h2>
+                <ul id="item-info" class="item-info" data-view="items/partials/iteminfo" data-subid="">
+                    <li class="icons icon-time">Publicado  <time> Hoy,22:27 </time></li>
+                    <li class="icons icon-pin">Los Olivos, Lima, Lima</li>
+                </ul>
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            int iterator = 0;
+                            string active = "active";
+                         }
+                        @foreach (var image in Model.resources)
+                        {
+                            if (iterator > 0) {
+                                active = "";
+                            }
+                            iterator++;
+                            <div class="item @active">
+                                <img src="@Url.Content("/resources/resource_" + image.article_id + "/" + image.path)" />
+                            </div>
+                        }
+                    </div>
+
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div id="item-description" class="item-description">
+                    <h3 class="description-title">Detalles del anuncio</h3>
+                    <div class="text with-optionals">
+                        @Html.DisplayFor(model => model.detail)
+                    </div>
+                    <ul class="optionals">
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.marca)</span>
+                            <span>@Html.DisplayFor(model => model.marca_name)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.modelo)</span>
+                            <span>@Html.DisplayFor(model => model.modelo_name)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.tipo)</span>
+                            <span>@Html.DisplayFor(model => model.tipo_name)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.anio)</span>
+                            <span>@Html.DisplayFor(model => model.anio)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.kilometraje)</span>
+                            <span>@Html.DisplayFor(model => model.kilometraje)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.vin)</span>
+                            <span>@Html.DisplayFor(model => model.vin)</span>
+                        </li>
+                        <li>
+                            <span>@Html.DisplayNameFor(model => model.condicion)</span>
+                            <span>@Html.DisplayFor(model => model.condicion_name)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="item-actions" class="item-actions">
+                <div class="social-sharing">
+                    <p>Compartir este anuncio :</p>
+                    <ul>
+                        <li class="button-fb" data-share-facebook="" data-share-url="http://lima-lima.olx.com.pe/los-olivos-iid-815276824">
+                            <a href="#" rel="nofollow" class="icons icon-facebook"></a>
+                        </li>
+                        <li class="button-twitter" data-share-twitter="" data-share-url="http://lima-lima.olx.com.pe/los-olivos-iid-815276824" data-share-title="los olivos">
+                            <a href="#" rel="nofollow" class="icons icon-twitter"></a>
+                        </li>
+                        <li class="button-googleplus" data-share-gplus="" data-share-url="http://lima-lima.olx.com.pe/los-olivos-iid-815276824">
+                            <a href="#" rel="nofollow" class="icons icon-googleplus"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+        <div id="relateds" data-view="items/partials/relatedads" data-subid="">
+            <div class="samurai-suggestions">
+                <h2>Anuncios Relacionados</h2>
+                <div class="samurai-related">
+                    <ul class="samurai-items">
+                        <li class="samurai-item">
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-813244755#clm-pe_r2-1" title="" class="samurai-image">
+                                <img src="http://images03.olx-st.com/ui/86/55/97/t_1435172511_813244755_1.jpg" alt="" title="" class="img-thumbnail">
+                            </a>
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-813244755#clm-pe_r2-1" title="">
+                                <span class="title">los olivos</span>
+                            </a>
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-813244755#clm-pe_r2-1" title="">
+                                <span class="price">$5.500USD</span>
+                            </a>
+                        </li>
+                        <li class="samurai-item">
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-814323192#clm-pe_r2-2" title="" class="samurai-image">
+
+                                <img src="http://images01.olx-st.com/ui/91/08/59/t_1435630782_814323192_1.jpg" alt="" title="" class="img-thumbnail">
+
+                            </a>
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-814323192#clm-pe_r2-2" title="">
+                                <span class="title">los olivos</span>
+                            </a>
+
+
+
+                            <a href="http://lima-lima.olx.com.pe/los-olivos-iid-814323192#clm-pe_r2-2" title="">
+
+                                <span class="price">$5.500USD</span>
+
+                            </a>
+
+
+                        </li>
+
+
+                        <li class="samurai-item">
+                            <a href="http://lima-lima.olx.com.pe/alquier-de-taxi-mitsubishi-lancer-con-glp-con-setame-puerta-libre-los-olivos-iid-806617852#clm-pe_r2-3" title="" class="samurai-image">
+
+                                <img src="http://images02.olx-st.com/ui/92/04/02/t_1432656471_806617852_1.jpg" alt="" title="" class="img-thumbnail">
+
+                            </a>
+                            <a href="http://lima-lima.olx.com.pe/alquier-de-taxi-mitsubishi-lancer-con-glp-con-setame-puerta-libre-los-olivos-iid-806617852#clm-pe_r2-3" title="">
+                                <span class="title">Alquier de Taxi Mitsubishi Lancer con GLP con SETAME Puerta Libre Los Olivos</span>
+                            </a>
+
+
+
+                            <a href="http://lima-lima.olx.com.pe/alquier-de-taxi-mitsubishi-lancer-con-glp-con-setame-puerta-libre-los-olivos-iid-806617852#clm-pe_r2-3" title="">
+
+                                <span class="price">S/.60</span>
+
+                            </a>
+
+
+                        </li>
+
+                    </ul>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <br class="clear">
+        </div>
+    </div>
+
+    <aside class="col-md-4">
+        <div id="item-price" class="item-price">
+            <p class="price">$@Html.DisplayFor(model => model.price) USD</p>
+        </div>
+        <section id="item-contact-form" class="item-contact-form">
+            <div class="user-info">
+                <p class="icons icon-user user-name">luis alfredo</p>
+                <p class="icons icon-phone user-phone">979032253</p>
+                <p class="icons icon-edit user-info">elmer.nyd@gmail.com</p>
+                <br>
+            </div>
+            <form id="replyForm" action="">
+                <input type="hidden" class="itemId" name="itemId" value="815276824">
+                <fieldset class="name">
+                    <label for="name">
+                        <input type="text" name="name" id="name" class="name" value="" maxlength="200" placeholder="Nombre ">
+                        <span class="error hide name"></span>
+                    </label>
+                </fieldset>
+                <fieldset class="message">
+                    <label for="message">
+                        <textarea id="message" class="message" name="message" cols="30" rows="6" placeholder="Mensaje "></textarea>
+                        <span class="error hide message"></span>
+                    </label>
+                </fieldset>
+                <fieldset class="email">
+                    <label for="email">
+                        <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="E-mail ">
+                        <span class="error hide email"></span>
+                    </label>
+                </fieldset>
+                <fieldset class="phone">
+                    <label for="phone">
+                        <input type="text" name="phone" id="phone" class="phone" value="" maxlength="15" placeholder="Tu número de teléfono (opcional) ">
+                    </label>
+                </fieldset>
+                <span class="spinner hide"></span>
+                <fieldset class="submit">
+                    <label for="submit">
+                        <input type="submit" value="Enviar mensaje " id="submit" class="olx-ui-button orange" data-qa="reply-send-button">
+                    </label>
+                </fieldset>
+                <p class="replySuccess icons icon-check hide" data-qa="reply-message-sent">
+                    Tu mensaje ha sido enviado.
+                    <span>Enviar otro mensaje </span>
+                </p>
+            </form>
+            <div class="disclaimer">
+                <p>
+                    Haciendo clic en «Enviar un e-mail», aceptas nuestros <a rel="nofollow" href="/terms" target="_blank"> Términos de uso</a>.
+                </p>
+            </div>
+        </section>
+    </aside>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/democarousel")
+
+    <script type="text/javascript">
+        $("#myCarousel").carousel("cycle");
+
+        // Enable Carousel Indicators
+        $(".item").click(function () {
+            alert(1);
+            $("#myCarousel").carousel(1);
+        });
+
+        // Enable Carousel Controls
+        $(".left").click(function () {
+            $("#myCarousel").carousel("prev");
+        });
+    </script>
+}

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ads.Common.ViewModels
 {
-    public class AutoViewModel : ArticleViewModel
+    public class AutoViewModel : VehiculoViewModel
     {
         public AutoViewModel()
         {
@@ -33,28 +33,9 @@ namespace Ads.Common.ViewModels
             this.condicion = entity.condicion;
         }
 
-        [Required]
-        [Display(Name = "Marca")]
-        public int marca { get; set; }
-
-        [Required]
-        [Display(Name = "Modelo")]
-        public int modelo { get; set; }
-
-        [Required]
-        [Display(Name = "Tipo")]
-        public int tipo { get; set; }
-        
-        [Display(Name = "Año")]
-        public int anio { get; set; }
-
-        [Display(Name = "Kilometraje")]
-        public string kilometraje { get; set; }
-
-        [Display(Name = "VIN")]
-        public string vin { get; set; }
-
-        [Display(Name = "Condición")]
-        public int condicion { get; set; }
+        public string marca_name { get; set; }
+        public string modelo_name { get; set; }
+        public string tipo_name { get; set; }
+        public string condicion_name { get; set; }
     }
 }

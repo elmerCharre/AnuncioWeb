@@ -8,13 +8,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ads.Common.ViewModels
 {
-    public class MotoViewModel : VehiculoViewModel
+    public class VehiculoViewModel : ArticleViewModel
     {
-        public MotoViewModel()
+        public VehiculoViewModel()
         {
         }
 
-        public MotoViewModel(moto entity)
+        public VehiculoViewModel(vehiculo entity)
         {
             this.id = entity.Id;
             this.title = entity.title;
@@ -26,15 +26,35 @@ namespace Ads.Common.ViewModels
             this.resources = entity.resources;
             this.marca = entity.marca;
             this.modelo = entity.modelo;
+            this.tipo = entity.tipo;
             this.anio = entity.anio;
             this.kilometraje = entity.kilometraje;
             this.vin = entity.vin;
             this.condicion = entity.condicion;
         }
 
-        public string marca_name { get; set; }
-        public string modelo_name { get; set; }
-        public string tipo_name { get; set; }
-        public string condicion_name { get; set; }
+        [Required]
+        [Display(Name = "Marca")]
+        public int marca { get; set; }
+
+        [Required]
+        [Display(Name = "Modelo")]
+        public int modelo { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo")]
+        public int tipo { get; set; }
+
+        [Display(Name = "Año")]
+        public int anio { get; set; }
+
+        [Display(Name = "Kilometraje")]
+        public string kilometraje { get; set; }
+
+        [Display(Name = "VIN")]
+        public string vin { get; set; }
+
+        [Display(Name = "Condición")]
+        public int condicion { get; set; }
     }
 }

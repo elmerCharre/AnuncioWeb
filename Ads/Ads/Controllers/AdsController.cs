@@ -67,55 +67,30 @@ namespace Ads.Controllers
         {
             string type = Request.QueryString["articleType"];
             int articleType_id = _articleTypeService.getArticleType(type).Id;
-            ViewBag.marcas = new SelectList(_articleService.GetListMarca(articleType_id), "id", "name");
-            ViewBag.condiciones = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
-            ViewBag.Tipos = new SelectList(_articleService.GetListTipo(articleType_id), "id", "name");
-
+            ViewBag.marca = new SelectList(_articleService.GetListMarca(articleType_id), "id", "name");
+            ViewBag.condicion = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
+            ViewBag.Tipo = new SelectList(_articleService.GetListTipo(articleType_id), "id", "name");
             ViewBag.categoryID = Convert.ToInt32(Request.QueryString["categories"]);
             ViewBag.customerID = _customerService.getCustomerByEmail(User.Identity.Name).Id;
             return PartialView(type + "/Create");
         }
 
-        public JsonResult GetListSubtypeByCategory(int id)
+        public ActionResult Auto(int id)
         {
-            return Json(_articleService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
+            var ads = _articleService.getAuto(id);
+            return View("Auto/View", ads);
         }
 
-        public JsonResult GetListModeloByMarca(int id)
+        public ActionResult Moto(int id)
         {
-            return Json(_articleService.GetListModeloByMarca(id), JsonRequestBehavior.AllowGet);
+            var ads = _articleService.Get(id);
+            return View(ads);
         }
 
-        public JsonResult GetListArticleTypeByCategory(int id)
+        public ActionResult Camion(int id)
         {
-            return Json(_articleService.GetListArticleTypeByCategory(id), JsonRequestBehavior.AllowGet);
-        }
-
-        public int deleteArticle(int id)
-        {
-            return _articleService.deleteArticle(id);
-        }
-
-        private void addResources(int articleID, HttpPostedFileBase[] files)
-        {
-            foreach (var file in files)
-            {
-                if (file != null && file.ContentLength > 0)
-                {
-                    var filename = Path.GetFileName(file.FileName);
-                    var res = new ResourceViewModel
-                    {
-                        article_id = articleID,
-                        path = filename,
-                        type = file.ContentType
-                    };
-                    var directory = Path.Combine(Server.MapPath("~/resources"), "resource_" + articleID);
-                    Directory.CreateDirectory(directory);
-                    var path_file = directory + "/" + filename;
-                    file.SaveAs(path_file);
-                    _resourceService.Create(res);
-                }
-            }
+            var ads = _articleService.Get(id);
+            return View(ads);
         }
 
         [HttpPost]
@@ -148,6 +123,64 @@ namespace Ads.Controllers
                 addResources(article_id, files);
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateCamion(CamionViewModel model, HttpPostedFileBase[] files)
+        {
+            if (ModelState.IsValid)
+            {
+                var customer = _customerService.getCustomerById(model.customer_id);
+                if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
+                Mapper.CreateMap<CamionViewModel, camion>();
+                camion entity = Mapper.Map<CamionViewModel, camion>(model);
+                var article_id = _articleService.Create(entity);
+                addResources(article_id, files);
+            }
+            return RedirectToAction("Index");
+        }
+
+        private int addResources(int articleID, HttpPostedFileBase[] files)
+        {
+            int rows_affected = 0;
+            foreach (var file in files)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    var filename = Path.GetFileName(file.FileName);
+                    var res = new ResourceViewModel
+                    {
+                        article_id = articleID,
+                        path = filename,
+                        type = file.ContentType
+                    };
+                    var directory = Path.Combine(Server.MapPath("~/resources"), "resource_" + articleID);
+                    Directory.CreateDirectory(directory);
+                    var path_file = directory + "/" + filename;
+                    file.SaveAs(path_file);
+                    rows_affected += _resourceService.Create(res);
+                }
+            }
+            return rows_affected;
+        }
+
+        public JsonResult GetListSubtypeByCategory(int id)
+        {
+            return Json(_articleService.GetListSubtypeByCategoryAsJson(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListModeloByMarca(int id)
+        {
+            return Json(_articleService.GetListModeloByMarca(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListArticleTypeByCategory(int id)
+        {
+            return Json(_articleService.GetListArticleTypeByCategory(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public int deleteArticle(int id)
+        {
+            return _articleService.deleteArticle(id);
         }
 
         // GET: Advertising/Edit/5

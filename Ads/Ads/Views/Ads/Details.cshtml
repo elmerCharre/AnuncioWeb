@@ -10,18 +10,18 @@
     @*<h4>Detalle del Anuncio</h4>*@
     <hr />
     <div id="carousel">
-        @foreach (var item in Model.resource)
+        @foreach (var item in Model.resources)
         {
-            <img src="@Url.Content("/resources/resource_" + item.advertising_id + "/" + item.path)" style="max-width: 550px;" />
+            <img src="@Url.Content("/resources/resource_" + item.Id + "/" + item.path)" style="max-width: 550px;" />
         }
     </div>
     <br>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.category_id)
+            @Html.DisplayNameFor(model => model.ca)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.category_name)
+            @Html.DisplayFor(model => model.)
         </dd>
 
         <dt>

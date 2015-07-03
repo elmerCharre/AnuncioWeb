@@ -49,7 +49,7 @@
             <div class="form-group" ng-controller="typeController">
                 @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("marcas", null, htmlAttributes: new { @class = "form-control", @ng_model = "test", @ng_change = "test()" })
+                    @Html.DropDownList("marca", null, htmlAttributes: new { @class = "form-control", @ng_model = "test", @ng_change = "test()" })
                     @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("tipos", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("tipo", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -100,7 +100,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.condicion, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("condiciones", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("condicion", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.condicion, "", new { @class = "text-danger" })
                 </div>
             </div>

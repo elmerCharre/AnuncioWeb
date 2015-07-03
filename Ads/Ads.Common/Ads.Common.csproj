@@ -60,6 +60,7 @@
     <Compile Include="ViewModels\OfertaEmpleoViewModel.cs" />
     <Compile Include="ViewModels\ResourceViewModel.cs" />
     <Compile Include="ViewModels\TipoViewModel.cs" />
+    <Compile Include="ViewModels\VehiculoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ads.Dominio\Ads.Dominio.csproj">

@@ -10760,8 +10760,7 @@ img.rsImg {
     border-radius: 3px;
     border-style: solid;
     border-width: 1px;
-    padding: 15px 20px;
-    position: relative;
+    padding: 20px 20px;
 }
 
     #item-contact-form:after, #item-contact-form:before {
@@ -10811,7 +10810,7 @@ img.rsImg {
         }
 
         #item-contact-form .user-info p.user-name {
-            padding-left: 30px;
+            padding-left: 40px;
             position: relative;
         }
 
@@ -10823,6 +10822,7 @@ img.rsImg {
 
         #item-contact-form .user-info p.user-phone {
             font-size: 1.428571428571429rem;
+            margin: 10px;
         }
 
         #item-contact-form .user-info p.hint {
@@ -10859,10 +10859,6 @@ img.rsImg {
         height: 80px;
     }
 
-    #item-contact-form form input[type="text"] {
-        height: 20px;
-    }
-
     #item-contact-form form textarea, #item-contact-form form input[type="text"] {
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
@@ -10871,7 +10867,9 @@ img.rsImg {
         font-size: 1rem;
         padding: 10px;
         resize: none;
-        width: 92%;
+        width: 310px;
+        font-weight: normal;
+        max-width: initial;
     }
 
     #item-contact-form form input[type="submit"] {
@@ -10890,7 +10888,8 @@ img.rsImg {
         text-align: center;
         text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
         font-size: 1.428571428571429rem;
-        width: 100%;
+        width: 310px;
+        max-width: initial;
     }
 
         #item-contact-form form input[type="submit"]:hover {
@@ -11788,10 +11787,6 @@ img.rsImg {
         .item-price p:first-child {
             font-size: 2.285714285714286rem;
             font-weight: bold;
-        }
-
-        .item-price p:only-child {
-            margin-top: 11px;
         }
 
 .price-type {

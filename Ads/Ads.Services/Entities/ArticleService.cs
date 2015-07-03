@@ -5,6 +5,7 @@ using Ads.Common.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Web;
+using AutoMapper;
 
 namespace Ads.Services.Entities
 {
@@ -48,10 +49,17 @@ namespace Ads.Services.Entities
             return AdvertisingLists.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
 
-        public IEnumerable<AutoViewModel> getListAuto()
+        public AutoViewModel getAuto(int id)
         {
-            var articles = _articleRepository.Get().OfType<auto>().ToList();
-            return articles.Select(auto => new AutoViewModel(auto)).ToList();
+            var article = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<auto, auto>();
+            var entity = Mapper.Map<auto>(article);
+            var model = new AutoViewModel(entity);
+            model.marca_name = _marcaRepository.Get().FirstOrDefault(x => x.Id == model.marca).name;
+            model.modelo_name = _modeloRepository.Get().FirstOrDefault(x => x.Id == model.modelo).name;
+            model.tipo_name = _tipoRepository.Get().FirstOrDefault(x => x.Id == model.tipo).name;
+            model.condicion_name = _conditionRepository.Get().FirstOrDefault(x => x.Id == model.condicion).name;
+            return model;
         }
 
         public IEnumerable<CategoryViewModel> getListCategories()
@@ -88,14 +96,9 @@ namespace Ads.Services.Entities
 
         public ArticleViewModel Get(int id)
         {
-            var AdsList = _articleRepository.Get().FirstOrDefault(x => x.Id == id);
-            if (AdsList == null) throw new InvalidOperationException("Anuncio no encontrado");
-                        
-            return new ArticleViewModel 
-            {
-                id = AdsList.Id,
-                resources = AdsList.resources.Where(x => x.article_id == AdsList.Id).ToList()
-            };
+            var article = _articleRepository.Get().FirstOrDefault(x => x.Id == id);
+            if (article == null) throw new InvalidOperationException("Anuncio no encontrado");
+            return new ArticleViewModel(article);
         }
 
         public IEnumerable<categories> GetListCategory()

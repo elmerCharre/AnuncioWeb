@@ -15,7 +15,7 @@ namespace Ads.Services.Entities
             _resourceRepository = resourceRepository;
         }
 
-        public void Create(ResourceViewModel resourceRepository)
+        public int Create(ResourceViewModel resourceRepository)
         {
             var res = new resources
             {
@@ -23,7 +23,7 @@ namespace Ads.Services.Entities
                 path = resourceRepository.path,
                 type = resourceRepository.type
             };
-            _resourceRepository.Create(res);
+            return _resourceRepository.Create(res);
         }
 
         public void Dispose()

@@ -203,7 +203,7 @@ namespace Ads.Services.Entities
 
         public IEnumerable<ArticleViewModel> getArticles(int page_number)
         {
-            var articles = _articleRepository.Get().OrderByDescending(x => x.Id).Skip(page_number).Take(10).ToList();
+            var articles = _articleRepository.Get().OrderByDescending(x => x.Id).Skip(page_number).Take(50).ToList();
             return articles.Select(article => new ArticleViewModel(article)).ToList();
         }
 

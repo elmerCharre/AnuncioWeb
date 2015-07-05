@@ -58,24 +58,6 @@
         </ul>
     </main>
 
-    <div id="items-pagination">
-        <ul class="items-paginations-numbers">
-            <li>
-                <a href="/Ads/Index/@(((ViewBag.CurrentRow < 2) ? 2 : ViewBag.CurrentRow) - 1)" rel="prev" class="icons pagination-arrow icon-arrow-left"></a>
-            </li>
-            <li class="current">
-                @ViewBag.Rows @Html.Raw("Rows")
-            </li>
-            <!--li>
-                <a href="/Ads/Index/2" class="pagination-number">2</a>
-            </li-->
-            <li>
-                @{ float total = (ViewBag.Rows / 10); }
-                <a href="/Ads/Index/@(((ViewBag.CurrentRow >= ViewBag.Rows) ? (ViewBag.Rows - 1) : (total > 1 ? total : 0)) + 1)" rel="next" class="icons pagination-arrow icon-arrow-right "></a>
-            </li>
-        </ul>
-    </div>
-
     <div class="modal fade" id="modal-popup" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

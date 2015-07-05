@@ -317,6 +317,7 @@
     <Content Include="Views\Ads\depa_alquiler\Edit.cshtml" />
     <Content Include="Views\Ads\oferta\Create.cshtml" />
     <Content Include="Views\Ads\oferta\View.cshtml" />
+    <Content Include="Views\Ads\oferta\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

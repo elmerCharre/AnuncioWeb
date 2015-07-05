@@ -1,11 +1,11 @@
-﻿@model Ads.Common.ViewModels.MotoViewModel
+﻿@model Ads.Common.ViewModels.OfertaEmpleoViewModel
 
 <h2>Actualizar información de Anuncio</h2>
 
-@using (Html.BeginForm("EditAuto", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("EditAlquiler", "Ads", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal" ng-app="myAds" ng-cloak ng-controller="myAdsController">
+    <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
@@ -43,60 +43,66 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.opcion_empleo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                @Html.DropDownList("opcion_empleo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.opcion_empleo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.compania, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("marca", null, htmlAttributes: new { @class = "form-control", @ng_model = "marca", @ng_init = "marca=" + @Model.marca, @ng_change = "getModelosByMarca()" })
-                @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.compania, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.compania, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tiempo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control" id="modelo" name="modelo">
-                    <option ng-repeat="item in modelos" value="{{item.Id}}">{{item.Name}}</option>
-                </select>
-                @Html.ValidationMessageFor(model => model.modelo, "", new { @class = "text-danger" })
+                @Html.DropDownList("tiempo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.tiempo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.anio, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.experiencia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.anio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.anio, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.experiencia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.experiencia, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.kilometraje, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.pago, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.kilometraje, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kilometraje, "", new { @class = "text-danger" })
+                @Html.DropDownList("pago", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.pago, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.vin, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.salario, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.vin, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.vin, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.salario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.salario, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.condicion, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("condicion", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.condicion, "", new { @class = "text-danger" })
+                @Html.DropDownList("tipo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Imágenes", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" class="form-control" name="files" multiple />
+                <!--div id="dragandrophandler"></!--div-->
             </div>
         </div>
 

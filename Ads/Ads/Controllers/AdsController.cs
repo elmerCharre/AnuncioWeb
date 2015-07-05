@@ -44,11 +44,8 @@ namespace Ads.Controllers
             return View("Messages", messages);
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 1)
         {
-            ViewBag.Rows = _articleService.getRows();
-            id = (id < 1) ? 1 : ((id >= ViewBag.Rows) ? ViewBag.Rows : id);
-            ViewBag.CurrentRow = id;
             var articles = _articleService.getArticles(id - 1);
             ViewBag.CustomerId = (User.Identity.IsAuthenticated) ? _customerService.getCustomerByEmail(User.Identity.Name).Id : 0;
             return View(articles);
@@ -56,7 +53,6 @@ namespace Ads.Controllers
 
         public ActionResult Category(int id)
         {
-            ViewBag.Rows = _articleService.getRows();
             var articles = _articleService.getArticlesByCategory(id);
             ViewBag.CustomerId = (User.Identity.IsAuthenticated) ? _customerService.getCustomerByEmail(User.Identity.Name).Id : 0;
             return View("Index", articles);
@@ -162,7 +158,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return model(article_id);
+            return RedirectToAction("model", new { id = article_id });
         }
 
         [HttpPost]
@@ -176,7 +172,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(Vmodel.id, files);
             }
-            return model(Vmodel.id);
+            return RedirectToAction("model", new { id = Vmodel.id });
         }
 
         /* Methods for Auto Model */
@@ -202,7 +198,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return auto(article_id);
+            return RedirectToAction("auto", new { id = article_id });
         }
 
         [HttpPost]
@@ -216,7 +212,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return auto(model.id);
+            return RedirectToAction("auto", new { id = model.id });
         }
 
         /* Methods for Moto Model */
@@ -242,7 +238,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return moto(article_id);
+            return RedirectToAction("moto", new { id = article_id });
         }
 
         [HttpPost]
@@ -256,7 +252,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return moto(model.id);
+            return RedirectToAction("moto", new { id = model.id });
         }
 
         /* Methods for Camion Model */
@@ -282,7 +278,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return camion(article_id);
+            return RedirectToAction("camion", new { id = article_id });
         }
 
         [HttpPost]
@@ -296,7 +292,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return camion(model.id);
+            return RedirectToAction("camion", new { id = model.id });
         }
 
         /* Methods for Depa Alquiler Model */
@@ -322,7 +318,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return depa_alquiler(article_id);
+            return RedirectToAction("depa_alquiler", new { id = article_id });
         }
 
         [HttpPost]
@@ -336,7 +332,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return depa_alquiler(model.id);
+            return RedirectToAction("depa_alquiler", new { id = model.id });
         }
 
         /* Methods for Empleo Oferta Model */
@@ -366,7 +362,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return oferta(article_id);
+            return RedirectToAction("oferta", new { id = article_id });
         }
 
         [HttpPost]
@@ -380,7 +376,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return oferta(model.id);
+            return RedirectToAction("oferta", new { id = model.id });
         }
 
 

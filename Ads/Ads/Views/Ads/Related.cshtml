@@ -1,0 +1,32 @@
+﻿<div id="relateds">
+    <div class="samurai-suggestions">
+        <h2>Anuncios Relacionados</h2>
+        <div class="samurai-related">
+            <ul class="samurai-items">
+
+                @foreach (var article in ViewBag.related)
+                {
+                    string path = "/Ads/" + article.articleType + "/" + article.id;
+                    <li class="samurai-item">
+                        @foreach (var image in article.resources)
+                        {
+                            <a href="@path" title="" class="samurai-image">
+                                <img alt="" src="@Url.Content("/resources/resource_" + image.article_id + "/" + image.path)" class="img-thumbnail">
+                            </a>
+                            break;
+                        }
+                        <a href="@path" title="">
+                            <span class="title">@article.title</span>
+                        </a>
+                        <a href="@path" title="">
+                            <span class="price">$@article.price USD</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <br class="clear">
+</div>

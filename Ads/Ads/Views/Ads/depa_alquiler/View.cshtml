@@ -1,0 +1,95 @@
+﻿@model Ads.Common.ViewModels.DepartamentoAlquilerViewModel
+
+@Html.Partial("../Ads/Search")
+
+<section id="item-page" class="dl-horizontal">
+    <div class="col-md-8">
+        <article id="item-content">
+            <div>
+                <h2 class="item-title">@Html.DisplayFor(model => model.title)</h2>
+                <ul id="item-info" class="item-info">
+                    <li class="icons icon-time">Publicado: <time>@String.Format("{0:D}", Model.date), @String.Format("{0:t}", Model.date)</time></li>
+                </ul>
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            int iterator = 0;
+                            string active = "active";
+                        }
+                        @foreach (var image in Model.resources)
+                        {
+                            if (iterator > 0)
+                            {
+                                active = "";
+                            }
+                            iterator++;
+                            <div class="item @active">
+                                <img src="@Url.Content("/resources/resource_" + image.article_id + "/" + image.path)" />
+                            </div>
+                        }
+                    </div>
+
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div id="item-description" class="item-description">
+                    <h3 class="description-title">Detalles del anuncio</h3>
+                    <div class="text with-optionals">
+                        @Html.DisplayFor(model => model.detail)
+                    </div>
+                    <ul class="optionals">
+                        <li>
+                            <strong>@Html.DisplayNameFor(model => model.amueblado)</strong>
+                            <span>@Html.DisplayFor(model => model.amueblado_name)</span>
+                        </li>
+                        <li>
+                            <strong>@Html.DisplayNameFor(model => model.cuartos)</strong>
+                            <span>@Html.DisplayFor(model => model.cuartos)</span>
+                        </li>
+                        <li>
+                            <strong>@Html.DisplayNameFor(model => model.cuartos_banio)</strong>
+                            <span>@Html.DisplayFor(model => model.cuartos_banio)</span>
+                        </li>
+                        <li>
+                            <strong>@Html.DisplayNameFor(model => model.comision)</strong>
+                            <span>@Html.DisplayFor(model => model.comision_name)</span>
+                        </li>
+                        <li>
+                            <strong>@Html.DisplayNameFor(model => model.metros)</strong>
+                            <span>@Html.DisplayFor(model => model.metros)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            @{ ViewBag.Title = Model.title; }
+            @Html.Partial("Social")
+
+
+        </article>
+
+        @Html.Partial("Related")
+
+    </div>
+
+    <aside class="col-md-4">
+        <div id="item-price" class="item-price">
+            <p class="price">$@Html.DisplayFor(model => model.price) USD</p>
+        </div>
+
+        @Html.Partial("Contact", new Ads.Common.ViewModels.ContactViewModel { article_id = Model.id })
+
+    </aside>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/democarousel")
+}

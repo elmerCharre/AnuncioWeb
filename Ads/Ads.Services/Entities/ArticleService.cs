@@ -67,9 +67,9 @@ namespace Ads.Services.Entities
             return new ArticleViewModel(entity);
         }
 
-        public IEnumerable<ArticleViewModel> getModels(int limit = 10)
+        public IEnumerable<ArticleViewModel> getModels(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<model>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            var entities = _articleRepository.Get().OfType<model>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
             return entities.Select(entity => new ArticleViewModel(entity)).ToList(); ;
         }
 
@@ -87,10 +87,10 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<AutoViewModel> getAutos(int limit = 10)
+        public IEnumerable<AutoViewModel> getAutos(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<auto>().OrderByDescending(x => x.Id).Take(limit).ToList();
-            return entities.Select(entity => new AutoViewModel(entity)).ToList(); ;
+            var entities = _articleRepository.Get().OfType<auto>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new AutoViewModel(entity)).ToList();
         }
 
         /* Methods for Moto Model */
@@ -106,9 +106,9 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<MotoViewModel> getMotos(int limit = 10)
+        public IEnumerable<MotoViewModel> getMotos(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<moto>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            var entities = _articleRepository.Get().OfType<moto>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
             return entities.Select(entity => new MotoViewModel(entity)).ToList(); ;
         }
 
@@ -124,9 +124,9 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<CamionViewModel> getCamiones(int limit = 10)
+        public IEnumerable<CamionViewModel> getCamiones(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<camion>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            var entities = _articleRepository.Get().OfType<camion>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
             return entities.Select(entity => new CamionViewModel(entity)).ToList(); ;
         }
 
@@ -142,9 +142,9 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<DepartamentoAlquilerViewModel> getDepaAlquileres(int limit = 10)
+        public IEnumerable<DepartamentoAlquilerViewModel> getDepaAlquileres(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<depa_alquiler>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            var entities = _articleRepository.Get().OfType<depa_alquiler>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
             return entities.Select(entity => new DepartamentoAlquilerViewModel(entity)).ToList(); ;
         }
 
@@ -159,9 +159,9 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<OfertaEmpleoViewModel> getEmpleoOfertas(int limit = 10)
+        public IEnumerable<OfertaEmpleoViewModel> getEmpleoOfertas(int limit = 10, int exclude_id = 0)
         {
-            var entities = _articleRepository.Get().OfType<oferta>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            var entities = _articleRepository.Get().OfType<oferta>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).ToList();
             return entities.Select(entity => new OfertaEmpleoViewModel(entity)).ToList(); ;
         }
 

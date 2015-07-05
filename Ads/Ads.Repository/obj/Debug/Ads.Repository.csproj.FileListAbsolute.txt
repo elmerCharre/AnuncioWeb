@@ -24,3 +24,5 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.Migrations.App
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csproj.GenerateResource.Cache
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
+E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.Migrations.App.resources
+E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csproj.GenerateResource.Cache

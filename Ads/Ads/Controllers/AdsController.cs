@@ -56,6 +56,7 @@ namespace Ads.Controllers
 
         public ActionResult Category(int id)
         {
+            ViewBag.Rows = _articleService.getRows();
             var articles = _articleService.getArticlesByCategory(id);
             ViewBag.CustomerId = (User.Identity.IsAuthenticated) ? _customerService.getCustomerByEmail(User.Identity.Name).Id : 0;
             return View("Index", articles);
@@ -142,7 +143,7 @@ namespace Ads.Controllers
         public ActionResult model(int id)
         {
             var ads = _articleService.getModel(id);
-            ViewBag.related = _articleService.getModels(10);
+            ViewBag.related = _articleService.getModels(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("model/View", ads);
         }
@@ -182,7 +183,7 @@ namespace Ads.Controllers
         public ActionResult auto(int id)
         {
             var ads = _articleService.getAuto(id);
-            ViewBag.related = _articleService.getAutos(10);
+            ViewBag.related = _articleService.getAutos(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("auto/View", ads);
         }
@@ -222,7 +223,7 @@ namespace Ads.Controllers
         public ActionResult moto(int id)
         {
             var ads = _articleService.getMoto(id);
-            ViewBag.related = _articleService.getMotos(10);
+            ViewBag.related = _articleService.getMotos(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("moto/View", ads);
         }
@@ -262,7 +263,7 @@ namespace Ads.Controllers
         public ActionResult camion(int id)
         {
             var ads = _articleService.getCamion(id);
-            ViewBag.related = _articleService.getCamiones(10);
+            ViewBag.related = _articleService.getCamiones(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("camion/View", ads);
         }
@@ -302,7 +303,7 @@ namespace Ads.Controllers
         public ActionResult depa_alquiler(int id)
         {
             var ads = _articleService.getDepaAlquiler(id);
-            ViewBag.related = _articleService.getDepaAlquileres(10);
+            ViewBag.related = _articleService.getDepaAlquileres(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("depa_alquiler/View", ads);
         }
@@ -342,7 +343,7 @@ namespace Ads.Controllers
         public ActionResult oferta(int id)
         {
             var ads = _articleService.getEmpleoOferta(id);
-            ViewBag.related = _articleService.getEmpleoOfertas(10);
+            ViewBag.related = _articleService.getEmpleoOfertas(10, id);
             var helper = new Helpers.HelperAds();
             ads.opcion_name = helper.GetOpcionEmpleo(ads.opcion_empleo);
             ads.tiempo_name = helper.GetTiempoEmpleo(ads.tiempo);

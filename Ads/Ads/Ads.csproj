@@ -182,6 +182,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdsController.cs" />
+    <Compile Include="Controllers\ArticulosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -324,6 +325,7 @@
     <Folder Include="resources\" />
     <Folder Include="Views\Ads\depa_venta\" />
     <Folder Include="Views\Ads\temp_alquiler\" />
+    <Folder Include="Views\Articulos\" />
     <Folder Include="Views\Vehiculos\" />
   </ItemGroup>
   <ItemGroup>

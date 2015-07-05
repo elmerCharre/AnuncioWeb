@@ -11,6 +11,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using System.Linq;
 using AutoMapper;
+using Ads.Services;
 
 namespace Ads.Controllers
 {
@@ -22,7 +23,7 @@ namespace Ads.Controllers
         private CustomerService _customerService;
 
         public AdsController(ArticleService articleService, ArticleTypeService articleTypeService,
-            ResourceService resourceService, CustomerService customerService)
+            ResourceService resourceService, CustomerService customerService, IList<IBuilder<ArticleViewModel>> builders)
         {
             _articleService = articleService;
             _articleTypeService = articleTypeService;
@@ -67,35 +68,23 @@ namespace Ads.Controllers
 
         public ActionResult CreateModel()
         {
-            string type = Request.QueryString["articleType"];
-            int articleType_id = _articleTypeService.getArticleType(type).Id;
-            switch (type)
+            var tipo = Request.QueryString["articleType"];
+            var modelo = crear(tipo);
+            return PartialView(tipo + "/Create", modelo);
+        }
+
+        private ArticleViewModel crear(string type)
+        {
+            ArticleViewModel modelo;
+
+            foreach(var builder in builders)
             {
-                case "auto":
-                case "moto":
-                case "camion":
-                    ViewBag.marca = new SelectList(_articleService.GetListMarca(articleType_id), "id", "name");
-                    ViewBag.condicion = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
-                    ViewBag.tipo = new SelectList(_articleService.GetListTipo(articleType_id), "id", "name");
-                    break;
-                case "depa_venta":
-                case "depa_alquiler":
-                case "temp_alquiler":
-                    ViewBag.amueblado = ViewBag.comision = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
-                    break;
-                case "oferta":
-                case "busqueda":
-                    var helper = new Helpers.HelperAds();
-                    ViewBag.opcion_empleo = new SelectList(helper.GetListOpcionEmpleo(), "Id", "Name");
-                    ViewBag.tiempo = new SelectList(helper.GetListTiempoEmpleo(), "Id", "Name");
-                    ViewBag.pago = new SelectList(helper.GetListPagoEmpleo(), "Id", "Name");
-                    ViewBag.tipo = new SelectList(_articleService.GetListTipo(articleType_id), "Id", "Name");
-                    break;
+                if (builder.EsAplicableA(type)) return builder.Build();
+
             }
-            
-            ViewBag.categoryID = Convert.ToInt32(Request.QueryString["categories"]);
-            ViewBag.customerID = _customerService.getCustomerByEmail(User.Identity.Name).Id;
-            return PartialView(type + "/Create");
+            return null;
+
+            return modelo;
         }
 
         public ActionResult Edit(int id)

@@ -24,6 +24,7 @@ namespace Ads.Common.ViewModels
             this.category_Id = article.category_Id;
             this.customer_id = article.customer_id;
             this.resources = article.resources;
+            this.contacts = article.contacts;
             this.articleType = article.GetType().BaseType.Name;
         }
 
@@ -47,6 +48,8 @@ namespace Ads.Common.ViewModels
         public DateTime date { get; set; }
 
         public ICollection<resources> resources { get; set; }
+
+        public ICollection<contacts> contacts { get; set; }
         
         public string articleType { get; set; }
     }

@@ -9539,12 +9539,13 @@ img.rsImg {
     }
 
     #relateds .samurai-items .samurai-item {
-        border: 1px solid #fafafa;
+        border: 1px solid #ccc;
         float: left;
-        height: 250px;
         padding: 10px;
         position: relative;
-        width: 198px;
+        margin-right: 15px;
+        max-width: 220px;
+        margin-bottom: 15px;
     }
 
         #relateds .samurai-items .samurai-item:hover {
@@ -9576,7 +9577,6 @@ img.rsImg {
         }
 
         #relateds .samurai-items .samurai-item .samurai-image {
-            border: 1px solid #ccc;
             height: 161px;
             position: relative;
             width: 198px;
@@ -10340,7 +10340,7 @@ img.rsImg {
             }
 
             .item-description .optionals li span {
-                font-size: .857142857142857rem;
+                font-size: 15px;
                 float: right;
             }
 
@@ -10859,7 +10859,8 @@ img.rsImg {
         height: 80px;
     }
 
-    #item-contact-form form textarea, #item-contact-form form input[type="text"] {
+    #item-contact-form form textarea, #item-contact-form form input[type="text"],
+    #item-contact-form form input[type="email"] {
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
@@ -11599,138 +11600,138 @@ img.rsImg {
                 text-transform: capitalize;
             }
 
-            .description {
-                color: #999;
-                font-size: 15px !important;
-                text-transform: capitalize;
-            }
+.description {
+    color: #999;
+    font-size: 15px !important;
+    text-transform: capitalize;
+}
 
-        .items-list .item .items-price {
-            color: #000;
-            font-size: 1.142857142857143rem;
-            font-weight: bold;
-            width: 140px;
-        }
+.items-list .item .items-price {
+    color: #000;
+    font-size: 1.142857142857143rem;
+    font-weight: bold;
+    width: 140px;
+}
 
-        .items-list .item .items-date {
-            color: #999;
-            font-size: .857142857142857rem;
-            width: 155px;
-        }
+.items-list .item .items-date {
+    color: #999;
+    font-size: .857142857142857rem;
+    width: 155px;
+}
 
-        .items-list .item .items-price, .items-list .item .items-date {
-            margin: 0;
-            padding-top: 10px;
-        }
+.items-list .item .items-price, .items-list .item .items-date {
+    margin: 0;
+    padding-top: 10px;
+}
 
-        .items-list .item p.featuredad .icon-star-circle {
-            color: #890;
-        }
+.items-list .item p.featuredad .icon-star-circle {
+    color: #890;
+}
 
-        .items-list .item p.featuredad i:before {
-            background: #fff;
-        }
+.items-list .item p.featuredad i:before {
+    background: #fff;
+}
 
-        .items-list .item p.featuredad em {
-            background: #ab0;
-            color: #fff;
-            font-size: 10px;
-            font-weight: bold;
-            left: 0;
-            padding: 0 20px 0 30px;
-            position: absolute;
-            height: 20px;
-            line-height: 20px;
-            text-transform: uppercase;
-            font-style: normal;
-        }
+.items-list .item p.featuredad em {
+    background: #ab0;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    left: 0;
+    padding: 0 20px 0 30px;
+    position: absolute;
+    height: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-style: normal;
+}
 
-            .items-list .item p.featuredad em:after {
-                border-color: #ab0 transparent #ab0 #ab0;
-                border-style: solid;
-                border-width: 10px;
-                bottom: 0;
-                content: " ";
-                height: 0;
-                position: absolute;
-                right: -10px;
-                width: 0;
-            }
-
-        .items-list .item p.soldad .icon-check-round {
-            color: #ec0;
-        }
-
-        .items-list .item p.soldad i:before {
-            background: #fff;
-        }
-
-        .items-list .item p.soldad em {
-            background: #ec0;
-            color: #fff;
-            font-size: 10px;
-            font-weight: bold;
-            left: 0;
-            padding: 0 20px 0 30px;
-            position: absolute;
-            height: 20px;
-            line-height: 20px;
-            text-transform: uppercase;
-            font-style: normal;
-        }
-
-            .items-list .item p.soldad em:after {
-                border-color: #ec0 transparent #ec0 #ec0;
-                border-style: solid;
-                border-width: 10px;
-                bottom: 0;
-                content: " ";
-                height: 0;
-                position: absolute;
-                right: -10px;
-                width: 0;
-            }
-
-        .items-list .item p.soldad, .items-list .item p.featuredad {
-            height: 20px;
-            left: 138px;
-            position: absolute;
-            top: -3px;
-        }
-
-            .items-list .item p.soldad i, .items-list .item p.featuredad i {
-                background: #fff;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
-                border-radius: 50%;
-                font-size: 26px;
-                left: 0;
-                position: absolute;
-                top: -7px;
-                z-index: 10;
-            }
-
-                .items-list .item p.soldad i:before, .items-list .item p.featuredad i:before {
-                    border: 2px solid #fff;
-                    -webkit-border-radius: 50%;
-                    -moz-border-radius: 50%;
-                    border-radius: 50%;
-                }
-
-            .items-list .item p.soldad em, .items-list .item p.featuredad em {
-                left: 24px;
-                padding-left: 22px;
-                position: absolute;
-                text-align: center;
-                top: 0;
-                width: 120px;
-            }
-
-    .items-list.staticsearch a .description {
-        color: #000;
-        font-size: 1rem;
-        padding: .5rem 0;
+    .items-list .item p.featuredad em:after {
+        border-color: #ab0 transparent #ab0 #ab0;
+        border-style: solid;
+        border-width: 10px;
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: -10px;
+        width: 0;
     }
+
+.items-list .item p.soldad .icon-check-round {
+    color: #ec0;
+}
+
+.items-list .item p.soldad i:before {
+    background: #fff;
+}
+
+.items-list .item p.soldad em {
+    background: #ec0;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    left: 0;
+    padding: 0 20px 0 30px;
+    position: absolute;
+    height: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-style: normal;
+}
+
+    .items-list .item p.soldad em:after {
+        border-color: #ec0 transparent #ec0 #ec0;
+        border-style: solid;
+        border-width: 10px;
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: -10px;
+        width: 0;
+    }
+
+.items-list .item p.soldad, .items-list .item p.featuredad {
+    height: 20px;
+    left: 138px;
+    position: absolute;
+    top: -3px;
+}
+
+    .items-list .item p.soldad i, .items-list .item p.featuredad i {
+        background: #fff;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        font-size: 26px;
+        left: 0;
+        position: absolute;
+        top: -7px;
+        z-index: 10;
+    }
+
+        .items-list .item p.soldad i:before, .items-list .item p.featuredad i:before {
+            border: 2px solid #fff;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+    .items-list .item p.soldad em, .items-list .item p.featuredad em {
+        left: 24px;
+        padding-left: 22px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 120px;
+    }
+
+.items-list.staticsearch a .description {
+    color: #000;
+    font-size: 1rem;
+    padding: .5rem 0;
+}
 
 .noresults {
     background: #ffc;

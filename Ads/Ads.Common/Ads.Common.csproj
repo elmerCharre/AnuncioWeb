@@ -50,6 +50,7 @@
     <Compile Include="ViewModels\CamionViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\ConditionViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\DepartamentoAlquilerViewModel.cs" />
     <Compile Include="ViewModels\DepartamentoVentaViewModel.cs" />

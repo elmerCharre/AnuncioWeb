@@ -53,13 +53,14 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="ConditionRepository.cs" />
+    <Compile Include="ContactRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="DbAdsContext.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="MarcaRepository.cs" />
-    <Compile Include="Migrations\201507020220067_App.cs" />
-    <Compile Include="Migrations\201507020220067_App.Designer.cs">
-      <DependentUpon>201507020220067_App.cs</DependentUpon>
+    <Compile Include="Migrations\201507040432134_App.cs" />
+    <Compile Include="Migrations\201507040432134_App.Designer.cs">
+      <DependentUpon>201507040432134_App.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModeloRepository.cs" />
@@ -85,8 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507020220067_App.resx">
-      <DependentUpon>201507020220067_App.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507040432134_App.resx">
+      <DependentUpon>201507040432134_App.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

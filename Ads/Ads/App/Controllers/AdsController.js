@@ -41,6 +41,20 @@ app.controller('myAdsController', ['$scope', '$log', 'anuncioService', 'notifica
             });
         };
 
+        $scope.getModelosByMarcaforJquery = function () {
+            anuncioService.getModelos($scope.marca).then(function (data) {
+                $scope.modelos = data;
+                var html = '';
+                $.each($scope.modelos, function (index, value) {
+                    html += '<option value="' + value.Id + '">' + value.Name + '</option>';
+                });
+                angular.element('#modelo').html(html);
+                notificationService.success("La marca tiene modelos");
+            }, function (errorMsg) {
+                notificationService.error(errorMsg);
+            });
+        };
+
         var getArticleTypes = function (categoryId) {
             anuncioService.getArticleTypes(categoryId).then(function (data) {
                 $scope.articleTypes = data;
@@ -51,5 +65,9 @@ app.controller('myAdsController', ['$scope', '$log', 'anuncioService', 'notifica
             }, function (errorMsg) {
                 notificationService.error(errorMsg);
             });
+        };
+
+        $scope.submitContact = function () {
+            alert(1);
         };
 }]);

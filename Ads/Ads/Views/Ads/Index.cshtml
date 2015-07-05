@@ -1,43 +1,9 @@
 ﻿@model IEnumerable<Ads.Common.ViewModels.ArticleViewModel>
 
-@{
-    ViewBag.Title = "Lista de Articulos";
-}
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@Html.Partial("Search")
 
 <section id="listing-items" ng-app="myAds" ng-controller="myAdsController">
-    <nav id="items-locations" class="items-locations">
-        <ul class="locations-tabs">
-            <li>
-                Perú
-            </li>
-        </ul>
-        <div class="locations-list">
-            <ul class="visible-locations">
-                <li class="locations">
-                    <a href="http://lima.olx.com.pe/autos-cat-378" rel="nofollow">Lima <span>38.884</span></a>
-                </li>
-            </ul>
-            <div class="actions">
-                <span class="see more icons icon-arrow-down">Ver más</span>
-                <span class="see less hide icons icon-arrow-up">Ver menos</span>
-            </div>
-        </div>
-    </nav>
     <main id="items-list-view" class="items-list-view">
-        <nav id="listing-tabs" class="listing-tabs">
-            <div class="order-by">
-                <label for="order-by-select">Ordenar por:</label>
-                <select id="order-by-select" class="form-control">
-                    <option value="datedesc">Publicación reciente</option>
-                    <option value="price">Precio: primero más bajo</option>
-                    <option value="pricedesc">Precio: primero más alto</option>
-                </select>
-            </div>
-        </nav>
         <ul class="items-list">
             @foreach (var item in Model)
             {
@@ -51,24 +17,41 @@
                             }
                         </figure>
                         <div class="items-info">
-                            <h3><a href="/Ads/Auto/@item.id">@item.title</a></h3>
+                            <h3><a href="/Ads/@item.articleType/@item.id">@item.title</a></h3>
                             <span class="description">
-                                @if (item.detail.Length > 125)
-                                {
-                                    @(item.detail.Substring(0, 125) + "...");
-                                }
-                                else
-                                {
+                                @if (item.detail.Length > 152) {
+                                    @(item.detail.Substring(0, 152) + "...");
+                                } else {
                                     @item.detail;
                                 }
                             </span>
                         </div>
                         <p class="items-price">
-                            @item.price
-                            <span class="price-type">Precio USD</span>
+                            @if (!String.IsNullOrEmpty(item.price.ToString())) {
+                                @item.price;
+                                <span class="price-type">Precio USD</span>
+                            } else {
+                                @Html.Raw("");
+                            }
                         </p>
                         <p class="items-date">@String.Format("{0:D}", item.date), <br>@String.Format("{0:t}", item.date)</p>
-                        <p class="items-optional right" ng-click="ModalDelete(@item.id)">Delete</p>
+
+                        @if ((int) ViewBag.CustomerId == item.customer_id) {
+                        <button style="margin-left:30px;" class="btn btn-primary" type="button" onclick="window.open('/Ads/Message/@item.id', '_blank');">
+                            Mensajes <span class="badge" style="background-color:#fff; color:#777;">@item.contacts.Count</span>
+                        </button>
+                        <!-- Single button -->
+                        <div class="btn-group right">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Ads/Edit/@item.id">Edit</a></li>
+                                <li><a href="javascript:void(0);" ng-click="ModalDelete(@item.id)">Delete</a></li>
+                            </ul>
+                        </div>
+                        }
+
                     </div>
                 </li>
             }
@@ -78,40 +61,16 @@
     <div id="items-pagination">
         <ul class="items-paginations-numbers">
             <li>
-                <a href="#" rel="prev" class="icons pagination-arrow icon-arrow-left disable"></a>
+                <a href="/Ads/Index/@(((ViewBag.CurrentRow < 2) ? 2 : ViewBag.CurrentRow) - 1)" rel="prev" class="icons pagination-arrow icon-arrow-left"></a>
             </li>
             <li class="current">
-                1
+                @ViewBag.Rows @Html.Raw("Rows")
             </li>
+            <!--li>
+                <a href="/Ads/Index/2" class="pagination-number">2</a>
+            </li-->
             <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-2" class="pagination-number">2</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-3" class="pagination-number">3</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-4" class="pagination-number">4</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-5" class="pagination-number">5</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-6" class="pagination-number">6</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-7" class="pagination-number">7</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-8" class="pagination-number">8</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-9" class="pagination-number">9</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-10" class="pagination-number">10</a>
-            </li>
-            <li>
-                <a href="http://www.olx.com.pe/autos-cat-378-p-2" rel="next" class="icons pagination-arrow icon-arrow-right "></a>
+                <a href="/Ads/Index/@(((ViewBag.CurrentRow >= ViewBag.Rows) ? (ViewBag.Rows - 1) : ViewBag.CurrentRow) + 1)" rel="next" class="icons pagination-arrow icon-arrow-right "></a>
             </li>
         </ul>
     </div>

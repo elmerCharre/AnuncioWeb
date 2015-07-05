@@ -13,7 +13,7 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public BasicViewModel(ModelBasic entity)
+        public BasicViewModel(model entity)
         {
             this.id = entity.Id;
             this.title = entity.title;
@@ -23,6 +23,7 @@ namespace Ads.Common.ViewModels
             this.customer_id = entity.customer_id;
             this.category_Id = entity.category_Id;
             this.resources = entity.resources;
+            this.articleType = entity.GetType().BaseType.Name;
         }
     }
 }

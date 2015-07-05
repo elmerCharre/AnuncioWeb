@@ -24,6 +24,7 @@ namespace Ads.Repository
         public virtual DbSet<relationship_condition> relationship_condition { get; set; }
         public virtual DbSet<relationship_marca> relationship_marca { get; set; }
         public virtual DbSet<resources> resources { get; set; }
+        public virtual DbSet<contacts> contacts { get; set; }
         public virtual DbSet<tipos> tipos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -39,23 +40,29 @@ namespace Ads.Repository
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<articles>()
+                .HasMany(e => e.contacts)
+                .WithRequired(e => e.articles)
+                .HasForeignKey(e => e.article_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<articles>()
                 /* Vehículos */
                 .Map<moto>(x => x.Requires("Type").HasValue("moto").HasColumnType("varchar").HasMaxLength(20))
                 .Map<auto>(x => x.Requires("Type").HasValue("auto"))
                 .Map<camion>(x => x.Requires("Type").HasValue("camion"))
 
                 /* Propiedades Inmuebles */
-                .Map<departamento_venta>(x => x.Requires("Type").HasValue("depa_venta"))
-                .Map<departamento_alquiler>(x => x.Requires("Type").HasValue("depa_alquiler"))
-                .Map<vacaciones_alquiler>(x => x.Requires("Type").HasValue("temp_alquiler"))
+                .Map<depa_venta>(x => x.Requires("Type").HasValue("depa_venta"))
+                .Map<depa_alquiler>(x => x.Requires("Type").HasValue("depa_alquiler"))
+                .Map<temp_alquiler>(x => x.Requires("Type").HasValue("temp_alquiler"))
 
                 /* Empleos Servicios */
-                .Map<oferta>(x => x.Requires("Type").HasValue("oferta_empleo"))
-                .Map<busqueda>(x => x.Requires("Type").HasValue("busqueda_empleo"))
+                .Map<oferta>(x => x.Requires("Type").HasValue("oferta"))
+                .Map<busqueda>(x => x.Requires("Type").HasValue("busqueda"))
                 .Map<servicio>(x => x.Requires("Type").HasValue("servicio"))
 
                 /* Modelos Estándar */
-                .Map<ModelBasic>(x => x.Requires("Type").HasValue("model"))
+                .Map<model>(x => x.Requires("Type").HasValue("model"))
                 ;
 
             modelBuilder.Entity<articleTypes>()

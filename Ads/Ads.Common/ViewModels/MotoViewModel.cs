@@ -30,6 +30,7 @@ namespace Ads.Common.ViewModels
             this.kilometraje = entity.kilometraje;
             this.vin = entity.vin;
             this.condicion = entity.condicion;
+            this.articleType = entity.GetType().BaseType.Name;
         }
 
         public string marca_name { get; set; }

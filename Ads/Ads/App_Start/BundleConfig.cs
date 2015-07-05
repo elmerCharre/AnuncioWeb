@@ -11,6 +11,9 @@ namespace Ads
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/Ads").Include(
+                        "~/Scripts/Ads.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -27,7 +30,8 @@ namespace Ads
                         "~/Scripts/uploadFiles/uploadFiles.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/democarousel").Include(
-                        "~/Scripts/DemoCarousel.js"));
+                        "~/Scripts/DemoCarousel.js",
+                        "~/Scripts/social.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

@@ -5,11 +5,12 @@ namespace Ads.Dominio
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public abstract class articles : EntityBase
+    public class articles : EntityBase
     {
         public articles()
         {
             resources = new HashSet<resources>();
+            contacts = new HashSet<contacts>();
         }
 
         [Required]
@@ -33,6 +34,8 @@ namespace Ads.Dominio
         public virtual customers customers { get; set; }
 
         public virtual ICollection<resources> resources { get; set; }
+
+        public virtual ICollection<contacts> contacts { get; set; }
     }
 
     public class vehiculo : tipoAtributo
@@ -57,15 +60,15 @@ namespace Ads.Dominio
     {
     }
 
-    public class departamento_venta : propiedad
+    public class depa_venta : propiedad
     {
     }
 
-    public class departamento_alquiler : propiedad
+    public class depa_alquiler : propiedad
     {
     }
 
-    public class vacaciones_alquiler : propiedad
+    public class temp_alquiler : propiedad
     {
     }
 
@@ -100,7 +103,7 @@ namespace Ads.Dominio
     {
     }
 
-    public class ModelBasic : articles
+    public class model : articles
     {
     }
 

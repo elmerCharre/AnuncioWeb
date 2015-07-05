@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace Ads.Services.Entities
 {
-    public class ArticleService
+    public class ArticleService : IDisposable
     {
         private IRepository<articles> _articleRepository;
         private IRepository<articleTypes> _articleTypeRepository;
@@ -21,13 +21,14 @@ namespace Ads.Services.Entities
         private IRepository<relationship_condition> _relationConditionRepository;
         private IRepository<modelos> _modeloRepository;
         private IRepository<tipos> _tipoRepository;
+        private IRepository<contacts> _contactRepository;
 
         public ArticleService(IRepository<articles> articleRepository,
             IRepository<articleTypes> articleTypeRepository, 
             IRepository<customers> customerRepository, IRepository<categories> categoryRepository,
             IRepository<marcas> marcaRepository, IRepository<relationship_marca> relationMarcaRepository,
             IRepository<conditions> conditionRepository, IRepository<relationship_condition> relationConditionRepository,
-            IRepository<modelos> modeloRepository, IRepository<tipos> tipoRepository)
+            IRepository<modelos> modeloRepository, IRepository<tipos> tipoRepository, IRepository<contacts> contactRepository)
         {
             _articleRepository = articleRepository;
             _articleTypeRepository = articleTypeRepository;
@@ -39,6 +40,7 @@ namespace Ads.Services.Entities
             _relationConditionRepository = relationConditionRepository;
             _modeloRepository = modeloRepository;
             _tipoRepository = tipoRepository;
+            _contactRepository = contactRepository;
         }
 
         public IEnumerable<ArticleViewModel> GetListByUser(string userName)
@@ -49,6 +51,29 @@ namespace Ads.Services.Entities
             return AdvertisingLists.Select(AdsList => new ArticleViewModel(AdsList)).ToList();
         }
 
+        public int CreateContact(ContactViewModel model)
+        {
+            Mapper.CreateMap<ContactViewModel, contacts>();
+            var entity = Mapper.Map<ContactViewModel, contacts>(model);
+            return _contactRepository.Create(entity);
+        }
+
+        /* Methods for Basic Model */
+        public ArticleViewModel getModel(int id)
+        {
+            var article = _articleRepository.Get().OfType<model>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<model, model>();
+            var entity = Mapper.Map<model>(article);
+            return new ArticleViewModel(entity);
+        }
+
+        public IEnumerable<ArticleViewModel> getModels(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<model>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new ArticleViewModel(entity)).ToList(); ;
+        }
+
+        /* Methods for Auto Model */
         public AutoViewModel getAuto(int id)
         {
             var article = _articleRepository.Get().OfType<auto>().FirstOrDefault(x => x.Id == id);
@@ -62,6 +87,84 @@ namespace Ads.Services.Entities
             return model;
         }
 
+        public IEnumerable<AutoViewModel> getAutos(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<auto>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new AutoViewModel(entity)).ToList(); ;
+        }
+
+        /* Methods for Moto Model */
+        public MotoViewModel getMoto(int id)
+        {
+            var article = _articleRepository.Get().OfType<moto>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<moto, moto>();
+            var entity = Mapper.Map<moto>(article);
+            var model = new MotoViewModel(entity);
+            model.marca_name = _marcaRepository.Get().FirstOrDefault(x => x.Id == model.marca).name;
+            model.modelo_name = _modeloRepository.Get().FirstOrDefault(x => x.Id == model.modelo).name;
+            model.condicion_name = _conditionRepository.Get().FirstOrDefault(x => x.Id == model.condicion).name;
+            return model;
+        }
+
+        public IEnumerable<MotoViewModel> getMotos(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<moto>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new MotoViewModel(entity)).ToList(); ;
+        }
+
+        /* Methods for Camion Model */
+        public CamionViewModel getCamion(int id)
+        {
+            var article = _articleRepository.Get().OfType<camion>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<camion, camion>();
+            var entity = Mapper.Map<camion>(article);
+            var model = new CamionViewModel(entity);
+            model.marca_name = _marcaRepository.Get().FirstOrDefault(x => x.Id == model.marca).name;
+            model.condicion_name = _conditionRepository.Get().FirstOrDefault(x => x.Id == model.condicion).name;
+            return model;
+        }
+
+        public IEnumerable<CamionViewModel> getCamiones(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<camion>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new CamionViewModel(entity)).ToList(); ;
+        }
+
+        /* Methods for Depa Alquiler Model */
+        public DepartamentoAlquilerViewModel getDepaAlquiler(int id)
+        {
+            var article = _articleRepository.Get().OfType<depa_alquiler>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<depa_alquiler, depa_alquiler>();
+            var entity = Mapper.Map<depa_alquiler>(article);
+            var model = new DepartamentoAlquilerViewModel(entity);
+            model.amueblado_name = _conditionRepository.Get().FirstOrDefault(x => x.Id == model.amueblado).name;
+            model.comision_name = _conditionRepository.Get().FirstOrDefault(x => x.Id == model.comision).name;
+            return model;
+        }
+
+        public IEnumerable<DepartamentoAlquilerViewModel> getDepaAlquileres(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<depa_alquiler>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new DepartamentoAlquilerViewModel(entity)).ToList(); ;
+        }
+
+        /* Methods for Empleo Oferta Model */
+        public OfertaEmpleoViewModel getEmpleoOferta(int id)
+        {
+            var article = _articleRepository.Get().OfType<oferta>().FirstOrDefault(x => x.Id == id);
+            Mapper.CreateMap<oferta, oferta>();
+            var entity = Mapper.Map<oferta>(article);
+            var model = new OfertaEmpleoViewModel(entity);
+            model.tipo_name = _tipoRepository.Get().FirstOrDefault(x => x.Id == model.tipo).name;
+            return model;
+        }
+
+        public IEnumerable<OfertaEmpleoViewModel> getEmpleoOfertas(int limit = 10)
+        {
+            var entities = _articleRepository.Get().OfType<oferta>().OrderByDescending(x => x.Id).Take(limit).ToList();
+            return entities.Select(entity => new OfertaEmpleoViewModel(entity)).ToList(); ;
+        }
+
         public IEnumerable<CategoryViewModel> getListCategories()
         {
             var categories = _categoryRepository.Get().OrderBy(c => c.status).ToList();
@@ -72,6 +175,15 @@ namespace Ads.Services.Entities
         {
             _articleRepository = null;
             _customerRepository = null;
+            _articleTypeRepository = null;
+            _categoryRepository = null;
+            _conditionRepository = null;
+            _contactRepository = null;
+            _marcaRepository = null;
+            _modeloRepository = null;
+            _relationConditionRepository = null;
+            _relationMarcaRepository = null;
+            _tipoRepository = null;
         }
 
         public int Create(articles Entity)
@@ -79,25 +191,31 @@ namespace Ads.Services.Entities
             return _articleRepository.Create(Entity);
         }
 
-        public void Update(ArticleViewModel model)
+        public void Update(articles Entity)
         {
-            var customer = _customerRepository.Get().FirstOrDefault(x => x.Id == model.customer_id);
-            if (customer == null) throw new InvalidOperationException("Cliente no encontrado");
-            //var advertising = new article()
-            //{
-            //    title = model.title,
-            //    detail = model.detail,
-            //    customer_id = customer.Id,
-            //    //articleType = model.articleType,
-            //    resource = model.resource
-            //};
-            //_articleRepository.Update(advertising);
+            _articleRepository.Update(Entity);
+        }
+
+        public int getRows()
+        {
+            return _articleRepository.Get().Count();
+        }
+
+        public IEnumerable<ArticleViewModel> getArticles(int page_number)
+        {
+            var articles = _articleRepository.Get().OrderByDescending(x => x.Id).Skip(page_number).Take(10).ToList();
+            return articles.Select(article => new ArticleViewModel(article)).ToList();
+        }
+
+        public IEnumerable<ArticleViewModel> getArticlesSearch(string text)
+        {
+            var articles = _articleRepository.Get().OrderByDescending(x => x.Id).Where(x => (x.title.Contains(text) || x.detail.Contains(text))).ToList();
+            return articles.Select(article => new ArticleViewModel(article)).ToList();
         }
 
         public ArticleViewModel Get(int id)
         {
             var article = _articleRepository.Get().FirstOrDefault(x => x.Id == id);
-            if (article == null) throw new InvalidOperationException("Anuncio no encontrado");
             return new ArticleViewModel(article);
         }
 
@@ -181,6 +299,12 @@ namespace Ads.Services.Entities
         public int CreateModel(articles entity)
         {
             return _articleRepository.Create(entity);
+        }
+
+        public IEnumerable<ContactViewModel> getMessages(int article_id)
+        {
+            var messages =  _contactRepository.Get().Where(r => r.article_id == article_id).ToList();
+            return messages.Select(message => new ContactViewModel(message)).ToList();
         }
     }
 }

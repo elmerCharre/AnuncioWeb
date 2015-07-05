@@ -32,5 +32,10 @@ namespace Ads.Common.ViewModels
             this.salario = entity.salario;
             this.tipo = entity.tipo;
         }
+
+        public string opcion_name { get; set; }
+        public string tiempo_name { get; set; }
+        public string pago_name { get; set; }
+        public string tipo_name { get; set; }
     }
 }

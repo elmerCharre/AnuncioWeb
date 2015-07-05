@@ -1,7 +1,10 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Linq;
+using Ads.Dominio;
+using Ads.Repository;
+using Ads.Common.ViewModels;
+using System.Collections.Generic;
+using System;
 using System.Web;
-using System.Web.Mvc;
 
 namespace Ads.Helpers
 {

@@ -45,6 +45,7 @@
     <Compile Include="articleTypes.cs" />
     <Compile Include="categories.cs" />
     <Compile Include="conditions.cs" />
+    <Compile Include="contacts.cs" />
     <Compile Include="customers.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="marcas.cs" />

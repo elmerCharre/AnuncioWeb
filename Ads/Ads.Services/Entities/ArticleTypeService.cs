@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Ads.Services.Entities
 {
-    public class ArticleTypeService
+    public class ArticleTypeService : IDisposable
     {
         private IRepository<articleTypes> _typeRepository;
 
@@ -18,6 +18,11 @@ namespace Ads.Services.Entities
         public articleTypes getArticleType(string type)
         {
             return _typeRepository.Get().FirstOrDefault(x => x.type == type);
+        }
+
+        public articleTypes getArticleType(int id)
+        {
+            return _typeRepository.Get().FirstOrDefault(x => x.Id == id);
         }
 
         public void Dispose()

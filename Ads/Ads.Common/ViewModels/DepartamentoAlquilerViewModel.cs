@@ -14,7 +14,7 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public DepartamentoAlquilerViewModel(departamento_alquiler entity)
+        public DepartamentoAlquilerViewModel(depa_alquiler entity)
         {
             this.id = entity.Id;
             this.title = entity.title;
@@ -29,6 +29,7 @@ namespace Ads.Common.ViewModels
             this.cuartos_banio = entity.cuartos_banio;
             this.comision = entity.comision;
             this.metros = entity.metros;
+            this.articleType = entity.GetType().BaseType.Name;
         }
 
         [Required]
@@ -49,5 +50,9 @@ namespace Ads.Common.ViewModels
         [Required]
         [Display(Name = "Metros Cuadrados")]
         public string metros { get; set; }
+
+        public string amueblado_name { get; set; }
+
+        public string comision_name { get; set; }
     }
 }

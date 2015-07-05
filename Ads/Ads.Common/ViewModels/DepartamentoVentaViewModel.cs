@@ -14,7 +14,7 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public DepartamentoVentaViewModel(departamento_venta entity)
+        public DepartamentoVentaViewModel(depa_venta entity)
         {
             this.id = entity.Id;
             this.title = entity.title;

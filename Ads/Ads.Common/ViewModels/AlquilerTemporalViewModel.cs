@@ -14,7 +14,7 @@ namespace Ads.Common.ViewModels
         {
         }
 
-        public AlquilerTemporalViewModel(vacaciones_alquiler entity)
+        public AlquilerTemporalViewModel(temp_alquiler entity)
         {
             this.id = entity.Id;
             this.title = entity.title;

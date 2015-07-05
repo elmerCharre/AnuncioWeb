@@ -184,11 +184,10 @@
     <Compile Include="Controllers\AdsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\VehiculosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AdsHelper.cs" />
+    <Compile Include="Helpers\HelperAds.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -201,7 +200,6 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\Controllers\AdsController.js" />
-    <Content Include="App\Controllers\SubTypeController.js" />
     <Content Include="App\Services\AnuncioService.js" />
     <Content Include="App\Services\Notification.js" />
     <Content Include="Content\bootstrap.css" />
@@ -211,6 +209,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Ads.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -235,6 +234,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\social.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\uploadFiles\images\accept.png" />
     <Content Include="Scripts\uploadFiles\images\add_file.png" />
@@ -296,19 +296,33 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Ads\Create.cshtml" />
-    <Content Include="Views\Ads\Delete.cshtml" />
-    <Content Include="Views\Ads\Details.cshtml" />
-    <Content Include="Views\Ads\Edit.cshtml" />
     <Content Include="Views\Ads\Index.cshtml" />
-    <Content Include="Views\Ads\Moto\Create.cshtml" />
-    <Content Include="Views\Ads\Auto\Create.cshtml" />
+    <Content Include="Views\Ads\moto\Create.cshtml" />
+    <Content Include="Views\Ads\auto\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Ads\Index_orig.cshtml" />
-    <Content Include="Views\Ads\Auto\View.cshtml" />
+    <Content Include="Views\Ads\auto\View.cshtml" />
+    <Content Include="Views\Ads\Related.cshtml" />
+    <Content Include="Views\Ads\Contact.cshtml" />
+    <Content Include="Views\Ads\auto\Edit.cshtml" />
+    <Content Include="Views\Ads\Search.cshtml" />
+    <Content Include="Views\Ads\Messages.cshtml" />
+    <Content Include="Views\Ads\moto\Edit.cshtml" />
+    <Content Include="Views\Ads\Social.cshtml" />
+    <Content Include="Views\Ads\model\Create.cshtml" />
+    <Content Include="Views\Ads\model\View.cshtml" />
+    <Content Include="Views\Ads\model\Edit.cshtml" />
+    <Content Include="Views\Ads\moto\View.cshtml" />
+    <Content Include="Views\Ads\depa_alquiler\Create.cshtml" />
+    <Content Include="Views\Ads\depa_alquiler\View.cshtml" />
+    <Content Include="Views\Ads\depa_alquiler\Edit.cshtml" />
+    <Content Include="Views\Ads\oferta\Create.cshtml" />
+    <Content Include="Views\Ads\oferta\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="resources\" />
+    <Folder Include="Views\Ads\depa_venta\" />
+    <Folder Include="Views\Ads\temp_alquiler\" />
     <Folder Include="Views\Vehiculos\" />
   </ItemGroup>
   <ItemGroup>

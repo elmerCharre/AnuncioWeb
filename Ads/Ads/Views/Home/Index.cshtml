@@ -1,19 +1,6 @@
 ﻿@model IEnumerable<Ads.Common.ViewModels.CategoryViewModel>
 
-<br><br>
-<header id="header-view" class="header-view wrapper" data-view="header/index" data-subid="">
-    <div class="brand"><a href="http://www.olx.com.pe" data-increment-metric="dgd.home.home" data-increment-include="currentRoute:categories#list"><img src="http://static01.olx-st.com/mobile-webapp/images/desktop/logo.png" alt="OLX Logo"></a></div>
-    <div id="search" class="partials_search_view" data-view="partials/search" data-subid="">
-        <form action="http://www.olx.com.pe/nf/search/redirect" method="post" role="search" class="search-form ">
-            <fieldset>
-                <input class="text-field" name="search" type="text" placeholder="¿Qué estás buscando?" tabindex="1" data-qa="search-input" value="">
-                <button class="icons icon-search button" type="submit" data-qa="search-submit"></button>
-            </fieldset>
-        </form>
-    </div>
-    <h6 class="posting-title disabled">Clasificados gratis<span>donde los compradores encuentran vendedores</span></h6>
-    <a href="/Ads/Create" rel="nofollow" class="posting" role="button">Publica un anuncio gratis</a>
-</header>
+@Html.Partial("../Ads/Search")
 
 <div class="form-horizontal">
     <section id="category-tree">
@@ -24,14 +11,14 @@
         {
             <ul class="category-list category-list-first">
                 <li class="category">
-                    <a class="category-link" href="/Ads/Category/@Html.DisplayFor(modelItem => item.Id)">
+                    <a class="category-link" href="/Ads/Category/@item.Id">
                         <span class="icon"></span>
                         <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                     </a>
                     <ul>
                         @foreach (var type in item.articleTypes)
                         {
-                            <li><a href="/Ads/Type/@Html.DisplayFor(modelItem => type.Id)">@Html.DisplayFor(modelItem => type.name)</a></li>
+                            <li><a href="/Ads/Category/@item.Id">@type.name</a></li>
                         }
                     </ul>
                 </li>

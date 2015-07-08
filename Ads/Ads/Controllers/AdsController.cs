@@ -21,6 +21,7 @@ namespace Ads.Controllers
         private ArticleTypeService _articleTypeService;
         private ResourceService _resourceService;
         private CustomerService _customerService;
+        private IList<IBuilder<ArticleViewModel>> _builders;
 
         public AdsController(ArticleService articleService, ArticleTypeService articleTypeService,
             ResourceService resourceService, CustomerService customerService, IList<IBuilder<ArticleViewModel>> builders)
@@ -29,6 +30,7 @@ namespace Ads.Controllers
             _articleTypeService = articleTypeService;
             _resourceService = resourceService;
             _customerService = customerService;
+            _builders = builders;
         }
 
         public ActionResult Search()
@@ -75,16 +77,12 @@ namespace Ads.Controllers
 
         private ArticleViewModel crear(string type)
         {
-            ArticleViewModel modelo;
-
-            foreach(var builder in builders)
+            foreach(var builder in _builders)
             {
                 if (builder.EsAplicableA(type)) return builder.Build();
 
             }
             return null;
-
-            return modelo;
         }
 
         public ActionResult Edit(int id)

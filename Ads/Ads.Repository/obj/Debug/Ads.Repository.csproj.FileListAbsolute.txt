@@ -26,3 +26,17 @@ A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
 A:\apps\VS\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb
 E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.Migrations.App.resources
 E:\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csproj.GenerateResource.Cache
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll.config
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.dll
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Repository.pdb
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.dll
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.dll
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.dll
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\Ads.Dominio.pdb
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.xml
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\bin\Debug\EntityFramework.SqlServer.xml
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csprojResolveAssemblyReference.cache
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.Migrations.App.resources
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.csproj.GenerateResource.Cache
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.dll
+A:\apps\VS\AnuncioWeb - Copy\AnuncioWeb\Ads\Ads.Repository\obj\Debug\Ads.Repository.pdb

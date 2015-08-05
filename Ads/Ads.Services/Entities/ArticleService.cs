@@ -59,9 +59,13 @@ namespace Ads.Services.Entities
             return new ArticleViewModel(entity);
         }
 
-        public IEnumerable<ArticleViewModel> getModels(int limit = 10)
+        public IEnumerable<ArticleViewModel> getModels(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<model>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<model>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new ArticleViewModel(a)).ToList();
             return articles;
         }
@@ -80,9 +84,13 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<AutoViewModel> getAutos(int limit = 10)
+        public IEnumerable<AutoViewModel> getAutos(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<auto>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<auto>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new AutoViewModel(a)).ToList();
             return articles;
         }
@@ -100,9 +108,13 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<MotoViewModel> getMotos(int limit = 10)
+        public IEnumerable<MotoViewModel> getMotos(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<moto>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<moto>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new MotoViewModel(a)).ToList();
             return articles;
         }
@@ -119,9 +131,13 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<CamionViewModel> getCamiones(int limit = 10)
+        public IEnumerable<CamionViewModel> getCamiones(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<camion>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<camion>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new CamionViewModel(a)).ToList();
             return articles;
         }
@@ -138,9 +154,13 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<DepartamentoAlquilerViewModel> getDepaAlquileres(int limit = 10)
+        public IEnumerable<DepartamentoAlquilerViewModel> getDepaAlquileres(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<depa_alquiler>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<depa_alquiler>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new DepartamentoAlquilerViewModel(a)).ToList();
             return articles;
         }
@@ -156,9 +176,13 @@ namespace Ads.Services.Entities
             return model;
         }
 
-        public IEnumerable<OfertaEmpleoViewModel> getEmpleoOfertas(int limit = 10)
+        public IEnumerable<OfertaEmpleoViewModel> getEmpleoOfertas(int limit = 10, int exclude_id = 0)
         {
+<<<<<<< HEAD
             var articles = _articleRepository.Get().OfType<oferta>().OrderByDescending(x => x.Id).Take(limit).Select(
+=======
+            var articles = _articleRepository.Get().OfType<oferta>().Where(x => x.Id != exclude_id).OrderByDescending(x => x.Id).Take(limit).Select(
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                 a => new OfertaEmpleoViewModel(a)).ToList();
             return articles;
         }
@@ -228,7 +252,12 @@ namespace Ads.Services.Entities
         public IEnumerable<MarcaViewModel> GetListMarca(int articleType_id)
         {
             var marcas = _relationMarcaRepository.Get().Where(r => r.articleType_id == articleType_id).Select(
+<<<<<<< HEAD
                 m => new MarcaViewModel {
+=======
+                m => new MarcaViewModel
+                {
+>>>>>>> 4676da16d2a3e5fbf5b959c589839c2af57d2607
                     Id = m.Id,
                     Name = m.marcas.name
                 }).ToList();

@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("marcas", null, htmlAttributes: new { @class = "form-control", @ng_model = "test", @ng_change = "test()" })
+                @Html.DropDownList("marca", null, htmlAttributes: new { @class = "form-control", @onchange = "Ads.getModelosByMarca(this)" })
                 @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.modelo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.modelo, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" id="modelo" name="modelo">
+                    <option>--Select Marca--</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.modelo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,7 +93,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.condicion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("condiciones", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("condicion", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.condicion, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -113,3 +115,4 @@
 }
 
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/Ads")

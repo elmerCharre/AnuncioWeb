@@ -1,4 +1,4 @@
-﻿@model Ads.Common.ViewModels.AutoViewModel
+﻿@model Ads.Common.ViewModels.MotoViewModel
 
 <h2>Actualizar información de Anuncio</h2>
 
@@ -53,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.marca, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("marca", null, htmlAttributes: new { @class = "form-control", @ng_model = "marca", @ng_change = "getModelosByMarca()" })
+                @Html.DropDownList("marca", null, htmlAttributes: new { @class = "form-control", @ng_model = "marca", @ng_init = "marca=" + @Model.marca, @ng_change = "getModelosByMarca()" })
                 @Html.ValidationMessageFor(model => model.marca, "", new { @class = "text-danger" })
             </div>
         </div>

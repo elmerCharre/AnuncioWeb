@@ -11,6 +11,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using System.Linq;
 using AutoMapper;
+using Ads.Services;
 
 namespace Ads.Controllers
 {
@@ -20,14 +21,16 @@ namespace Ads.Controllers
         private ArticleTypeService _articleTypeService;
         private ResourceService _resourceService;
         private CustomerService _customerService;
+        private IList<IBuilder<ArticleViewModel>> _builders;
 
         public AdsController(ArticleService articleService, ArticleTypeService articleTypeService,
-            ResourceService resourceService, CustomerService customerService)
+            ResourceService resourceService, CustomerService customerService, IList<IBuilder<ArticleViewModel>> builders)
         {
             _articleService = articleService;
             _articleTypeService = articleTypeService;
             _resourceService = resourceService;
             _customerService = customerService;
+            _builders = builders;
         }
 
         public ActionResult Search()
@@ -44,11 +47,8 @@ namespace Ads.Controllers
             return View("Messages", messages);
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 1)
         {
-            ViewBag.Rows = _articleService.getRows();
-            id = (id < 1) ? 1 : ((id >= ViewBag.Rows) ? ViewBag.Rows : id);
-            ViewBag.CurrentRow = id;
             var articles = _articleService.getArticles(id - 1);
             ViewBag.CustomerId = (User.Identity.IsAuthenticated) ? _customerService.getCustomerByEmail(User.Identity.Name).Id : 0;
             return View(articles);
@@ -70,35 +70,19 @@ namespace Ads.Controllers
 
         public ActionResult CreateModel()
         {
-            string type = Request.QueryString["articleType"];
-            int articleType_id = _articleTypeService.getArticleType(type).Id;
-            switch (type)
+            var tipo = Request.QueryString["articleType"];
+            var modelo = crear(tipo);
+            return PartialView(tipo + "/Create", modelo);
+        }
+
+        private ArticleViewModel crear(string type)
+        {
+            foreach(var builder in _builders)
             {
-                case "auto":
-                case "moto":
-                case "camion":
-                    ViewBag.marca = new SelectList(_articleService.GetListMarca(articleType_id), "id", "name");
-                    ViewBag.condicion = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
-                    ViewBag.tipo = new SelectList(_articleService.GetListTipo(articleType_id), "id", "name");
-                    break;
-                case "depa_venta":
-                case "depa_alquiler":
-                case "temp_alquiler":
-                    ViewBag.amueblado = ViewBag.comision = new SelectList(_articleService.GetListCondition(articleType_id), "id", "name");
-                    break;
-                case "oferta":
-                case "busqueda":
-                    var helper = new Helpers.HelperAds();
-                    ViewBag.opcion_empleo = new SelectList(helper.GetListOpcionEmpleo(), "Id", "Name");
-                    ViewBag.tiempo = new SelectList(helper.GetListTiempoEmpleo(), "Id", "Name");
-                    ViewBag.pago = new SelectList(helper.GetListPagoEmpleo(), "Id", "Name");
-                    ViewBag.tipo = new SelectList(_articleService.GetListTipo(articleType_id), "Id", "Name");
-                    break;
+                if (builder.EsAplicableA(type)) return builder.Build();
+
             }
-            
-            ViewBag.categoryID = Convert.ToInt32(Request.QueryString["categories"]);
-            ViewBag.customerID = _customerService.getCustomerByEmail(User.Identity.Name).Id;
-            return PartialView(type + "/Create");
+            return null;
         }
 
         public ActionResult Edit(int id)
@@ -142,7 +126,7 @@ namespace Ads.Controllers
         public ActionResult model(int id)
         {
             var ads = _articleService.getModel(id);
-            ViewBag.related = _articleService.getModels(10);
+            ViewBag.related = _articleService.getModels(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("model/View", ads);
         }
@@ -161,7 +145,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return model(article_id);
+            return RedirectToAction("model", new { id = article_id });
         }
 
         [HttpPost]
@@ -175,14 +159,14 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(Vmodel.id, files);
             }
-            return model(Vmodel.id);
+            return RedirectToAction("model", new { id = Vmodel.id });
         }
 
         /* Methods for Auto Model */
         public ActionResult auto(int id)
         {
             var ads = _articleService.getAuto(id);
-            ViewBag.related = _articleService.getAutos(10);
+            ViewBag.related = _articleService.getAutos(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("auto/View", ads);
         }
@@ -201,7 +185,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return auto(article_id);
+            return RedirectToAction("auto", new { id = article_id });
         }
 
         [HttpPost]
@@ -215,14 +199,14 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return auto(model.id);
+            return RedirectToAction("auto", new { id = model.id });
         }
 
         /* Methods for Moto Model */
         public ActionResult moto(int id)
         {
             var ads = _articleService.getMoto(id);
-            ViewBag.related = _articleService.getMotos(10);
+            ViewBag.related = _articleService.getMotos(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("moto/View", ads);
         }
@@ -241,7 +225,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return moto(article_id);
+            return RedirectToAction("moto", new { id = article_id });
         }
 
         [HttpPost]
@@ -255,14 +239,14 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return moto(model.id);
+            return RedirectToAction("moto", new { id = model.id });
         }
 
         /* Methods for Camion Model */
         public ActionResult camion(int id)
         {
             var ads = _articleService.getCamion(id);
-            ViewBag.related = _articleService.getCamiones(10);
+            ViewBag.related = _articleService.getCamiones(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("camion/View", ads);
         }
@@ -281,7 +265,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return camion(article_id);
+            return RedirectToAction("camion", new { id = article_id });
         }
 
         [HttpPost]
@@ -295,14 +279,14 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return camion(model.id);
+            return RedirectToAction("camion", new { id = model.id });
         }
 
         /* Methods for Depa Alquiler Model */
         public ActionResult depa_alquiler(int id)
         {
             var ads = _articleService.getDepaAlquiler(id);
-            ViewBag.related = _articleService.getDepaAlquileres(10);
+            ViewBag.related = _articleService.getDepaAlquileres(10, id);
             ViewBag.userInfo = _customerService.getCustomerById(ads.customer_id);
             return View("depa_alquiler/View", ads);
         }
@@ -321,7 +305,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return depa_alquiler(article_id);
+            return RedirectToAction("depa_alquiler", new { id = article_id });
         }
 
         [HttpPost]
@@ -335,14 +319,14 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return depa_alquiler(model.id);
+            return RedirectToAction("depa_alquiler", new { id = model.id });
         }
 
         /* Methods for Empleo Oferta Model */
         public ActionResult oferta(int id)
         {
             var ads = _articleService.getEmpleoOferta(id);
-            ViewBag.related = _articleService.getEmpleoOfertas(10);
+            ViewBag.related = _articleService.getEmpleoOfertas(10, id);
             var helper = new Helpers.HelperAds();
             ads.opcion_name = helper.GetOpcionEmpleo(ads.opcion_empleo);
             ads.tiempo_name = helper.GetTiempoEmpleo(ads.tiempo);
@@ -365,7 +349,7 @@ namespace Ads.Controllers
                 article_id = _articleService.Create(entity);
                 addResources(article_id, files);
             }
-            return oferta(article_id);
+            return RedirectToAction("oferta", new { id = article_id });
         }
 
         [HttpPost]
@@ -379,7 +363,7 @@ namespace Ads.Controllers
                 _articleService.Update(entity);
                 addResources(model.id, files);
             }
-            return oferta(model.id);
+            return RedirectToAction("oferta", new { id = model.id });
         }
 
 

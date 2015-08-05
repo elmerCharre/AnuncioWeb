@@ -5,21 +5,20 @@ using Microsoft.Owin.Security;
 using Ads.Repository;
 using Ads.Services;
 using Ninject.Web.Mvc;
+using System;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
+using Ninject.Extensions.Conventions;
+using Ads.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Ads.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Ads.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Ads.App_Start
 {
-    using System;
-    using System.Web;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Extensions.Conventions;
-    using Ads.Models;
-
-    public static class NinjectWebCommon 
+     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
@@ -80,6 +79,12 @@ namespace Ads.App_Start
                     .WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
                 kernel.Bind<RoleManager<IdentityRole>>().ToSelf().InRequestScope();
 
+                // registrar los builders
+                kernel.Bind(x => x.FromAssemblyContaining(typeof(IBuilder<>))
+                    .SelectAllClasses().WhichAreGeneric()
+                    .InheritedFrom(typeof(IBuilder<>))
+                    .BindAllInterfaces());
+
                 //se le indica mvc que use ese resolver para crear los controllers
                 DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
                 RegisterServices(kernel);
@@ -98,6 +103,8 @@ namespace Ads.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-        }        
+        }
+
+       
     }
 }

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoBuilder.cs" />
     <Compile Include="Entities\ArticleService.cs" />
     <Compile Include="Entities\ArticleTypeService.cs" />
     <Compile Include="Entities\CategoryService.cs" />
